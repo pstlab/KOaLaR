@@ -1,27 +1,36 @@
-package it.cnr.istc.pst.koala.lang;
+package it.cnr.istc.pst.koala.reasoner.parser.lang;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 
  * @author alessandro
  *
  */
-public class Sensor 
-{	
-	public String id;
-	public String type;		// FIXME -> usare enumerazione e "collegare" all'ontologia tramite le relative classi 
-	
+public class RoomObject 
+{
+	private String id;
+	private String type;
+	private List<Sensor> sensors;
+
 	/**
 	 * 
 	 * @param id
 	 * @param type
 	 */
-	public Sensor(String id, String type) {
+	public RoomObject(String id, String type) {
 		this.id = id;
 		this.type = type;
+		this.sensors = new ArrayList<Sensor>();
 	}
 	
 	public String getId() {
 		return id;
+	}
+	
+	public List<Sensor> getSensors() {
+		return new ArrayList<Sensor>(sensors);
 	}
 	
 	public String getType() {
@@ -44,7 +53,7 @@ public class Sensor
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Sensor other = (Sensor) obj;
+		RoomObject other = (RoomObject) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -53,11 +62,8 @@ public class Sensor
 		return true;
 	}
 	
-	/**
-	 * 
-	 */
 	@Override
 	public String toString() {
-		return "[Sensor id= " + this.id + " type= " + this.type + "]";
+		return "[RoomObject id= " + this.id + " type= " + this.type + "]";
 	}
 }

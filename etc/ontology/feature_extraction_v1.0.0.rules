@@ -1,0 +1,30 @@
+@prefix	rdf:	http://www.w3.org/1999/02/22-rdf-syntax-ns#
+@prefix ssn:	http://purl.oclc.org/NET/ssnx/ssn#
+@prefix dul:	http://www.loa-cnr.it/ontologies/DUL.owl#
+@prefix	koala:	http://pst.istc.cnr.it/ontologies/2017/1/koala#
+
+[inf-space1:
+	(?o dul:hasRegion ?r1), (?o dul:hasPart ?p), (?p dul:hasRegion ?r2)
+	-> 
+	(?r1 dul:hasRegion ?r2), print('AAA')]
+	
+[inf-space2:
+	(?o dul:hasRegion ?r1), (?o dul:hasComponent ?p), (?p dul:hasRegion ?r2)
+	-> 
+	(?r1 dul:hasRegion ?r2), print('BBBB')]
+	
+[inf-platform:
+	(?s ssn:hasDeployment ?d), (?d ssn:deployedOnPlatform ?p), 
+	->
+	(?s ssn:onPlatform ?p), print('CCCC')]
+	
+[inf-component:
+	(?s ssn:onPlatform ?p), (?o dul:hasLocation ?p)
+	->
+	(?o dul:hasComponent ?s), print('DDDD')]
+	
+[inf-feature:
+	(?o dul:hasLocation ?p), (?p rdf:type ssn:Platform), (?s ssn:onPlatform ?p),
+	makeTemp(?f)
+	->
+	(?f rdf:type koala:ObservableFeature), (?o koala:hasObservableFeature ?f), print('EEE')]

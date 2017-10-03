@@ -386,9 +386,9 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Living_Room -->
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#LivingRoom -->
 
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Living_Room">
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#LivingRoom">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Room"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Living Room</rdfs:label>
@@ -416,12 +416,36 @@
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Microwave -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Microwave">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#HomeArtifact"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Monitor -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Monitor">
+        <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Sensor"/>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#MonitoringActivity -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#MonitoringActivity">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Activity"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Monitoring Activity</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Motion -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Motion">
+        <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Sensor"/>
     </owl:Class>
     
 
@@ -475,6 +499,22 @@
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Pir -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Pir">
+        <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Sensor"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Presence -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Presence">
+        <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Sensor"/>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Relative -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Relative">
@@ -515,6 +555,14 @@
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Sofa -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Sofa">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#HomeArtifact"/>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#SpaceLocation -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#SpaceLocation">
@@ -525,12 +573,28 @@
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Switch -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Switch">
+        <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Sensor"/>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#TV -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#TV">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#HomeArtifact"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>TV</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Table -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Table">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#HomeArtifact"/>
     </owl:Class>
     
 
