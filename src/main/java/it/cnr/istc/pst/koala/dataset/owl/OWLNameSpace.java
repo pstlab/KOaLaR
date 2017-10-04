@@ -30,7 +30,7 @@ enum OWLNameSpace
 	/**
 	 * 
 	 */
-	KOALA("http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#");
+	KOALA("http://pst.istc.cnr.it/ontologies/2017/1/koala#");
 	
 	private String ns;
 	

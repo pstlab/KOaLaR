@@ -84,20 +84,6 @@ public class OWLKnowledgeManager implements KnowledgeManager
 	
 	/**
 	 * 
-	 * @throws Exception
-	 */
-	public void listInstancesOfClass(String URI) 
-			throws Exception 
-	{
-		// list of installed sensors
-		List<Resource> list = this.kb.getIndividualsOfClass(URI);
-		for (Resource i : list) {
-			System.out.println("Instance: " + i);
-		}
-	}
-	
-	/**
-	 * 
 	 * @param room
 	 * @return
 	 * @throws Exception
@@ -208,14 +194,20 @@ public class OWLKnowledgeManager implements KnowledgeManager
 			OWLKnowledgeManager km = new OWLKnowledgeManager();
 			
 			System.out.println("-----------------------------------------------------------------------------------------");
-			km.kb.listStatements(OWLNameSpace.DUL + "onPlatform");
+			km.kb.listStatements(OWLNameSpace.SSN + "onPlatform");
 			System.out.println("-----------------------------------------------------------------------------------------");
 			km.kb.listStatements(OWLNameSpace.DUL + "hasComponent");
 			// check detected features of interest
 			System.out.println("\n-------------------------------------------------------------------------------------------------\n"
 					+ "\tList of detected observable features of the environment\n"
 					+ "-------------------------------------------------------------------------------------------------\n");
+			
+			/*
+			 * FIXME - NON RIESCO A LEGGERE LE TRIPLE RISPETTO ALLA PROPRIETA "koala:hasObservableFeature"
+			 */
 			km.kb.listStatements(OWLNameSpace.DUL + "hasRole");
+			System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+			km.kb.listIndividualsOfClass(OWLNameSpace.KOALA + "ObservableFeature");
 		}
 		catch (Exception ex) {
 			System.err.println(ex.getMessage());

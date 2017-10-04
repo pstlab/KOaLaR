@@ -1,11 +1,8 @@
 package it.cnr.istc.pst.koala.dataset.owl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.jena.ontology.Individual;
-import org.apache.jena.ontology.OntClass;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.rdf.model.InfModel;
@@ -16,7 +13,6 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.StmtIterator;
 import org.apache.jena.reasoner.rulesys.GenericRuleReasoner;
 import org.apache.jena.reasoner.rulesys.Rule;
-import org.apache.jena.util.iterator.ExtendedIterator;
 import org.apache.jena.vocabulary.ReasonerVocabulary;
 
 /**
@@ -74,10 +70,8 @@ public class OWLDataset
 			throw new Exception("No resource found with URI= \"" + classURI + "\" in the knowledge-base");
 		}
 		
-		// convert to ontology class
-		OntClass cls = res.as(OntClass.class);
 		// create an individual of the class
-		Resource resource = this.infModel.createResource(cls.getLocalName().toLowerCase() + "_" + IDCOUNTER.getAndIncrement(), cls);
+		Resource resource = this.infModel.createResource(res.getLocalName().toLowerCase() + "_" + IDCOUNTER.getAndIncrement(), res);
 		// get created individual
 		return resource;
 	}
@@ -99,21 +93,17 @@ public class OWLDataset
 		}
 		
 		// get target
-		Resource tr = this.infModel.getResource(targetURI);
-		if (tr == null) {
+		Resource target = this.infModel.getResource(targetURI);
+		if (target == null) {
 			throw new Exception("Resource with URI=\"" + targetURI + "\" not found in the knowledge-base");
 		}
-		// convert to RDF node
-		RDFNode target = tr.as(RDFNode.class);
 		
 		// check whether a resource with "propertyURI" actually exists
-		Resource pr = this.infModel.getResource(propertyURI);
-		if (pr == null) {
-			throw new Exception("Resource with URI=\"" + propertyURI + "\" not found in the knowledge-base");
+		Property property = this.infModel.getProperty(propertyURI);
+		if (property == null) {
+			throw new Exception("Property with URI=\"" + propertyURI + "\" not found in the knowledge-base");
 		}
 		
-		// convert to property
-		Property property = pr.as(Property.class);
 		// add statement to the knowledge base
 		this.infModel.add(reference, property, target);
 	}
@@ -122,21 +112,31 @@ public class OWLDataset
 	 * 
 	 */
 	public void listStatements() {
+		// get iterator over statements
 		StmtIterator it = this.infModel.listStatements();
 		while (it.hasNext()) {
-			System.out.println("---> " + it.next());
+			System.out.println("[Statement: " + it.next() + "]");
 		}
 	}
 	
 	/**
 	 * 
 	 * @param propertyURI
+	 * @throws Exception
 	 */
-	public void listStatements(String propertyURI) {
-		Property p = this.infModel.getProperty(propertyURI);
-		StmtIterator it = this.infModel.listStatements((Resource) null, p, (RDFNode) null);
+	public void listStatements(String propertyURI) 
+			throws Exception
+	{
+		// get property 
+		Property property = this.infModel.getProperty(propertyURI);
+		if (property == null) {
+			throw new Exception("Property with URI=\"" + propertyURI + "\" not found in the knowledge-base"); 
+		}
+		
+		// get iterator over statements
+		StmtIterator it = this.infModel.listStatements((Resource) null, property, (RDFNode) null);
 		while (it.hasNext()) {
-			System.out.println("---> " + it.next());
+			System.out.println("[Statement: " + it.next() + "]");
 		}
 	}
 	
@@ -146,29 +146,21 @@ public class OWLDataset
 	 * @return
 	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
-	public List<Resource> getIndividualsOfClass(String classURI) 
+	public void listIndividualsOfClass(String classURI) 
 			throws Exception
 	{
 		// check whether a resource with "classURI" actually exists
-		Resource r = this.infModel.getResource(classURI);
-		if (r == null) {
+		Resource resource = this.infModel.getResource(classURI);
+		if (resource == null) {
 			throw new Exception("Resource with URI=\"" + classURI + "\" not found in the knowledge-base");
 		}
 		
-		// convert to ontology class
-		OntClass cls = r.as(OntClass.class);
-		// list of individual
-		List<Resource> list = new ArrayList<Resource>();
-		// list instances of the class
-		ExtendedIterator<Individual> it = (ExtendedIterator<Individual>) cls.listInstances();
+		// get property type
+		Property property = this.infModel.getProperty(OWLNameSpace.RDF + "type");
+		// check statements
+		StmtIterator it = this.infModel.listStatements((Resource) null, property, resource.as(RDFNode.class));
 		while (it.hasNext()) {
-			// get instance of the class
-			Individual resource = it.next();
-			list.add(resource);
+			System.out.println("[Statement: " + it.next() + "]");
 		}
-		
-		// get the list
-		return list;
 	}
 }
