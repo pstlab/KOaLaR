@@ -15,6 +15,11 @@ enum OWLNameSpace
 	/**
 	 * 
 	 */
+	RDFS("http://www.w3.org/2000/01/rdf-schema#"),
+	
+	/**
+	 * 
+	 */
 	DUL("http://www.loa-cnr.it/ontologies/DUL.owl#"),
 	
 	/**

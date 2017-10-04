@@ -37,9 +37,9 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#hasObervableFeature -->
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#hasObservableFeature -->
 
-    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#hasObervableFeature">
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#hasObservableFeature">
         <rdfs:subPropertyOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasRole"/>
         <rdfs:domain rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Object"/>
         <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#ObservableFeature"/>

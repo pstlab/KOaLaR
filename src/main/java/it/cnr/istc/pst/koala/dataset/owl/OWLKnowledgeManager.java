@@ -51,17 +51,16 @@ public class OWLKnowledgeManager implements KnowledgeManager
 				for (RoomObject object : objects)
 				{
 					// create room object individual
-					Resource iObject = this.doCreateRoomObject(object);
+					Resource iObject = this.doCreateRoomObjectIndividual(object);
 					// locate object into the room
 					this.doLocateObjectIntoRoom(iObject, iRoom);
-					
 					
 					// check object installed sensors if any
 					List<Sensor> sensors = parser.getListOfSensorsByObject(object);
 					for (Sensor sensor : sensors) 
 					{
 						// create sensor individual
-						Resource iSensor = this.doCreateSensor(sensor);
+						Resource iSensor = this.doCreateSensorIndividual(sensor);
 						// install sensor on object
 						this.doInstallSensorOnElement(iSensor, iObject);
 					}
@@ -72,7 +71,7 @@ public class OWLKnowledgeManager implements KnowledgeManager
 				for (Sensor sensor : sensors) 
 				{
 					// create sensor individual
-					Resource iSensor = this.doCreateSensor(sensor);
+					Resource iSensor = this.doCreateSensorIndividual(sensor);
 					// install sensor on room
 					this.doInstallSensorOnElement(iSensor, iRoom);
 				}
@@ -91,7 +90,7 @@ public class OWLKnowledgeManager implements KnowledgeManager
 			throws Exception 
 	{
 		// list of installed sensors
-		List<Resource> list = this.kb.getIndividualsByClass(URI);
+		List<Resource> list = this.kb.getIndividualsOfClass(URI);
 		for (Resource i : list) {
 			System.out.println("Instance: " + i);
 		}
@@ -117,7 +116,6 @@ public class OWLKnowledgeManager implements KnowledgeManager
 				resource.getURI(), 
 				OWLNameSpace.DUL + "hasRegion", 
 				region.getURI());
-		
 		// get created individual
 		return resource;
 	}
@@ -128,7 +126,7 @@ public class OWLKnowledgeManager implements KnowledgeManager
 	 * @return
 	 * @throws Exception
 	 */
-	private Resource doCreateRoomObject(RoomObject object) 
+	private Resource doCreateRoomObjectIndividual(RoomObject object) 
 			throws Exception
 	{
 		// get object classification
@@ -152,7 +150,7 @@ public class OWLKnowledgeManager implements KnowledgeManager
 	 * @return
 	 * @throws Exception
 	 */
-	private Resource doCreateSensor(Sensor sensor) 
+	private Resource doCreateSensorIndividual(Sensor sensor) 
 			throws Exception
 	{
 		// get sensor classification
@@ -173,7 +171,7 @@ public class OWLKnowledgeManager implements KnowledgeManager
 			throws Exception
 	{
 		// simply assert property - use DUL:hasPart for transitivity, DUL:hasComponent otherwise
-		this.kb.assertProperty(room.getURI(), OWLNameSpace.DUL + "hasPart", object.getURI());
+		this.kb.assertProperty(room.getURI(), OWLNameSpace.DUL + "hasComponent", object.getURI());
 	}
 	
 	/**
@@ -187,7 +185,8 @@ public class OWLKnowledgeManager implements KnowledgeManager
 	{
 		// create a platform form the object 
 		Resource platform = this.kb.createIndividual(OWLNameSpace.SSN + "Platform");
-		// associate the platform to the object
+		// associate the platform to the holding element/object of the environment
+		this.kb.assertProperty(element.getURI(), OWLNameSpace.DUL + "hasLocation", platform.getURI());
 	
 		// deploy sensor on platform
 		Resource deployment = this.kb.createIndividual(OWLNameSpace.SSN + "Deployment");
@@ -207,7 +206,16 @@ public class OWLKnowledgeManager implements KnowledgeManager
 		{
 			// create knowledge manager
 			OWLKnowledgeManager km = new OWLKnowledgeManager();
-			km.listInstancesOfClass(OWLNameSpace.KOALA + "ObservableFeature");
+			
+			System.out.println("-----------------------------------------------------------------------------------------");
+			km.kb.listStatements(OWLNameSpace.DUL + "onPlatform");
+			System.out.println("-----------------------------------------------------------------------------------------");
+			km.kb.listStatements(OWLNameSpace.DUL + "hasComponent");
+			// check detected features of interest
+			System.out.println("\n-------------------------------------------------------------------------------------------------\n"
+					+ "\tList of detected observable features of the environment\n"
+					+ "-------------------------------------------------------------------------------------------------\n");
+			km.kb.listStatements(OWLNameSpace.DUL + "hasRole");
 		}
 		catch (Exception ex) {
 			System.err.println(ex.getMessage());
