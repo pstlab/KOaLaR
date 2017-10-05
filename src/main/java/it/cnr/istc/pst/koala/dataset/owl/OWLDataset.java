@@ -38,7 +38,7 @@ public class OWLDataset
 		// create the model schema from the ontology 
 //		this.model = ModelFactory.createOntologyModel();									// create in-memory ontology model with OWL-Full language and sub-class, sub-property inference
 //		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RULE_INF);	// create in-memory ontology model with OWL-DL language and rule-based reasoner with OWL rules (computationally expansive)
-		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF);	// create in-memory ontology model with OWL-Full language and optimized rule-based reasoner with OWL rules
+		this.model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM_RDFS_INF);	// create in-memory ontology model with OWL-Full language and optimized rule-based reasoner with OWL rules
 		// use DocumentManager API to specify that KOALA ontology is replicated locally on disk
 		this.model.getDocumentManager().addAltEntry(OWLNameSpace.KOALA.getNs(), "file:" + ONTOLOGY_FILE);
 		// read ontology file

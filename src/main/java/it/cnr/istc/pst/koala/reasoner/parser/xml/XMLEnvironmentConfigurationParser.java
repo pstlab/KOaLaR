@@ -21,6 +21,7 @@ import it.cnr.istc.pst.koala.reasoner.parser.EnvironmentConfigurationParser;
 import it.cnr.istc.pst.koala.reasoner.parser.lang.Room;
 import it.cnr.istc.pst.koala.reasoner.parser.lang.RoomObject;
 import it.cnr.istc.pst.koala.reasoner.parser.lang.Sensor;
+import it.cnr.istc.pst.koala.reasoner.parser.lang.SensorState;
 
 
 /**
@@ -90,8 +91,11 @@ public class XMLEnvironmentConfigurationParser implements EnvironmentConfigurati
 				// get id attribute
 				Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
 				Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
+				Attr attrState = (Attr) node.getAttributes().getNamedItem("state");
+				// check sensor state
+				SensorState state = attrState.getValue().equals("0") ? SensorState.ON : SensorState.OFF;
 				// create sensor element
-				Sensor sensor = new Sensor(attrId.getValue(), attrType.getValue());
+				Sensor sensor = new Sensor(attrId.getValue(), attrType.getValue(), state);
 				list.add(sensor);
 			}
 		}
@@ -207,8 +211,11 @@ public class XMLEnvironmentConfigurationParser implements EnvironmentConfigurati
 				// get id attribute
 				Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
 				Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
+				Attr attrState = (Attr) node.getAttributes().getNamedItem("state");
+				// check sensor state
+				SensorState state = attrState.getValue().equals("0") ? SensorState.ON : SensorState.OFF;
 				// create sensor element
-				Sensor sensor = new Sensor(attrId.getValue(), attrType.getValue());
+				Sensor sensor = new Sensor(attrId.getValue(), attrType.getValue(), state);
 				list.add(sensor);
 			}
 		}
@@ -246,8 +253,11 @@ public class XMLEnvironmentConfigurationParser implements EnvironmentConfigurati
 				// get id attribute
 				Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
 				Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
+				Attr attrState = (Attr) node.getAttributes().getNamedItem("state");
+				// check sensor state
+				SensorState state = attrState.getValue().equals("0") ? SensorState.ON : SensorState.OFF;
 				// create sensor element
-				Sensor sensor = new Sensor(attrId.getValue(), attrType.getValue());
+				Sensor sensor = new Sensor(attrId.getValue(), attrType.getValue(), state);
 				list.add(sensor);
 			}
 		}

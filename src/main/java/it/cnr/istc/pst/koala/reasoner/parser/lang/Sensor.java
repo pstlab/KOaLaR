@@ -7,17 +7,20 @@ package it.cnr.istc.pst.koala.reasoner.parser.lang;
  */
 public class Sensor 
 {	
-	public String id;
-	public String type; 
+	private String id;
+	private String type;
+	private SensorState state;
 	
 	/**
 	 * 
 	 * @param id
 	 * @param type
+	 * @param state
 	 */
-	public Sensor(String id, String type) {
+	public Sensor(String id, String type, SensorState state) {
 		this.id = id;
 		this.type = type;
+		this.state = state;
 	}
 	
 	public String getId() {
@@ -26,6 +29,10 @@ public class Sensor
 	
 	public String getType() {
 		return type;
+	}
+	
+	public SensorState getState() {
+		return state;
 	}
 
 	@Override

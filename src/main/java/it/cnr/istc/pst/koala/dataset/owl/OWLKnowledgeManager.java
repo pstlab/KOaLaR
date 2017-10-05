@@ -2,7 +2,6 @@ package it.cnr.istc.pst.koala.dataset.owl;
 
 import java.util.List;
 
-import org.apache.jena.ontology.Individual;
 import org.apache.jena.rdf.model.Resource;
 
 import it.cnr.istc.pst.koala.dataset.KnowledgeManager;
@@ -143,6 +142,39 @@ public class OWLKnowledgeManager implements KnowledgeManager
 		String classURI = sensor.getType();
 		// create individual into the knowledge base
 		Resource resource = this.kb.createIndividual(classURI);
+		
+		// check sensor state
+		switch (sensor.getState()) 
+		{
+			// check failure state
+			case FAILURE: {
+				// assert failure state
+				this.kb.assertProperty(resource.getURI(), OWLNameSpace.KOALA.getNs() + "hasDiagnosis", OWLNameSpace.KOALA_FAILURE_STATE_INDIVIDUAL.getNs());
+			}
+			break;
+				
+			// check maintenance state
+			case MAINENTANCE: {
+				// assert maintenance state
+				this.kb.assertProperty(resource.getURI(), OWLNameSpace.KOALA.getNs() + "hasDiagnosis", OWLNameSpace.KOALA_MAINTENANCE_STATE_INDIVIDUAL.getNs());
+			}
+			break;
+			
+			// check off state
+			case OFF: {
+				// assert off state
+				this.kb.assertProperty(resource.getURI(), OWLNameSpace.KOALA.getNs() + "hasDiagnosis", OWLNameSpace.KOALA_OFF_STATE_INDIVIDUAL.getNs());
+			}
+			break;
+			
+			// check on state
+			case ON: {
+				// assert on state
+				this.kb.assertProperty(resource.getURI(), OWLNameSpace.KOALA.getNs() + "hasDiagnosis", OWLNameSpace.KOALA_ON_STATE_INDIVIDUAL.getNs());
+			}
+			break;
+		}
+		
 		// get created individual
 		return resource;
 	}
@@ -197,17 +229,17 @@ public class OWLKnowledgeManager implements KnowledgeManager
 			km.kb.listStatements(OWLNameSpace.SSN + "onPlatform");
 			System.out.println("-----------------------------------------------------------------------------------------");
 			km.kb.listStatements(OWLNameSpace.DUL + "hasComponent");
+			System.out.println("-----------------------------------------------------------------------------------------");
+			km.kb.listStatements(OWLNameSpace.KOALA + "hasDiagnosis");
 			// check detected features of interest
 			System.out.println("\n-------------------------------------------------------------------------------------------------\n"
 					+ "\tList of detected observable features of the environment\n"
 					+ "-------------------------------------------------------------------------------------------------\n");
 			
-			/*
-			 * FIXME - NON RIESCO A LEGGERE LE TRIPLE RISPETTO ALLA PROPRIETA "koala:hasObservableFeature"
-			 */
-			km.kb.listStatements(OWLNameSpace.DUL + "hasRole");
-			System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+			// list detected observable features
 			km.kb.listIndividualsOfClass(OWLNameSpace.KOALA + "ObservableFeature");
+			System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+			km.kb.listStatements(OWLNameSpace.KOALA + "hasObservableFeature");
 		}
 		catch (Exception ex) {
 			System.err.println(ex.getMessage());

@@ -15,9 +15,9 @@
 	(?o dul:hasComponent ?s)]
 	
 [feature:
-	(?o dul:hasComponent ?s), (?s ssn:onPlatform ?p),
-	makeSkolem(?f, ?o, ?p, ?s)
+	(?o dul:hasLocation ?p), (?s ssn:hasDeployment ?d), (?d ssn:deployedOnPlatform ?p), (?s koala:hasDiagnosis koala:on_state),
+	makeSkolem(?f, ?o, ?s)
 	->
-	(?o dul:hasRole ?f), (?f rdf:type koala:ObservableFeature)]
+	(?o koala:hasObservableFeature ?f), (?f rdf:type koala:ObservableFeature)]
 
 	

@@ -1,8 +1,5 @@
 package it.cnr.istc.pst.koala.reasoner.parser.lang;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 
  * @author alessandro
@@ -12,8 +9,6 @@ public class Room
 {
 	private String id;
 	private String type;
-	private List<RoomObject> objects;
-	private List<Sensor> sensors;
 	
 	/**
 	 * 
@@ -23,8 +18,6 @@ public class Room
 	public Room(String id, String type) {
 		this.id = id;
 		this.type = type;
-		this.objects = new ArrayList<RoomObject>();
-		this.sensors = new ArrayList<Sensor>();
 	}
 	
 	/**
@@ -43,22 +36,6 @@ public class Room
 		return type;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public List<RoomObject> getObjects() {
-		return new ArrayList<RoomObject>(objects);
-	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public List<Sensor> getSensors() {
-		return new ArrayList<Sensor>(sensors);
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
