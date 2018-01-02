@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1514912753304" name="duplicate:http://pst.istc.cnr.it/ontologies/2017/1/koala.owl" uri="koala_v1.0.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1514912753304" name="duplicate:http://pst.istc.cnr.it/ontologies/2017/1/koala.owl" uri="koala_v0.1.owl"/>
+    </group>
+</catalog>

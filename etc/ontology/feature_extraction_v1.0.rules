@@ -1,8 +1,25 @@
-@prefix	rdf:	http://www.w3.org/1999/02/22-rdf-syntax-ns#
-@prefix rdfs:	http://www.w3.org/2000/01/rdf-schema#
-@prefix ssn:	http://purl.oclc.org/NET/ssnx/ssn#
-@prefix dul:	http://www.loa-cnr.it/ontologies/DUL.owl#
-@prefix	koala:	http://pst.istc.cnr.it/ontologies/2017/1/koala#
+@prefix	rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#>.
+@prefix ssn:	<http://purl.oclc.org/NET/ssnx/ssn#>.
+@prefix dul:	<http://www.loa-cnr.it/ontologies/DUL.owl#>.
+@prefix	koala:	<http://pst.istc.cnr.it/ontologies/2017/1/koala#>.
+
+[pir:
+	(?s rdf:type koala:Pir)
+	->
+	(?s ssn:observes koala:Temperature), (?s ssn:observes koala:Luminosity), (?s ssn:observes koala:Presence)]
+	
+[switch:
+	(?s rdf:type koala:Switch)
+	->
+	(?s ssn:observes koala:Current), (?s ssn:observes koala:Energy), 
+	(?s ssn:observes koala:Power), (?s ssn:observes koala:Voltage)]
+	
+[gap:
+	(?s rdf:type koala:Gap)
+	->
+	(?s ssn:observes koala:Contact), (?s ssn:observes koala:Luminosity),
+	(?s ssn:observes koala:Presence), (?s ssn:observes koala:Temperature)]
 	
 [platform:
 	(?s ssn:hasDeployment ?d), (?d ssn:deployedOnPlatform ?p) 
@@ -15,9 +32,22 @@
 	(?o dul:hasComponent ?s)]
 	
 [feature:
-	(?o dul:hasLocation ?p), (?s ssn:hasDeployment ?d), (?d ssn:deployedOnPlatform ?p), (?s koala:hasDiagnosis koala:on_state),
-	makeSkolem(?f, ?o, ?s)
+	(?o dul:hasLocation ?p), (?s ssn:hasDeployment ?d), (?d ssn:deployedOnPlatform ?p), 
+	(?s koala:hasDiagnosis koala:on_state), makeSkolem(?f, ?o, ?s)
 	->
-	(?o koala:hasObservableFeature ?f), (?f rdf:type koala:ObservableFeature)]
+	(?o koala:hasObservableFeature ?f), (?f rdf:type koala:ObservableFeature), 
+	(?f koala:isObservableThrough ?s)]
+	
+	
+[property:
+	(?f rdf:type koala:ObservableFeature), (?f koala:isObservableThrough ?s), (?s ssn:observes ?p)
+	->
+	(?f koala:hasObservableProperty ?p)]
 
+	
+	
+	
+	
+	
+	
 	

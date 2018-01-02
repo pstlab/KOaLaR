@@ -1,26 +1,26 @@
 <environment id="0x0184e8a0">
 	<roomlist>
-		<room id="0" label="Kitchen" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Kitchen">
-			<object id="2" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Fridge" xmap= "" ymap="">
-				<sensor id= "3" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Switch" state="0" />
+		<room id="0" label="Kitchen" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Kitchen">
+			<object id="2" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Fridge" xmap= "" ymap="">
+				<sensor id= "3" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" state="0" />
 			</object>
-			<object id="4" label="Microwave" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Microwave" xmap="" ymap="">
-				<sensor id= "5" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Switch" state="0" />
+			<object id="4" label="Microwave" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Microwave" xmap="" ymap="">
+				<sensor id= "5" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" state="0" />
 			</object>
-			<object id="6" label="Table" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Table" xmap="" ymap="">
-				<sensor id= "7" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Motion" state="0" />
+			<object id="6" label="Table" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Table" xmap="" ymap="">
+				<sensor id= "7" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" state="0" />
 			</object>
-			<sensor id="8" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Monitor" state= "0" />
+			<sensor id="8" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" state= "0" />
 	    </room>
-	    <room id="8" label="Living Room" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#LivingRoom">
-	        <object id="9" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Sofa" xmap="" ymap="">
-	        	<sensor id= "10" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Presence" state="0" />
+	    <room id="8" label="Living Room" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#LivingRoom">
+	        <object id="9" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Sofa" xmap="" ymap="">
+	        	<sensor id= "10" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" state="0" />
 	        </object>
-	        <object id="11" label="TV" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#TV" xmap="" ymap="">
-	        	<sensor id="12" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Switch" state="0" />
+	        <object id="11" label="TV" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#TV" xmap="" ymap="">
+	        	<sensor id="12" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" state="0" />
 	        </object>
-	        <object id="13" label="Window" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Window" xmap="" ymap="">
-	        	<sensor id="14" type="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#Pir" state="0" />
+	        <object id="13" label="Window" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Window" xmap="" ymap="">
+	        	<sensor id="14" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" state="0" />
 	        </object>
 	    </room>
 	</roomlist>
