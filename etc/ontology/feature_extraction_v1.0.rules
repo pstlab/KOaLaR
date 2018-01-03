@@ -4,6 +4,52 @@
 @prefix dul:	<http://www.loa-cnr.it/ontologies/DUL.owl#>.
 @prefix	koala:	<http://pst.istc.cnr.it/ontologies/2017/1/koala#>.
 
+// modeling environment elements
+[window:
+	(?w rdf:type koala:Window), makeTemp(?p)
+	->
+	(?p rdf:type koala:Contact), (?w ssn:hasProperty ?p)]
+	
+[tv:
+	(?t rdf:type koala:TV), makeTemp(?p)
+	->
+	(?p rdf:type koala:Energy), (?t ssn:hasProperty ?p)]
+	
+[door: 
+	(?d rdf:type koala:Door), makeTemp(?p)
+	->
+	(?p rdf:type koala:Contact), (?d ssn:hasProperty ?p)]
+	
+[fridge-contact:
+	(?d rdf:type koala:Fridge), makeTemp(?p)
+	->
+	(?p rdf:type koala:Contact), (?d ssn:hasProperty ?p1)]
+	
+[fridge-energy:
+	(?d rdf:type koala:Fridge), makeTemp(?p)
+	->
+	(?p rdf:type koala:Energy), (?d ssn:hasProperty ?p)]
+	
+[environment-luminosity:
+	(?e rdf:type ?t), (?t rdfs:subClassOf koala:HomeEnvironment),
+	makeTemp(?p)
+	->
+	(?p rdf:type koala:Luminosity), (?e ssn:hasProperty ?p)]
+	
+[environment-temperature:
+	(?e rdf:type ?t), (?t rdfs:subClassOf koala:HomeEnvironment),
+	makeTemp(?p)
+	->
+	(?p rdf:type koala:Temperature), (?e ssn:hasProperty ?p)]
+	
+[environment-presence:
+	(?e rdf:type ?t), (?t rdfs:subClassOf koala:HomeEnvironment),
+	makeTemp(?p)
+	->
+	(?p rdf:type koala:Presence), (?e ssn:hasProperty ?p)]
+
+// modeling sensors
+
 [pir:
 	(?s rdf:type koala:Pir)
 	->
@@ -21,28 +67,34 @@
 	(?s ssn:observes koala:Contact), (?s ssn:observes koala:Luminosity),
 	(?s ssn:observes koala:Presence), (?s ssn:observes koala:Temperature)]
 	
+// analyzing sensor deployment
+	
 [platform:
 	(?s ssn:hasDeployment ?d), (?d ssn:deployedOnPlatform ?p) 
 	->
 	(?s ssn:onPlatform ?p)]
 	
-[component:
-	(?o dul:hasLocation ?p), (?s ssn:onPlatform ?p)
-	->
-	(?o dul:hasComponent ?s)]
-	
+
+// inferring observable features of the environment
+
 [feature:
 	(?o dul:hasLocation ?p), (?s ssn:hasDeployment ?d), (?d ssn:deployedOnPlatform ?p), 
-	(?s koala:hasDiagnosis koala:on_state), makeSkolem(?f, ?o, ?s)
+	(?s koala:hasDiagnosis koala:on_state), 
+	makeSkolem(?f, ?o, ?s)
 	->
-	(?o koala:hasObservableFeature ?f), (?f rdf:type koala:ObservableFeature), 
+	(?f rdf:type koala:ObservableFeature), (?o koala:hasObservableFeature ?f),  
 	(?f koala:isObservableThrough ?s)]
 	
-	
-[property:
-	(?f rdf:type koala:ObservableFeature), (?f koala:isObservableThrough ?s), (?s ssn:observes ?p)
+// inferring observable properties of the environment
+
+[properties:
+	(?f rdf:type koala:ObservableFeature), 
+	(?o koala:hasObservableFeature ?f), (?o ssn:hasProperty ?p), (?p rdf:type ?t), 
+	(?f koala:isObservableThrough ?s), (?s ssn:observes ?t), 
+	makeSkolem(?x, ?f, ?p, ?t)
 	->
-	(?f koala:hasObservableProperty ?p)]
+	(?x rdf:type koala:ObservableProperty), (?f koala:hasObservableProperty ?x),
+	(?x koala:isObservableThrough ?s), (?x ssn:observes ?p)]
 
 	
 	
