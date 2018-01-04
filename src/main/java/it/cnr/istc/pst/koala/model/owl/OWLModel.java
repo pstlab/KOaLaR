@@ -1,4 +1,4 @@
-package it.cnr.istc.pst.koala.dataset.owl;
+package it.cnr.istc.pst.koala.model.owl;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.rdf.model.InfModel;
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
@@ -20,40 +21,101 @@ import org.apache.jena.vocabulary.ReasonerVocabulary;
  * @author alessandro
  *
  */
-public class OWLDataset 
+public class OWLModel 
 {
 	private static final AtomicLong IDCOUNTER = new AtomicLong(0);
-	private static final String FEATURE_EXTRACTION_RULE_SET_VERSION = "1.0";
-	private static final String FEATURE_EXTRACTION_RULE_SET_FILE = "etc/ontology/feature_extraction_v" + FEATURE_EXTRACTION_RULE_SET_VERSION + ".rules";
 	private static final String ONTOLOGY_VERSION = "1.0";
 	private static final String ONTOLOGY_FILE = "etc/ontology/koala_v" + ONTOLOGY_VERSION + ".owl";
+	private String ontologyFile;
+	private String inferenceRuleFile;
 	private OntModel model;
 	private InfModel infModel;
 	
 	/**
 	 * 
+	 * @param inferenceRuleFile
 	 */
-	protected OWLDataset() 
+	public OWLModel(String inferenceRuleFile) {
+		this(ONTOLOGY_FILE, inferenceRuleFile);
+	}
+	
+	/**
+	 * 
+	 * @param ontologyFile
+	 * @param inferenceRuleFile
+	 */
+	protected OWLModel(String ontologyFile, String inferenceRuleFile) 
 	{
+		// set ontology file 
+		this.ontologyFile = ontologyFile;
+		// set inference rule file
+		this.inferenceRuleFile = inferenceRuleFile;
 		// create the model schema from the ontology 
 //		this.model = ModelFactory.createOntologyModel();									// create in-memory ontology model with OWL-Full language and sub-class, sub-property inference
 //		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RULE_INF);	// create in-memory ontology model with OWL-DL language and rule-based reasoner with OWL rules (computationally expansive)
 //		this.model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM_TRANS_INF);		// create in-memory ontology model with RDFS language and transitive rule-based reasoner with RDFS rules
 		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RDFS_INF);
 		// use DocumentManager API to specify that KOALA ontology is replicated locally on disk
-		this.model.getDocumentManager().addAltEntry(OWLNameSpace.KOALA.getNs(), "file:" + ONTOLOGY_FILE);
+		this.model.getDocumentManager().addAltEntry(OWLNameSpace.KOALA.getNs(), "file:" + this.ontologyFile);
 		// read ontology file
 		this.model.read(OWLNameSpace.KOALA.getNs());
 		
-		
 		// parse the list of inference rules for feature extraction 
-		List<Rule> rules = Rule.rulesFromURL("file:" + FEATURE_EXTRACTION_RULE_SET_FILE);
+		List<Rule> rules = Rule.rulesFromURL("file:" + inferenceRuleFile);
 		// create a generic rule-based reasoner
 		GenericRuleReasoner reasoner = new GenericRuleReasoner(rules);
 		// configure reasoner - user forward chaining RETE rule engine
 		reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forwardRETE");
 		// create an inference model on the raw data model
 		this.infModel = ModelFactory.createInfModel(reasoner, this.model);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getOntologyFile() {
+		return ontologyFile;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getInferenceRuleFile() {
+		return inferenceRuleFile;
+	}
+	
+	/**
+	 * 
+	 * @param model
+	 */
+	public void setup(Model model) {
+		// setup model
+		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RDFS_INF, model);
+		// use DocumentManager API to specify that KOALA ontology is replicated locally on disk
+		this.model.getDocumentManager().addAltEntry(OWLNameSpace.KOALA.getNs(), "file:" + this.ontologyFile);
+		// read ontology file
+		this.model.read(OWLNameSpace.KOALA.getNs());
+		
+		
+		// parse the list of inference rules for feature extraction 
+		List<Rule> rules = Rule.rulesFromURL("file:" + inferenceRuleFile);
+		// create a generic rule-based reasoner
+		GenericRuleReasoner reasoner = new GenericRuleReasoner(rules);
+		// configure reasoner - user forward chaining RETE rule engine
+		reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forwardRETE");
+		// create an inference model on the raw data model
+		this.infModel = ModelFactory.createInfModel(reasoner, this.model);
+		
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Model getModel() {
+		return this.infModel.getDeductionsModel();
 	}
 	
 	/**

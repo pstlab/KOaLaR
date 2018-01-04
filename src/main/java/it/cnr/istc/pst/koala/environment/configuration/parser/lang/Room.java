@@ -1,29 +1,37 @@
-package it.cnr.istc.pst.koala.reasoner.parser.lang;
+package it.cnr.istc.pst.koala.environment.configuration.parser.lang;
 
 /**
  * 
  * @author alessandro
  *
  */
-public class RoomObject 
+public class Room
 {
 	private String id;
 	private String type;
-
+	
 	/**
 	 * 
 	 * @param id
 	 * @param type
 	 */
-	public RoomObject(String id, String type) {
+	public Room(String id, String type) {
 		this.id = id;
 		this.type = type;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getId() {
 		return id;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getType() {
 		return type;
 	}
@@ -44,7 +52,7 @@ public class RoomObject
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RoomObject other = (RoomObject) obj;
+		Room other = (Room) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -52,9 +60,12 @@ public class RoomObject
 			return false;
 		return true;
 	}
-	
+
+	/**
+	 * 
+	 */
 	@Override
 	public String toString() {
-		return "[RoomObject id= " + this.id + " type= " + this.type + "]";
+		return "[Room id= " + this.id + " type= " + this.type + "]";
 	}
 }

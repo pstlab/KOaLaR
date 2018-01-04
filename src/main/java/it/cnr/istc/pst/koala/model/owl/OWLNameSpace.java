@@ -1,11 +1,11 @@
-package it.cnr.istc.pst.koala.dataset.owl;
+package it.cnr.istc.pst.koala.model.owl;
 
 /**
  * 
  * @author alessandro
  *
  */
-enum OWLNameSpace 
+public enum OWLNameSpace 
 {
 	/**
 	 * 

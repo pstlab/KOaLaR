@@ -1,4 +1,4 @@
-package it.cnr.istc.pst.koala.reasoner.parser.xml;
+package it.cnr.istc.pst.koala.environment.configuration.parser.xml;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -17,11 +17,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import it.cnr.istc.pst.koala.reasoner.parser.EnvironmentConfigurationParser;
-import it.cnr.istc.pst.koala.reasoner.parser.lang.Room;
-import it.cnr.istc.pst.koala.reasoner.parser.lang.RoomObject;
-import it.cnr.istc.pst.koala.reasoner.parser.lang.Sensor;
-import it.cnr.istc.pst.koala.reasoner.parser.lang.SensorState;
+import it.cnr.istc.pst.koala.environment.configuration.parser.EnvironmentConfigurationParser;
+import it.cnr.istc.pst.koala.environment.configuration.parser.lang.Room;
+import it.cnr.istc.pst.koala.environment.configuration.parser.lang.RoomObject;
+import it.cnr.istc.pst.koala.environment.configuration.parser.lang.Sensor;
+import it.cnr.istc.pst.koala.environment.configuration.parser.lang.SensorState;
 
 
 /**

@@ -1,32 +1,46 @@
-package it.cnr.istc.pst.koala.dataset.owl;
+package it.cnr.istc.pst.koala.environment.configuration.reasoner.owl;
 
 import java.util.List;
 
+import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 
-import it.cnr.istc.pst.koala.dataset.KnowledgeManager;
-import it.cnr.istc.pst.koala.reasoner.parser.lang.Room;
-import it.cnr.istc.pst.koala.reasoner.parser.lang.RoomObject;
-import it.cnr.istc.pst.koala.reasoner.parser.lang.Sensor;
-import it.cnr.istc.pst.koala.reasoner.parser.xml.XMLEnvironmentConfigurationParser;
+import it.cnr.istc.pst.koala.environment.configuration.parser.lang.Room;
+import it.cnr.istc.pst.koala.environment.configuration.parser.lang.RoomObject;
+import it.cnr.istc.pst.koala.environment.configuration.parser.lang.Sensor;
+import it.cnr.istc.pst.koala.environment.configuration.parser.xml.XMLEnvironmentConfigurationParser;
+import it.cnr.istc.pst.koala.environment.configuration.reasoner.EnvironmentConfigurationReasoner;
+import it.cnr.istc.pst.koala.model.owl.OWLModel;
+import it.cnr.istc.pst.koala.model.owl.OWLNameSpace;
 
 /**
  * 
- * @author alessandro
+ * @author anacleto
  *
  */
-public class OWLKnowledgeManager implements KnowledgeManager 
+public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfigurationReasoner 
 {
-	private OWLDataset kb;			// the knowledge-base
+	private static final String FEATURE_EXTRACTION_RULE_SET_VERSION = "1.0";
+	private static final String FEATURE_EXTRACTION_RULE_SET_FILE = "etc/ontology/feature_extraction_v" + FEATURE_EXTRACTION_RULE_SET_VERSION + ".rules";
+	private OWLModel kb;			// the knowledge-base
 
 	/**
 	 * 
 	 */
-	public OWLKnowledgeManager() {
+	public OWLEnvironmentConfigurationReasoner() {
 		// create a knowledge-base instance
-		this.kb = new OWLDataset();
+		this.kb = new OWLModel(FEATURE_EXTRACTION_RULE_SET_FILE);
 		// initialize knowledge-base
 		this.init();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@Override
+	public Model getModel() {
+		return this.kb.getModel();
 	}
 	
 	/**
@@ -213,7 +227,6 @@ public class OWLKnowledgeManager implements KnowledgeManager
 		this.kb.assertProperty(deployment.getURI(), OWLNameSpace.SSN + "deployedOnPlatform", platform.getURI());
 	}
 	
-	
 	/**
 	 * 
 	 * @param args
@@ -223,7 +236,7 @@ public class OWLKnowledgeManager implements KnowledgeManager
 		try
 		{
 			// create knowledge manager
-			OWLKnowledgeManager km = new OWLKnowledgeManager();
+			OWLEnvironmentConfigurationReasoner km = new OWLEnvironmentConfigurationReasoner();
 			
 			System.out.println("-----------------------------------------------------------------------------------------");
 			km.kb.listStatements(OWLNameSpace.SSN + "onPlatform");

@@ -1,4 +1,4 @@
-package it.cnr.istc.pst.koala.reasoner.parser.lang;
+package it.cnr.istc.pst.koala.environment.configuration.parser.lang;
 
 /**
  * 
