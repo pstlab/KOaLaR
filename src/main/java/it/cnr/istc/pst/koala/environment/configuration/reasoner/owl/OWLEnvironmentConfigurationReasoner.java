@@ -22,7 +22,7 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 {
 	private static final String FEATURE_EXTRACTION_RULE_SET_VERSION = "1.0";
 	private static final String FEATURE_EXTRACTION_RULE_SET_FILE = "etc/ontology/feature_extraction_v" + FEATURE_EXTRACTION_RULE_SET_VERSION + ".rules";
-	private OWLModel kb;			// the knowledge-base
+	public OWLModel kb;			// the knowledge-base
 
 	/**
 	 * 
@@ -40,6 +40,7 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 	 */
 	@Override
 	public Model getModel() {
+		// get current knowledge base
 		return this.kb.getModel();
 	}
 	
@@ -108,6 +109,8 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 		String classURI = room.getType();
 		// create individual
 		Resource resource = this.kb.createIndividual(classURI);
+		// assert data property
+		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", new Long(room.getId()));
 		// create space region to model spatial information of the room
 		Resource region = this.kb.createIndividual(OWLNameSpace.DUL + "SpaceRegion");
 		// assert property
@@ -132,6 +135,8 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 		String classURI = object.getType();
 		// create individual
 		Resource resource = this.kb.createIndividual(classURI);
+		// assert data property
+		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", new Long(object.getId()));
 		// create space region to model spatial information of the room
 		Resource region = this.kb.createIndividual(OWLNameSpace.DUL + "SpaceRegion");
 		// assert property
@@ -156,7 +161,8 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 		String classURI = sensor.getType();
 		// create individual into the knowledge base
 		Resource resource = this.kb.createIndividual(classURI);
-		
+		// assert data property
+		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", new Long(sensor.getId()));
 		// check sensor state
 		switch (sensor.getState()) 
 		{

@@ -7,13 +7,9 @@
   <description>Knowledge-based cOntinuous Loop Reasoner</description>
   <dependencies>
   	<dependency>
-  		<groupId>
-  			org.apache.jena
-  		</groupId>
+  		<groupId>org.apache.jena</groupId>
   		<artifactId>jena-core</artifactId>
-  		<version>
-  			3.4.0
-  		</version>
+  		<version>3.6.0</version>
   	</dependency>
   </dependencies>
 </project>
