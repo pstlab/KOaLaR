@@ -101,13 +101,25 @@ public class OWLObservationReasoner extends ObservationReasoner
 				
 				case TEMPEREATURE : 
 				{
-					// create observation value
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "Temperature");
+					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
 					Resource value = this.kb.createIndividual(
 							OWLNameSpace.KOALA.getNs() + "TemperatureObservationValue");
-					
+				
 					// assert data property
 					this.kb.assertDataProperty(
-							value.getURI(),
+							value.getURI(), 
 							OWLNameSpace.KOALA.getNs() + "hasTemperatureValue", 
 							new Long(observationValue).longValue());
 					
@@ -126,7 +138,6 @@ public class OWLObservationReasoner extends ObservationReasoner
 		}
 	}
 
-	
 	/*
 	 * 
 	 */
@@ -145,9 +156,21 @@ public class OWLObservationReasoner extends ObservationReasoner
 			
 			Thread.sleep(1000);
 			
-			reasoner.observation("7", "23", ObservationProperty.LUMINOSITY);
+			reasoner.observation("7", "55", ObservationProperty.LUMINOSITY);
 			
+			
+			Thread.sleep(1000);
+			
+			reasoner.observation("7", "21", ObservationProperty.TEMPEREATURE);
+			
+			Thread.sleep(1000);
+			
+			reasoner.observation("7", "10", ObservationProperty.TEMPEREATURE);
+		
+			
+			System.out.println("\n\n------- Knowledge-base Statements ------\n\n");
 			reasoner.kb.listStatements();
+			System.out.println("\n\n---------------------------------------\n\n");
 		}
 		catch (Exception ex) {
 			System.err.println(ex.getMessage());

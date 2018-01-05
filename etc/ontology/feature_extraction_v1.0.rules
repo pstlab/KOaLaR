@@ -93,8 +93,7 @@
 	(?f koala:isObservableThrough ?s), (?s ssn:observes ?t), 
 	makeSkolem(?x, ?f, ?p, ?t)
 	->
-	(?x rdf:type koala:ObservableProperty), (?f koala:hasObservableProperty ?x),
-	(?x koala:isObservableThrough ?s), (?x ssn:observes ?p)]
+	(?x rdf:type koala:ObservableProperty), (?f koala:hasObservableProperty ?x), (?x ssn:observes ?p)]
 
 	
 	
