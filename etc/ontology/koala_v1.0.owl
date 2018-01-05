@@ -41,7 +41,7 @@
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns -->
 
     <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns">
-        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Situation"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent"/>
         <rdfs:range rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Object"/>
     </owl:ObjectProperty>
     
@@ -174,17 +174,9 @@
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#ActingActivity -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#ActingActivity">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Activity"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedActivity"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Acting Activity</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Activity -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Activity">
-        <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Action"/>
     </owl:Class>
     
 
@@ -382,22 +374,22 @@ Weight</rdfs:label>
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentEvent -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentEvent">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent"/>
+        <rdfs:comment></rdfs:comment>
+        <rdfs:label>Environment-related Event</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentProperty -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentProperty">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#PhysicalProperty"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Environment Property</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentSituation -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentSituation">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Situation"/>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>Environment-related Situation</rdfs:label>
     </owl:Class>
     
 
@@ -413,7 +405,7 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Fallen -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Fallen">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthEvent"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Fallen</rdfs:label>
     </owl:Class>
@@ -487,9 +479,19 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#GasLeak -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#GasLeak">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentEvent"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Gas Leak</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthEvent -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthEvent">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent"/>
+        <rdfs:comment></rdfs:comment>
+        <rdfs:label>Health-related Event</rdfs:label>
     </owl:Class>
     
 
@@ -503,20 +505,10 @@ Weight</rdfs:label>
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthSituation -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthSituation">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Situation"/>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>Health-related Situation</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#HighLuminosity -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#HighLuminosity">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityRelatedSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityEvent"/>
     </owl:Class>
     
 
@@ -524,7 +516,7 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#HighStress -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#HighStress">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthEvent"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>High Stress</rdfs:label>
     </owl:Class>
@@ -534,7 +526,7 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#HighTemperature -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#HighTemperature">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureRelatedSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureEvent"/>
     </owl:Class>
     
 
@@ -614,7 +606,7 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#LowLuminosity -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#LowLuminosity">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityRelatedSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityEvent"/>
     </owl:Class>
     
 
@@ -622,7 +614,7 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#LowTemperature -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#LowTemperature">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureRelatedSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureEvent"/>
     </owl:Class>
     
 
@@ -637,6 +629,15 @@ Weight</rdfs:label>
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityEvent -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityEvent">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentEvent"/>
+        <rdfs:label>Luminosity-related Event</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityObservationValue -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityObservationValue">
@@ -647,14 +648,6 @@ Weight</rdfs:label>
                 <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityRelatedSituation -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityRelatedSituation">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentSituation"/>
     </owl:Class>
     
 
@@ -684,17 +677,18 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#MonitoringActivity -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#MonitoringActivity">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Activity"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedActivity"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Monitoring Activity</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#MotionDetection -->
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#MotionEvent -->
 
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#MotionDetection">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentSituation"/>
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#MotionEvent">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentEvent"/>
+        <rdfs:label>Motion detection Event</rdfs:label>
     </owl:Class>
     
 
@@ -720,6 +714,30 @@ Weight</rdfs:label>
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableProperty">
         <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Role"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedActivity -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedActivity">
+        <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Action"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent">
+        <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Event"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
+                <owl:someValuesFrom rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment></rdfs:comment>
+        <rdfs:label>Observed Event</rdfs:label>
     </owl:Class>
     
 
@@ -833,7 +851,7 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#RegularLuminosity -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#RegularLuminosity">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityRelatedSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityEvent"/>
     </owl:Class>
     
 
@@ -841,7 +859,7 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#RegularTemperature -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#RegularTemperature">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureRelatedSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureEvent"/>
     </owl:Class>
     
 
@@ -852,22 +870,6 @@ Weight</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeEnvironment"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Room</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Situation -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Situation">
-        <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Event"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
-                <owl:someValuesFrom rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Object"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>Situation</rdfs:label>
     </owl:Class>
     
 
@@ -976,6 +978,15 @@ Weight</rdfs:label>
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureEvent -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureEvent">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentEvent"/>
+        <rdfs:label>Temperature related Event</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureObservationValue -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureObservationValue">
@@ -986,14 +997,6 @@ Weight</rdfs:label>
                 <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureRelatedSituation -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#TemperatureRelatedSituation">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentSituation"/>
     </owl:Class>
     
 
@@ -1034,7 +1037,7 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#WaterLeak -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#WaterLeak">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentSituation"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentEvent"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Water Leak</rdfs:label>
     </owl:Class>
