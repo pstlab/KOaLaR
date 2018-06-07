@@ -1,0 +1,28 @@
+<environment id="0x0184e8a0">
+	<roomlist>
+		<room id="10" label="Kitchen" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Kitchen">
+			<object id="0" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Table">
+				<sensor id= "215" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" state="1" />
+			</object>
+			<sensor id="216" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" state="1" />
+	    </room>
+	    <room id="11" label="Living Room" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#LivingRoom">
+	        <object id="1" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Lamp">
+	        	<sensor id= "144" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" state="1" />
+	        </object>
+	        <object id="2" label="TV" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#TV">
+	        	<sensor id="12" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" />
+	        </object>
+	        <object id="3" label="Window" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Window">
+	        	<sensor id="14" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" />
+	        </object>
+	        <sensor id= "146" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" state="1" />
+	    </room>
+	</roomlist>
+	<topology house_id="0x0184e8a0">
+		<adjacent>
+        	<node room-id="10" />
+        	<node room-id="11" />
+    	</adjacent>    
+    </topology>
+</environment>

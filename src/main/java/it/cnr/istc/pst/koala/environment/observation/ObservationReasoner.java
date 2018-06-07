@@ -29,4 +29,14 @@ public abstract class ObservationReasoner implements EnvironmentConfigurationLis
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * 
+	 * @param sensorId
+	 * @param observationValue
+	 * @param property
+	 * @throws Exception
+	 */
+	public abstract void observation(String sensorId, String observationValue, ObservationProperty property) 
+			throws Exception;
 }

@@ -57,13 +57,15 @@
 	(?event rdf:type koala:HighTemperature), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o)]
 	
 [luminosity-low:
-	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), (?e koala:hasObservableFeature ?f),
-	(?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
-	(?v koala:hasTemperatureValue ?l), (koala:environment_min_temperature koala:hasTemperatureValue ?min),
+	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), 
+	(?e koala:hasObservableFeature ?f),(?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
+	(?v koala:hasTemperatureValue ?l), 
+	(koala:environment_min_temperature koala:hasTemperatureValue ?min),
 	lessThan(?l, ?min), makeSkolem(?event, ?o)
 	->
 	print('Low temperature detected on feature ', ?l, ?e, ?event),
-	(?event rdf:type koala:LowTemperature), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o)]	
+	(?event rdf:type koala:LowTemperature), (?event koala:concerns ?e), 
+	(?event ssn:isProducedBy ?o)]	
 	
 [luminosity-regular:
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), (?e koala:hasObservableFeature ?f),

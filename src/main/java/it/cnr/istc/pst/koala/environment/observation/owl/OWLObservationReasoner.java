@@ -152,25 +152,24 @@ public class OWLObservationReasoner extends ObservationReasoner
 			
 			
 			// add observation
-			reasoner.observation("7", "11", ObservationProperty.LUMINOSITY);
+			reasoner.observation("4", "11", ObservationProperty.LUMINOSITY);
 			
 			Thread.sleep(1000);
 			
-			reasoner.observation("7", "55", ObservationProperty.LUMINOSITY);
+			reasoner.observation("4", "55", ObservationProperty.LUMINOSITY);
 			
 			
 			Thread.sleep(1000);
 			
-			reasoner.observation("7", "21", ObservationProperty.TEMPEREATURE);
+			reasoner.observation("4", "21", ObservationProperty.TEMPEREATURE);
 			
 			Thread.sleep(1000);
 			
-			reasoner.observation("7", "10", ObservationProperty.TEMPEREATURE);
-		
+			reasoner.observation("4", "10", ObservationProperty.TEMPEREATURE);
 			
-			System.out.println("\n\n------- Knowledge-base Statements ------\n\n");
-			reasoner.kb.listStatements();
-			System.out.println("\n\n---------------------------------------\n\n");
+//			System.out.println("\n\n------- Knowledge-base Statements ------\n\n");
+//			reasoner.kb.listStatements();
+//			System.out.println("\n\n---------------------------------------\n\n");
 		}
 		catch (Exception ex) {
 			System.err.println(ex.getMessage());
