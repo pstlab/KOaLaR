@@ -110,7 +110,7 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 		// create individual
 		Resource resource = this.kb.createIndividual(classURI);
 		// assert data property
-		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", new Long(room.getId()));
+		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", Long.parseLong(room.getId()));
 		// create space region to model spatial information of the room
 		Resource region = this.kb.createIndividual(OWLNameSpace.DUL + "SpaceRegion");
 		// assert property
@@ -136,7 +136,7 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 		// create individual
 		Resource resource = this.kb.createIndividual(classURI);
 		// assert data property
-		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", new Long(object.getId()));
+		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", Long.parseLong(object.getId()));
 		// create space region to model spatial information of the room
 		Resource region = this.kb.createIndividual(OWLNameSpace.DUL + "SpaceRegion");
 		// assert property
@@ -162,7 +162,7 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 		// create individual into the knowledge base
 		Resource resource = this.kb.createIndividual(classURI);
 		// assert data property
-		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", new Long(sensor.getId()));
+		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", Long.parseLong(sensor.getId()));
 		// check sensor state
 		switch (sensor.getState()) 
 		{

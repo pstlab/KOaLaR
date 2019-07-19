@@ -46,7 +46,7 @@ public class OWLObservationReasoner extends ObservationReasoner
 		try
 		{
 			// retrieve sensor individual according to the ID
-			Resource sensor = this.kb.getResourceById(new Long(sensorId));
+			Resource sensor = this.kb.getResourceById(Long.parseLong(sensorId));
 			// create observation individual
 			Resource observation = this.kb.createIndividual(OWLNameSpace.SSN.getNs() + "Observation");
 			// create sensor output individual
@@ -80,8 +80,8 @@ public class OWLObservationReasoner extends ObservationReasoner
 					// assert data property
 					this.kb.assertDataProperty(
 							value.getURI(), 
-							OWLNameSpace.KOALA.getNs() + "hasLuminosityValue", 
-							new Long(observationValue).longValue());
+							OWLNameSpace.KOALA.getNs() + "hasLuminosityValue",
+							Long.parseLong(observationValue));
 					
 					// assert property
 					this.kb.assertProperty(
@@ -120,8 +120,8 @@ public class OWLObservationReasoner extends ObservationReasoner
 					// assert data property
 					this.kb.assertDataProperty(
 							value.getURI(), 
-							OWLNameSpace.KOALA.getNs() + "hasTemperatureValue", 
-							new Long(observationValue).longValue());
+							OWLNameSpace.KOALA.getNs() + "hasTemperatureValue",
+							Long.parseLong(observationValue));
 					
 					// assert property
 					this.kb.assertProperty(

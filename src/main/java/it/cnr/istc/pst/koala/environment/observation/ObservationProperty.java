@@ -7,15 +7,33 @@ package it.cnr.istc.pst.koala.environment.observation;
  */
 public enum ObservationProperty 
 {
+	/**
+	 * 
+	 */
 	LUMINOSITY,
 	
+	/**
+	 * 
+	 */
 	TEMPEREATURE,
 	
+	/**
+	 * 
+	 */
 	PRESENCE,
 	
+	/**
+	 * 
+	 */
 	ENERGY,
 	
+	/**
+	 * 
+	 */
 	VOLTAGE,
 	
+	/**
+	 * 
+	 */
 	POWER
 }
