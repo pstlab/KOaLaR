@@ -1,0 +1,33 @@
+<environment id="0x0184e8a0">
+	<roomlist>
+		<room id="0" label="Kitchen" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Kitchen">
+			<object id="1" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Fridge">
+				<sensor id= "2" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" state="1" />
+			</object>
+			<object id="3" label="Microwave" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Microwave">
+				<sensor id="7" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" state="1" />
+			</object>
+			<object id="5" label="Table" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Table">
+				<sensor id= "6" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" state="1" />
+			</object>
+			<sensor id="4" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" />
+	    </room>
+	    <room id="8" label="Living Room" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#LivingRoom">
+	        <object id="9" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Sofa">
+	        	<sensor id= "10" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" />
+	        </object>
+	        <object id="11" label="TV" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#TV">
+	        	<sensor id="12" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" />
+	        </object>
+	        <object id="13" label="Window" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Window">
+	        	<sensor id="14" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" />
+	        </object>
+	    </room>
+	</roomlist>
+	<topology house_id="0x0184e8a0">
+		<adjacent>
+        	<node room-id="0" />
+        	<node room-id="8" />
+    	</adjacent>    
+    </topology>
+</environment>

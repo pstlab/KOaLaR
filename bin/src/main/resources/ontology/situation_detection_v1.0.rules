@@ -1,0 +1,11 @@
+@prefix	rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#>.
+@prefix ssn:	<http://purl.oclc.org/NET/ssnx/ssn#>.
+@prefix dul:	<http://www.loa-cnr.it/ontologies/DUL.owl#>.
+@prefix	koala:	<http://pst.istc.cnr.it/ontologies/2017/1/koala#>.
+
+	
+
+	
+	
+	
