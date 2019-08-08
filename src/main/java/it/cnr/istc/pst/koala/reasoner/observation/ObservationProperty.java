@@ -1,4 +1,4 @@
-package it.cnr.istc.pst.koala.environment.observation;
+package it.cnr.istc.pst.koala.reasoner.observation;
 
 /**
  * 

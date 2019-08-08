@@ -19,10 +19,10 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-import it.cnr.istc.pst.koala.environment.configuration.reasoner.EnvironmentConfigurationReasoner;
-import it.cnr.istc.pst.koala.environment.configuration.reasoner.owl.OWLEnvironmentConfigurationReasoner;
-import it.cnr.istc.pst.koala.environment.observation.ObservationProperty;
-import it.cnr.istc.pst.koala.environment.observation.owl.OWLObservationReasoner;
+import it.cnr.istc.pst.koala.reasoner.environment.EnvironmentReasoner;
+import it.cnr.istc.pst.koala.reasoner.observation.ObservationProperty;
+import it.cnr.istc.pst.koala.reasoner.owl.OWLEnvironmentReasoner;
+import it.cnr.istc.pst.koala.reasoner.owl.OWLObservationReasoner;
 
 /**
  * 
@@ -50,28 +50,25 @@ public class MQTTSensorNetworkManager implements MqttCallback
 	
 	private OWLObservationReasoner reasoner;
 	
+	
 	/**
 	 * 
-	 * @return
+	 * @param envConfigFile
+	 * @param ontoFile
+	 * @param envRules
+	 * @param obsRules
 	 */
-	public static MQTTSensorNetworkManager getInstance() {
-        if (_instance == null) {
-            _instance = new MQTTSensorNetworkManager();
-            return _instance;
-        } else {
-            return _instance;
-        }
-    }
-
-	/**
-	 * 
-	 */
-    private MQTTSensorNetworkManager() {
+    public MQTTSensorNetworkManager(String envConfigFile, String ontoFile, String envRules, String obsRules) 
+    {
         super();
         
-        // create env
-        EnvironmentConfigurationReasoner environment = new OWLEnvironmentConfigurationReasoner();
-        this.reasoner = new OWLObservationReasoner(environment);
+        // create environment reasoner
+        EnvironmentReasoner environment = new OWLEnvironmentReasoner(ontoFile, envRules);
+        environment.init(envConfigFile);
+        
+        // create observation reasoner and setup with the environment
+        this.reasoner = new OWLObservationReasoner(ontoFile, obsRules);
+        this.reasoner.init(environment);
     }
 
     /**
@@ -300,15 +297,17 @@ public class MQTTSensorNetworkManager implements MqttCallback
         }
     }
     
-    
-    
     /**
      * 
      * @param args
      */
     public static void main(String[] args) {
 		
-		MQTTSensorNetworkManager manager = MQTTSensorNetworkManager.getInstance();
+		MQTTSensorNetworkManager manager = new MQTTSensorNetworkManager(
+				"etc/environment/house_config.xml",
+				"etc/ontology/koala_v1.0.owl",
+				"etc/ontology/feature_extraction_v1.0.rules",
+				"etc/ontology/situation_detection_v1.0.rules");
 		
 		manager.startBroker();
 		manager.connect();

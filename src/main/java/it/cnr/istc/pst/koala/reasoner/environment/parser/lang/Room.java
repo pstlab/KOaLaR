@@ -1,38 +1,39 @@
-package it.cnr.istc.pst.koala.environment.configuration.parser.lang;
+package it.cnr.istc.pst.koala.reasoner.environment.parser.lang;
 
 /**
  * 
  * @author alessandro
  *
  */
-public class Sensor 
-{	
+public class Room
+{
 	private String id;
 	private String type;
-	private SensorState state;
 	
 	/**
 	 * 
 	 * @param id
 	 * @param type
-	 * @param state
 	 */
-	public Sensor(String id, String type, SensorState state) {
+	public Room(String id, String type) {
 		this.id = id;
 		this.type = type;
-		this.state = state;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getId() {
 		return id;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getType() {
 		return type;
-	}
-	
-	public SensorState getState() {
-		return state;
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class Sensor
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Sensor other = (Sensor) obj;
+		Room other = (Room) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -59,12 +60,12 @@ public class Sensor
 			return false;
 		return true;
 	}
-	
+
 	/**
 	 * 
 	 */
 	@Override
 	public String toString() {
-		return "[Sensor id= " + this.id + " type= " + this.type + "]";
+		return "[Room id= " + this.id + " type= " + this.type + "]";
 	}
 }

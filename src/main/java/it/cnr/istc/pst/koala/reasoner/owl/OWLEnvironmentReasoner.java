@@ -1,37 +1,33 @@
-package it.cnr.istc.pst.koala.environment.configuration.reasoner.owl;
+package it.cnr.istc.pst.koala.reasoner.owl;
 
 import java.util.List;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 
-import it.cnr.istc.pst.koala.environment.configuration.parser.lang.Room;
-import it.cnr.istc.pst.koala.environment.configuration.parser.lang.RoomObject;
-import it.cnr.istc.pst.koala.environment.configuration.parser.lang.Sensor;
-import it.cnr.istc.pst.koala.environment.configuration.parser.xml.XMLEnvironmentConfigurationParser;
-import it.cnr.istc.pst.koala.environment.configuration.reasoner.EnvironmentConfigurationReasoner;
-import it.cnr.istc.pst.koala.model.owl.OWLModel;
-import it.cnr.istc.pst.koala.model.owl.OWLNameSpace;
+import it.cnr.istc.pst.koala.reasoner.environment.EnvironmentReasoner;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.Room;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.RoomObject;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.Sensor;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.xml.XMLEnvironmentConfigurationParser;
 
 /**
  * 
  * @author anacleto
  *
  */
-public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfigurationReasoner 
+public class OWLEnvironmentReasoner extends EnvironmentReasoner 
 {
-	private static final String FEATURE_EXTRACTION_RULE_SET_VERSION = "1.0";
-	private static final String FEATURE_EXTRACTION_RULE_SET_FILE = "etc/ontology/feature_extraction_v" + FEATURE_EXTRACTION_RULE_SET_VERSION + ".rules";
-	public OWLModel kb;			// the knowledge-base
+	public OWLModel kb;			// the knowledge base
 
 	/**
 	 * 
+	 * @param ontologyFilePath
+	 * @param ruleFilePath
 	 */
-	public OWLEnvironmentConfigurationReasoner() {
+	public OWLEnvironmentReasoner(String ontologyFilePath, String ruleFilePath) {
 		// create a knowledge-base instance
-		this.kb = new OWLModel(FEATURE_EXTRACTION_RULE_SET_FILE);
-		// initialize knowledge-base
-		this.init();
+		this.kb = new OWLModel(ontologyFilePath, ruleFilePath);
 	}
 	
 	/**
@@ -45,14 +41,14 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 	}
 	
 	/**
-	 * Initialize the knowledge-based by reading the XML configuration file of the environment
+	 * Setup the knowledge-based by reading the XML configuration file of the environment
 	 */
-	protected void init() 
+	public void init(String envConfigFilePath) 
 	{
 		try
 		{
 			// get XML configuration parser
-			XMLEnvironmentConfigurationParser parser = XMLEnvironmentConfigurationParser.getInstance();
+			XMLEnvironmentConfigurationParser parser = new XMLEnvironmentConfigurationParser(envConfigFilePath);
 			// get the list of rooms
 			List<Room> rooms = parser.getListOfRooms();
 			for (Room room : rooms)
@@ -242,7 +238,14 @@ public class OWLEnvironmentConfigurationReasoner extends EnvironmentConfiguratio
 		try
 		{
 			// create knowledge manager
-			OWLEnvironmentConfigurationReasoner km = new OWLEnvironmentConfigurationReasoner();
+			OWLEnvironmentReasoner km = new OWLEnvironmentReasoner(
+					"etc/ontology/koala_v1.0.owl",
+					"etc/ontology/feature_extraction_v1.0.rules");
+			
+			// initialize reasoner
+			km.init("etc/environment/house_config.xml");
+			
+			
 			
 			System.out.println("-----------------------------------------------------------------------------------------");
 			km.kb.listStatements(OWLNameSpace.SSN + "onPlatform");

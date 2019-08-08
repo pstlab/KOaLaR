@@ -1,13 +1,10 @@
-package it.cnr.istc.pst.koala.environment.observation.owl;
+package it.cnr.istc.pst.koala.reasoner.owl;
 
 import org.apache.jena.rdf.model.Resource;
 
-import it.cnr.istc.pst.koala.environment.configuration.reasoner.EnvironmentConfigurationReasoner;
-import it.cnr.istc.pst.koala.environment.configuration.reasoner.owl.OWLEnvironmentConfigurationReasoner;
-import it.cnr.istc.pst.koala.environment.observation.ObservationProperty;
-import it.cnr.istc.pst.koala.environment.observation.ObservationReasoner;
-import it.cnr.istc.pst.koala.model.owl.OWLModel;
-import it.cnr.istc.pst.koala.model.owl.OWLNameSpace;
+import it.cnr.istc.pst.koala.reasoner.environment.EnvironmentReasoner;
+import it.cnr.istc.pst.koala.reasoner.observation.ObservationProperty;
+import it.cnr.istc.pst.koala.reasoner.observation.ObservationReasoner;
 
 /**
  * 
@@ -16,19 +13,24 @@ import it.cnr.istc.pst.koala.model.owl.OWLNameSpace;
  */
 public class OWLObservationReasoner extends ObservationReasoner
 {
-	private static final String RULE_SET_VERSION = "1.0";
-	private static final String SITUATION_DETECTION_RULE_SET_FILE = "etc/ontology/situation_detection_v" + RULE_SET_VERSION + ".rules";
-	
 	private OWLModel kb;											// the knowledge-base
 	
 	/**
 	 * 
-	 * @param environment
+	 * @param ontologyFilePath
+	 * @param ruleFilePath
 	 */
-	public OWLObservationReasoner(EnvironmentConfigurationReasoner environment) {
-		super(environment);
+	public OWLObservationReasoner(String ontologyFilePath, String ruleFilePath) {
+		super();
 		// create a knowledge-base instance
-		this.kb = new OWLModel(SITUATION_DETECTION_RULE_SET_FILE);
+		this.kb = new OWLModel(ontologyFilePath, ruleFilePath);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	protected void doInitialize() {
 		// setup model
 		this.kb.setup(this.environment.getModel());
 	}
@@ -130,6 +132,22 @@ public class OWLObservationReasoner extends ObservationReasoner
 							value.getURI());
 				}
 				break;
+				
+				
+				case ENERGY:
+					break;
+					
+					
+				case POWER:
+					break;
+					
+					
+				case VOLTAGE:
+					break;
+					
+					
+				default:
+					break;
 			}
 		}
 		catch (Exception ex) {
@@ -146,9 +164,21 @@ public class OWLObservationReasoner extends ObservationReasoner
 		try
 		{
 			// create environment reasoner
-			EnvironmentConfigurationReasoner env = new OWLEnvironmentConfigurationReasoner();
+			EnvironmentReasoner env = new OWLEnvironmentReasoner(
+					"etc/ontology/koala_v1.0.owl",
+					"etc/ontology/feature_extraction_v1.0.rules");
+			
+			// initialize reasoner
+			env.init("etc/environment/house_config.xml");
+			
+			
 			// get observation reasoner
-			OWLObservationReasoner reasoner = new OWLObservationReasoner(env);
+			ObservationReasoner reasoner = new OWLObservationReasoner(
+					"etc/ontology/koala_v1.0.owl",
+					"etc/ontology/situation_detection_v1.0.rules");
+			
+			// initialize reasoner over the environment
+			reasoner.init(env);
 			
 			
 			// add observation

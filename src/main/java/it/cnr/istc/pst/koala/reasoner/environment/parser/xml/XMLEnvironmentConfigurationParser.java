@@ -1,4 +1,4 @@
-package it.cnr.istc.pst.koala.environment.configuration.parser.xml;
+package it.cnr.istc.pst.koala.reasoner.environment.parser.xml;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -17,11 +17,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import it.cnr.istc.pst.koala.environment.configuration.parser.EnvironmentConfigurationParser;
-import it.cnr.istc.pst.koala.environment.configuration.parser.lang.Room;
-import it.cnr.istc.pst.koala.environment.configuration.parser.lang.RoomObject;
-import it.cnr.istc.pst.koala.environment.configuration.parser.lang.Sensor;
-import it.cnr.istc.pst.koala.environment.configuration.parser.lang.SensorState;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.EnvironmentConfigurationParser;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.Room;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.RoomObject;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.Sensor;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.SensorState;
 
 
 /**
@@ -31,39 +31,26 @@ import it.cnr.istc.pst.koala.environment.configuration.parser.lang.SensorState;
  */
 public class XMLEnvironmentConfigurationParser implements EnvironmentConfigurationParser
 {
-	private static XMLEnvironmentConfigurationParser INSTANCE = null;
-	private static final String CONFIG_FILE = "etc/environment/house_config.xml";
 	private Document document;
 	
 	/**
 	 * 
+	 * @param envConfigFilePath
 	 */
-	protected XMLEnvironmentConfigurationParser() 
+	public XMLEnvironmentConfigurationParser(String envConfigFilePath) 
 	{
 		try
 		{
 			// parse the document file
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			this.document = builder.parse(new FileInputStream(CONFIG_FILE));
+			this.document = builder.parse(new FileInputStream(envConfigFilePath));
 		}
 		catch (Exception ex) {
 			throw new RuntimeException(ex.getMessage());
 		}
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public static XMLEnvironmentConfigurationParser getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new XMLEnvironmentConfigurationParser();
-		}
-		
-		// get instance
-		return INSTANCE;
-	}
 	
 	/**
 	 * @return
@@ -276,7 +263,7 @@ public class XMLEnvironmentConfigurationParser implements EnvironmentConfigurati
 	{
 		try
 		{
-			XMLEnvironmentConfigurationParser parser = new XMLEnvironmentConfigurationParser();
+			XMLEnvironmentConfigurationParser parser = new XMLEnvironmentConfigurationParser("etc/environment/house_config.xml");
 			List<Sensor> sensors = parser.getListOfSensors();
 			for (Sensor sensor : sensors) {
 				System.out.println(sensor);

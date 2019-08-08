@@ -1,4 +1,4 @@
-package it.cnr.istc.pst.koala.model.owl;
+package it.cnr.istc.pst.koala.reasoner.owl;
 
 /**
  * 

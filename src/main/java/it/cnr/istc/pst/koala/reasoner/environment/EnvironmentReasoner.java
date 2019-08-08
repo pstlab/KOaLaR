@@ -1,4 +1,4 @@
-package it.cnr.istc.pst.koala.environment.configuration.reasoner;
+package it.cnr.istc.pst.koala.reasoner.environment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,22 +10,22 @@ import org.apache.jena.rdf.model.Model;
  * @author alessandro
  *
  */
-public abstract class EnvironmentConfigurationReasoner 
+public abstract class EnvironmentReasoner 
 {
-	private final List<EnvironmentConfigurationListener> listeners;
+	private final List<EnvironmentListener> listeners;
 	
 	/**
 	 * 
 	 */
-	public EnvironmentConfigurationReasoner() {
-		this.listeners = new ArrayList<EnvironmentConfigurationListener>();
+	public EnvironmentReasoner() {
+		this.listeners = new ArrayList<EnvironmentListener>();
 	}
 	
 	/**
 	 * 
 	 * @param listener
 	 */
-	public void subscribe(EnvironmentConfigurationListener listener) {
+	public void subscribe(EnvironmentListener listener) {
 		synchronized (this.listeners) {
 			this.listeners.add(listener);
 		}
@@ -37,12 +37,18 @@ public abstract class EnvironmentConfigurationReasoner
 	protected void publish() {
 		// check subscribers
 		synchronized (this.listeners) {
-			for (EnvironmentConfigurationListener listener : this.listeners) {
+			for (EnvironmentListener listener : this.listeners) {
 				// update listener
 				listener.update();
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * @param envFilePath
+	 */
+	public abstract void init(String envFilePath);
 	
 	/**
 	 * 

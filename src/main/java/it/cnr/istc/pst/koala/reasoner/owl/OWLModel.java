@@ -1,4 +1,4 @@
-package it.cnr.istc.pst.koala.model.owl;
+package it.cnr.istc.pst.koala.reasoner.owl;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,21 +26,21 @@ import org.apache.jena.vocabulary.ReasonerVocabulary;
  */
 public class OWLModel 
 {
-	private static final AtomicLong IDCOUNTER = new AtomicLong(0);
-	private static final String ONTOLOGY_VERSION = "1.0";
-	private static final String ONTOLOGY_FILE = "etc/ontology/koala_v" + ONTOLOGY_VERSION + ".owl";
+	private final AtomicLong idCounter;
+//	private static final String ONTOLOGY_VERSION = "1.0";
+//	private static final String ONTOLOGY_FILE = "etc/ontology/koala_v" + ONTOLOGY_VERSION + ".owl";
 	private String ontologyFile;
 	private String inferenceRuleFile;
 	private OntModel model;
 	private InfModel infModel;
 	
-	/**
-	 * 
-	 * @param inferenceRuleFile
-	 */
-	public OWLModel(String inferenceRuleFile) {
-		this(ONTOLOGY_FILE, inferenceRuleFile);
-	}
+//	/**
+//	 * 
+//	 * @param inferenceRuleFile
+//	 */
+//	protected OWLModel(String inferenceRuleFile) {
+//		this(ONTOLOGY_FILE, inferenceRuleFile);
+//	}
 	
 	/**
 	 * 
@@ -49,6 +49,9 @@ public class OWLModel
 	 */
 	protected OWLModel(String ontologyFile, String inferenceRuleFile) 
 	{
+		// initialize ID counter
+		this.idCounter = new AtomicLong(0);
+		
 		// set ontology file 
 		this.ontologyFile = ontologyFile;
 		// set inference rule file
@@ -153,7 +156,7 @@ public class OWLModel
 		}
 		
 		// create an individual of the class
-		Resource resource = this.infModel.createResource(res.getLocalName().toLowerCase() + "_" + IDCOUNTER.getAndIncrement(), res);
+		Resource resource = this.infModel.createResource(res.getLocalName().toLowerCase() + "_" + this.idCounter.getAndIncrement(), res);
 		// get created individual
 		return resource;
 	}
