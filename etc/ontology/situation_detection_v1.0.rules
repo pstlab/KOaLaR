@@ -12,7 +12,8 @@
 	(?o ssn:observedBy ?s), (?f koala:isObservableThrough ?s),
 	noValue(?o, ssn:observationResultTime), makeTemp(?i), now(?t)
 	->
-	print('Processing observation ', ?o, ?t), (?o ssn:featureOfInterest ?f),
+	print('Processing observation ', ?o, ?t), 
+	(?o ssn:featureOfInterest ?f),
 	(?i rdf:type koala:TimeInstant), (?o ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
 	
 // analyze observations concerning environment luminosity
@@ -21,19 +22,23 @@
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), (?e koala:hasObservableFeature ?f),
 	(?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
 	(?v koala:hasLuminosityValue ?l), (koala:environment_max_luminosity koala:hasLuminosityValue ?max),
-	greaterThan(?l, ?max), makeSkolem(?event, ?o, ?sit)
+	greaterThan(?l, ?max), makeSkolem(?event, ?o, ?sit), 
+	makeTemp(?i), now(?t)
 	->
-	print('High luminosity detected on feature ', ?l, ?e),
-	(?event rdf:type koala:HighLuminosity), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o)]
+	print('[Event] High luminosity detected on feature ', ?l, ?e),
+	(?event rdf:type koala:HighLuminosity), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o),
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
 	
 [luminosity-low:
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), (?e koala:hasObservableFeature ?f),
 	(?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
 	(?v koala:hasLuminosityValue ?l), (koala:environment_min_luminosity koala:hasLuminosityValue ?min),
-	lessThan(?l, ?min), makeSkolem(?event, ?o)
+	lessThan(?l, ?min), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
 	->
-	print('Low luminosity detected on feature ', ?l, ?e, ?event),
-	(?event rdf:type koala:LowLuminosity), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o)]	
+	print('[Event] Low luminosity detected on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:LowLuminosity), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o),
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]	
 	
 
 // analyze observations concerning environment temperature
@@ -42,21 +47,36 @@
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), (?e koala:hasObservableFeature ?f),
 	(?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
 	(?v koala:hasTemperatureValue ?l), (koala:environment_max_temperature koala:hasTemperatureValue ?max),
-	greaterThan(?l, ?max), makeSkolem(?event, ?o)
+	greaterThan(?l, ?max), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
 	->
-	print('High temperature detected on feature ', ?l, ?e, ?event),
-	(?event rdf:type koala:HighTemperature), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o)]
+	print('[Event] High temperature detected on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:HighTemperature), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o),
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
 	
 [luminosity-low:
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), 
 	(?e koala:hasObservableFeature ?f),(?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
 	(?v koala:hasTemperatureValue ?l), 
 	(koala:environment_min_temperature koala:hasTemperatureValue ?min),
-	lessThan(?l, ?min), makeSkolem(?event, ?o)
+	lessThan(?l, ?min), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
 	->
-	print('Low temperature detected on feature ', ?l, ?e, ?event),
-	(?event rdf:type koala:LowTemperature), (?event koala:concerns ?e), 
-	(?event ssn:isProducedBy ?o)]	
+	print('[Event] Low temperature detected on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:LowTemperature), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o),
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
+	
+[motion:
+	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f),
+	(?e koala:hasObservableFeature ?f), (?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
+	(?v koala:hasPresenceValue ?l), (koala:true koala:hasBooleanValue ?top), 
+	equal(?l, ?top), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
+	->
+	print('[Event] Motion detected on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:MotionEvent), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+
+
 
 
 // analyze observations concerning physiological parameters
