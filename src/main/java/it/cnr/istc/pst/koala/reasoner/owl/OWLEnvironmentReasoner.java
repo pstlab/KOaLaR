@@ -1,14 +1,15 @@
 package it.cnr.istc.pst.koala.reasoner.owl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Resource;
 
 import it.cnr.istc.pst.koala.reasoner.environment.EnvironmentReasoner;
-import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.Room;
-import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.RoomObject;
-import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.Sensor;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.xml.Element;
+import it.cnr.istc.pst.koala.reasoner.environment.parser.xml.Sensor;
 import it.cnr.istc.pst.koala.reasoner.environment.parser.xml.XMLEnvironmentConfigurationParser;
 
 /**
@@ -47,44 +48,48 @@ public class OWLEnvironmentReasoner extends EnvironmentReasoner
 	{
 		try
 		{
+			// resource index
+			Map<Element, Resource> index = new HashMap<Element, Resource>();
+			
 			// get XML configuration parser
 			XMLEnvironmentConfigurationParser parser = new XMLEnvironmentConfigurationParser(envConfigFilePath);
-			// get the list of rooms
-			List<Room> rooms = parser.getListOfRooms();
-			for (Room room : rooms)
+			// get the list of elements
+			List<Element> elements = parser.getElements();
+			// check room elements
+			for (Element element : elements)
 			{
 				// create room individual
-				Resource iRoom = this.doCreateRoomIndividual(room);
-				
-				// parse room objects
-				List<RoomObject> objects = parser.getListOfObjectsByRoom(room);
-				for (RoomObject object : objects)
+				Resource resource = this.doCreateElementIndividual(element);
+				// index element
+				index.put(element, resource);
+			}
+			
+			// assert structure information
+			for (Element element : elements) 
+			{
+				// check part of 
+				if (element.getPartOf() != null)
 				{
-					// create room object individual
-					Resource iObject = this.doCreateRoomObjectIndividual(object);
-					// locate object into the room
-					this.doLocateObjectIntoRoom(iObject, iRoom);
+					// get parent resource
+					Resource rParent = index.get(element.getPartOf());
+					Resource rChild = index.get(element);
 					
-					// check object installed sensors if any
-					List<Sensor> sensors = parser.getListOfSensorsByObject(object);
-					for (Sensor sensor : sensors) 
-					{
-						// create sensor individual
-						Resource iSensor = this.doCreateSensorIndividual(sensor);
-						// install sensor on object
-						this.doInstallSensorOnElement(iSensor, iObject);
-					}
+					// locate object into the room
+					this.doLocateObjectIntoRoom(rChild, rParent);
 				}
-				
-				// parse room sensors
-				List<Sensor> sensors = parser.getListOfSensorsByRoom(room);
-				for (Sensor sensor : sensors) 
-				{
-					// create sensor individual
-					Resource iSensor = this.doCreateSensorIndividual(sensor);
-					// install sensor on room
-					this.doInstallSensorOnElement(iSensor, iRoom);
-				}
+			}
+			
+			
+			// get list of sensors
+			List<Sensor> sensors = parser.getSensors();
+			for (Sensor sensor : sensors)
+			{
+				// create sensor individual
+				Resource resource = this.doCreateSensorIndividual(sensor);
+				// get sensor target
+				Resource target = index.get(sensor.getTarget());
+				// install sensor on object
+				this.doInstallSensorOnElement(resource, target);
 			}
 		}
 		catch (Exception ex) {
@@ -98,41 +103,15 @@ public class OWLEnvironmentReasoner extends EnvironmentReasoner
 	 * @return
 	 * @throws Exception
 	 */
-	private Resource doCreateRoomIndividual(Room room) 
+	private Resource doCreateElementIndividual(Element element) 
 			throws Exception
 	{
 		// get room classification
-		String classURI = room.getType();
+		String classURI = element.getType();
 		// create individual
 		Resource resource = this.kb.createIndividual(classURI);
 		// assert data property
-		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", new Long(room.getId()));
-		// create space region to model spatial information of the room
-		Resource region = this.kb.createIndividual(OWLNameSpace.DUL + "SpaceRegion");
-		// assert property
-		this.kb.assertProperty(
-				resource.getURI(), 
-				OWLNameSpace.DUL + "hasRegion", 
-				region.getURI());
-		// get created individual
-		return resource;
-	}
-	
-	/**
-	 * 
-	 * @param object
-	 * @return
-	 * @throws Exception
-	 */
-	private Resource doCreateRoomObjectIndividual(RoomObject object) 
-			throws Exception
-	{
-		// get object classification
-		String classURI = object.getType();
-		// create individual
-		Resource resource = this.kb.createIndividual(classURI);
-		// assert data property
-		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", new Long(object.getId()));
+		this.kb.assertDataProperty(resource.getURI(), OWLNameSpace.KOALA + "hasId", new Long(element.getId()));
 		// create space region to model spatial information of the room
 		Resource region = this.kb.createIndividual(OWLNameSpace.DUL + "SpaceRegion");
 		// assert property
@@ -248,7 +227,7 @@ public class OWLEnvironmentReasoner extends EnvironmentReasoner
 			
 			
 			System.out.println("-----------------------------------------------------------------------------------------");
-			km.kb.listStatements(OWLNameSpace.SSN + "onPlatform");
+			km.kb.listStatements(OWLNameSpace.SSN + "deployedOnPlatform");
 			System.out.println("-----------------------------------------------------------------------------------------");
 			km.kb.listStatements(OWLNameSpace.DUL + "hasComponent");
 			System.out.println("-----------------------------------------------------------------------------------------");

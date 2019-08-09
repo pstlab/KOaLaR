@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl#"
      xml:base="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:terms="http://purl.org/dc/terms/"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:ns="http://creativecommons.org/ns#"
-     xmlns:koala="http://pst.istc.cnr.it/ontologies/2017/1/koala#"
+     xmlns:DUL="http://www.loa-cnr.it/ontologies/DUL.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:DUL="http://www.loa-cnr.it/ontologies/DUL.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:dc="http://purl.org/dc/elements/1.1/">
+     xmlns:koala="http://pst.istc.cnr.it/ontologies/2017/1/koala#"
+     xmlns:terms="http://purl.org/dc/terms/">
     <owl:Ontology rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala">
         <owl:imports rdf:resource="http://purl.oclc.org/NET/ssnx/ssn"/>
         <rdfs:label>Knowledge-based cOntinuous Loop</rdfs:label>
@@ -106,6 +106,12 @@
     
 
 
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#hasRole -->
+
+    <owl:ObjectProperty rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#hasRole"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -160,6 +166,18 @@
     
 
 
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#hasIntervalDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#hasIntervalDate"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#hasRegionDataValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#hasRegionDataValue"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -185,6 +203,18 @@
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#AssistiveRobot">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#AutonomousRobot"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BatteryLevel"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommand"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Assistive Robot</rdfs:label>
     </owl:Class>
@@ -201,22 +231,34 @@
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Balcony -->
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#BathRoom -->
 
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Balcony">
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#BathRoom">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeEnvironment"/>
         <rdfs:comment></rdfs:comment>
-        <rdfs:label>Balcony</rdfs:label>
+        <rdfs:label>Bath Room</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#BathRoom -->
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#BatteryLevel -->
 
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#BathRoom">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Room"/>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>Bath Room</rdfs:label>
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#BatteryLevel">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#RobotProperty"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#BatterySensor -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#BatterySensor">
+        <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Sensor"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BatteryLevel"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -224,19 +266,9 @@
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#BedRoom -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#BedRoom">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Room"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeEnvironment"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Bed Room</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodGlucoseLevel -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodGlucoseLevel">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthProperty"/>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>Blood Glucose Level</rdfs:label>
     </owl:Class>
     
 
@@ -261,6 +293,16 @@
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodSugar -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodSugar">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthProperty"/>
+        <rdfs:comment></rdfs:comment>
+        <rdfs:label>Blood Glucose Level</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyTemperature -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyTemperature">
@@ -278,6 +320,20 @@
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Body 
 Weight</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Chair -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Chair">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeArtifact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -325,7 +381,7 @@ Weight</rdfs:label>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
-                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment></rdfs:comment>
@@ -466,16 +522,6 @@ Weight</rdfs:label>
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Garden -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Garden">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeEnvironment"/>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>Garden</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#GasLeak -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#GasLeak">
@@ -501,6 +547,14 @@ Weight</rdfs:label>
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthProperty">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#PhysicalProperty"/>
         <rdfs:label>Health Property</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#HeartRate -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#HeartRate">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthProperty"/>
     </owl:Class>
     
 
@@ -569,24 +623,10 @@ Weight</rdfs:label>
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#HumanBody -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#HumanBody">
-        <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#BiologicalObject"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
-                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthProperty"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Kitchen -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Kitchen">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Room"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeEnvironment"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Kitchen</rdfs:label>
     </owl:Class>
@@ -596,7 +636,7 @@ Weight</rdfs:label>
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#LivingRoom -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#LivingRoom">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Room"/>
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeEnvironment"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Living Room</rdfs:label>
     </owl:Class>
@@ -782,14 +822,52 @@ Weight</rdfs:label>
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Oximetry -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Oximetry">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthProperty"/>
+    </owl:Class>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Patient -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Patient">
         <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#NaturalPerson"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#hasPart"/>
-                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HumanBody"/>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodPressure"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodSugar"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyTemperature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyWeight"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HeartRate"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Oximetry"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -802,6 +880,50 @@ Weight</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Property"/>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Physical Property</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Physiological -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Physiological">
+        <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Sensor"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodPressure"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodSugar"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyTemperature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyWeight"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HeartRate"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Oximetry"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -864,12 +986,10 @@ Weight</rdfs:label>
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Room -->
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#RobotProperty -->
 
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Room">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeEnvironment"/>
-        <rdfs:comment></rdfs:comment>
-        <rdfs:label>Room</rdfs:label>
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#RobotProperty">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#PhysicalProperty"/>
     </owl:Class>
     
 
@@ -898,6 +1018,12 @@ Weight</rdfs:label>
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Sofa">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeArtifact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#hasProperty"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -960,14 +1086,6 @@ Weight</rdfs:label>
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Table -->
-
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Table">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HomeArtifact"/>
-    </owl:Class>
-    
-
-
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#Temperature -->
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Temperature">
@@ -1012,6 +1130,28 @@ Weight</rdfs:label>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label>Time Instant</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommand -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommand">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#RobotProperty"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommandListener -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommandListener">
+        <rdfs:subClassOf rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Sensor"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observes"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommand"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1066,6 +1206,72 @@ Weight</rdfs:label>
     
 
 
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#Action -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Action"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#Description -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Description"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#Diagnosis -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Diagnosis"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#Entity -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Entity"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#NaturalPerson -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#NaturalPerson"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalAgent -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalAgent"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalArtifact -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalArtifact"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalPlace -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalPlace"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#Role -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#Role"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#SpaceRegion -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#SpaceRegion"/>
+    
+
+
+    <!-- http://www.loa-cnr.it/ontologies/DUL.owl#TimeInterval -->
+
+    <owl:Class rdf:about="http://www.loa-cnr.it/ontologies/DUL.owl#TimeInterval"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -1099,7 +1305,7 @@ Weight</rdfs:label>
 
     <owl:NamedIndividual rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#environment_max_luminosity">
         <rdf:type rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityObservationValue"/>
-        <koala:hasLuminosityValue rdf:datatype="http://www.w3.org/2001/XMLSchema#double">33.0</koala:hasLuminosityValue>
+        <koala:hasLuminosityValue rdf:datatype="http://www.w3.org/2001/XMLSchema#double">80.0</koala:hasLuminosityValue>
     </owl:NamedIndividual>
     
 
@@ -1117,7 +1323,7 @@ Weight</rdfs:label>
 
     <owl:NamedIndividual rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#environment_min_luminosity">
         <rdf:type rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#LuminosityObservationValue"/>
-        <koala:hasLuminosityValue rdf:datatype="http://www.w3.org/2001/XMLSchema#double">7.0</koala:hasLuminosityValue>
+        <koala:hasLuminosityValue rdf:datatype="http://www.w3.org/2001/XMLSchema#double">20.0</koala:hasLuminosityValue>
     </owl:NamedIndividual>
     
 
@@ -1164,5 +1370,5 @@ Weight</rdfs:label>
 
 
 
-<!-- Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
 

@@ -19,8 +19,8 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import it.cnr.istc.pst.koala.lang.dictionary.KoalaPropertyDictionary;
 import it.cnr.istc.pst.koala.reasoner.environment.EnvironmentReasoner;
-import it.cnr.istc.pst.koala.reasoner.observation.ObservationProperty;
 import it.cnr.istc.pst.koala.reasoner.owl.OWLEnvironmentReasoner;
 import it.cnr.istc.pst.koala.reasoner.owl.OWLObservationReasoner;
 
@@ -227,9 +227,12 @@ public class MQTTSensorNetworkManager implements MqttCallback
 	            	{
 	            		double data = Double.parseDouble(value);
 	            		
-	            		System.out.println("\nADDING OBSERVATION: SENSOR-DI= " + sensorId + ", OBSERVED-VALUE= " + value + ", PROPERTY= " + ObservationProperty.TEMPEREATURE + "\n");
+	            		System.out.println("\nADDING OBSERVATION: SENSOR-DI= " + sensorId + ", OBSERVED-VALUE= " + value + ", PROPERTY= " + KoalaPropertyDictionary.KOALA_TEMPERATURE + "\n");
 			            // add observation
-			            this.reasoner.observation(sensorId, new Long(Math.round(data)).toString(), ObservationProperty.TEMPEREATURE);
+			            this.reasoner.observation(
+			            		sensorId, 
+			            		new Long(Math.round(data)).toString(),
+			            		KoalaPropertyDictionary.KOALA_TEMPERATURE.getUri());
 	            	}
 	            	catch(Exception ex) {
 	            		System.err.println(ex.getMessage());

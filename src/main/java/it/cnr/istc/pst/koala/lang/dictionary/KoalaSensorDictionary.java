@@ -13,9 +13,9 @@ public enum KoalaSensorDictionary
 	
 	KOALA_SWITCH("http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch"),
 	
-	KOALA_BATTERY("http://pst.istc.cnr.it/ontologies/2017/1/koala#Battery"),
+	KOALA_BATTERY("http://pst.istc.cnr.it/ontologies/2017/1/koala#BatterySensor"),
 	
-	KOALA_VOICE_COMMAND("http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommand"),
+	KOALA_VOICE_COMMAND("http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommandListener"),
 	
 	KOALA_PHYSIOLOGICAL("http://pst.istc.cnr.it/ontologies/2017/1/koala#Physiological");
 	

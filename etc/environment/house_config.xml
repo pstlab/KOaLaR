@@ -1,33 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <environment id="0x0184e8a0">
-	<roomlist>
-		<room id="0" label="Kitchen" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Kitchen">
-			<object id="1" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Fridge">
-				<sensor id= "2" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" state="1" />
-			</object>
-			<object id="3" label="Microwave" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Microwave">
-				<sensor id="7" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" state="1" />
-			</object>
-			<object id="5" label="Table" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Table">
-				<sensor id= "6" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" state="1" />
-			</object>
-			<sensor id="4" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" />
-	    </room>
-	    <room id="8" label="Living Room" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#LivingRoom">
-	        <object id="9" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Sofa">
-	        	<sensor id= "10" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" />
-	        </object>
-	        <object id="11" label="TV" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#TV">
-	        	<sensor id="12" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" />
-	        </object>
-	        <object id="13" label="Window" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Window">
-	        	<sensor id="14" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" />
-	        </object>
-	    </room>
-	</roomlist>
+
+	<elementlist>
+	
+		<element name="SoroHouse" id="0" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#House">
+		</element>	
+
+		<!-- Kitchen -->
+		<element name="SoroKitchen" id="1" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Kitchen" partOf="SoroHouse">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Temperature" value="18.8" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Luminosity" value="11.3" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Presence" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroKitchenWindow" id="2" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Window" partOf="SoroKitchen">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroKitchenDoor" id="3" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Door" partOf="SoroKitchen">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="1" />
+			</properties>
+		</element>
+		
+		<element name="SoroKitchenTv" id="4" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#TV" partOf="SoroKitchen">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Energy" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroKitchenChair" id="5" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Chair" partOf="SoroKitchen">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="0" />
+			</properties>
+		</element>
+			
+		<!-- Bedroom -->
+		<element name="SoroBedroom" id="6" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BedRoom" partOf="SoroHouse">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Temperature" value="20.3" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Luminosity" value="8.2" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Presence" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroBedroomWindow" id="7" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Window" partOf="SoroBedroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroBedroomDoor" id="8" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Door" partOf="SoroBedroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="1" />
+			</properties>
+		</element>
+		
+		<element name="SoroBedroomTv" id="9" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#TV" partOf="SoroBedroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Energy" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroBedroomBed" id="10" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Bed" partOf="SoroBedroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="0" />
+			</properties>
+		</element>
+			
+		<!-- Bathroom -->
+		<element name="SoroBathroom" id="11" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BathRoom" partOf="SoroHouse">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Temperature" value="21.8" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Luminosity" value="11.3" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Presence" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroBathroomWindow" id="12" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Window" partOf="SoroBathroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="1" />
+			</properties>
+		</element>
+		
+		<element name="SoroBathroomDoor" id="13" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Door" partOf="SoroBathroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="1" />
+			</properties>
+		</element>
+			
+		<!-- Livingroom -->
+		<element name="SoroLivingroom" id="14" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#LivingRoom" partOf="SoroHouse">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Temperature" value="23.0" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Luminosity" value="92.3" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Presence" value="1" />
+			</properties>
+		</element>
+		
+		<element name="SoroLivingroomWindow1" id="15" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Window" partOf="SoroLivingroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroLivingroomWindow2" id="16" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Window" partOf="SoroLivingroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="1" />
+			</properties>
+		</element>
+		
+		<element name="SoroLivingroomDoor" id="17" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Door" partOf="SoroLivingroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroLivingroomTv" id="18" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#TV" partOf="SoroLivingroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Energy" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroLivingroomSofa" id="19" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Sofa" partOf="SoroLivingroom">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="0" />
+			</properties>
+		</element>
+			
+		<!-- Corridor -->
+		<element name="SoroCorridor" id="20" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Corridor" partOf="SoroHouse">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Temperature" value="20.5" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Luminosity" value="3.2" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Presence" value="0" />
+			</properties>
+		</element>
+		
+		<element name="SoroCorridorDoor" id="21" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Door" partOf="SoroCorridor">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Contact" value="1" />
+			</properties>
+		</element>
+			
+		<!-- Patient -->
+		<element name="Mary" id="22" partOf="SoroLivingroom" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Patient">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodPressure" value="78_123" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodSugar" value="medium" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyTemperature" value="18" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyWeight" value="75" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#HeartRate" value="65" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Oximetry" value="98" />
+			</properties>
+			
+			<acting>
+				<behavior name="Mary@ChangeRoom" type="ChangeRoom" minDuration="3000" maxDuration="5000" />
+				
+				<behavior name="Mary@TurnOnLight" type="TurnOnLight" minDuration="3000" maxDuration="5000" />
+				<behavior name="Mary@TurnOffLight" type="TurnOffLight" minDuration="3000" maxDuration="5000" />
+				
+				<behavior name="Mary@CloseDoor" type="CloseDoor" minDuration="3000" maxDuration="5000" />
+				<behavior name="Mary@OpenDoor" type="OpenDoor" minDuration="3000" maxDuration="5000" />
+				
+				<behavior name="Mary@CloseWindow" type="CloseWindow" minDuration="3000" maxDuration="5000" />
+				<behavior name="Mary@OpenWindow" type="OpenWindow" minDuration="3000" maxDuration="5000" />
+				
+				<behavior name="Mary@TakeBodyTemperature" type="TakeBodyTemperature" minDuration="3000" maxDuration="5000" />
+				<behavior name="Mary@TakeBodyWeight" type="TakeBodyWeight" minDuration="3000" maxDuration="5000" />
+				
+				<behavior name="Mary@TakeBloodPressure" type="TakeBloodPressure" minDuration="3000" maxDuration="5000" />
+				<behavior name="Mary@TakeBloodSugar" type="TakeBloodSugar" minDuration="3000" maxDuration="5000" />
+				<behavior name="Mary@TakeHeartRate" type="TakeHeartRate" minDuration="3000" maxDuration="5000" />
+				<behavior name="Mary@TakeOximetry" type="TakeOximetry" minDuration="3000" maxDuration="5000" />
+				
+			</acting>
+				 
+		</element>
+			
+		<!-- Assistive Robot -->
+		<element name="Robin" id="23" partOf="SoroLivingroom" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#AssistiveRobot">
+			<properties>
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BatteryLevel" value="100" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommand" value="none" />
+			</properties>
+				 
+		</element>
+	
+	</elementlist>
+		
+	<sensorlist>
+	
+		<sensor name="SoroCorridorDoorSensor" id="24" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroCorridorDoor" target="SoroCorridorDoor" state="1" />
+	
+		<sensor name="SoroKitchenSensor" id="25" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" frequency="1000" placement="SoroKitchen" target="SoroKitchen" state="1" />
+		<sensor name="SoroKitchenWindowSensor" id="26" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroKitchenWindow" target="SoroKitchenWindow" state="1" />
+		<sensor name="SoroKitchenDoorSensor" id="27" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroKitchenDoor" target="SoroKitchenDoor" state="1" />
+		
+		
+		<sensor name="SoroBedroomSensor" id="28" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" frequency="1000" placement="SoroBedroom" target="SoroBedroom" state="1" />
+		<sensor name="SoroBedroomWindowSensor" id="29" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroBedroomWindow" target="SoroBedroomWindow" state="1" />
+		<sensor name="SoroBedroomDoorSensor" id="30" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroBedroomDoor" target="SoroBedroomDoor" state="1" />
+		
+		
+		<sensor name="SoroBathroomSensor" id="31" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" frequency="1000" placement="SoroBathroom" target="SoroBathroom" state="1" />
+		<sensor name="SoroBathroomWindowSensor" id="32" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroBathroomWindow" target="SoroBathroomWindow" state="1" />
+		<sensor name="SoroBathroomDoorSensor" id="33" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroBathroomDoor" target="SoroBathroomDoor" state="1" />
+		
+		
+		<sensor name="SoroLivingroomSensor" id="34" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Pir" frequency="1000" placement="SoroLivingroom" target="SoroLivingroom" state="1" />
+		<sensor name="SoroLivingroomWindow1Sensor" id="35" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroLivingroomWindow1" target="SoroLivingroomWindow1" state="1" />
+		<sensor name="SoroLivingroomWindow1Sensor" id="36" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroLivingroomWindow2" target="SoroLivingroomWindow2" state="1" />
+		<sensor name="SoroLivingroomDoorSensor" id="37" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroLivingroomDoor" target="SoroLivingroomDoor" state="1" />
+		
+		<sensor name="SoroLivingroomTvSensor" id="38" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" frequency="1000" placement="SoroLivingroomTv" target="SoroLivingroomTv" state="1" />
+		<sensor name="SoroBedroomTvSensor" id="39" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" frequency="1000" placement="SoroBedroomTv" target="SoroBedroomTv" state="1" />
+		<sensor name="SoroKitchenTvSensor" id="40" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Switch" frequency="1000" placement="SoroKitchenTv" target="SoroKitchenTv" state="1" />
+		
+		<sensor name="SoroLivingroomSofaSensor" id="41" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroLivingroomSofa" target="SoroLivingroomSofa" state="1" />
+		<sensor name="SoroKitchenChairSensor" id="42" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroKitchenChair" target="SoroKitchenChair" state="1" />
+		<sensor name="SoroBedroomBedSensor" id="43" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Gap" placement="SoroBedroomBed" target="SoroBedroomBed" state="1" />
+		
+		
+		<sensor name="MaryPhysioSensor" id="44" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Physiological" placement="Mary" target="Mary" state="1" />
+		
+		<sensor name="RobinBatterySensor" id="45" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BatterySensor" placement="Robin" target="Robin" state="1" />
+		<sensor name="RobinInstructionSensor" id="46" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommandListener" placement="Robin" target="Robin" state="1" />
+		
+	</sensorlist>
+
 	<topology house_id="0x0184e8a0">
 		<adjacent>
-        	<node room-id="0" />
-        	<node room-id="8" />
-    	</adjacent>    
-    </topology>
+			<node room-id="20" /> 
+			<node room-id="1" />
+		</adjacent>
+		
+		<adjacent>
+			<node room-id="20" /> 
+			<node room-id="6" />
+		</adjacent>
+		
+		<adjacent>
+			<node room-id="20" />
+			<node room-id="11" />		
+		</adjacent>
+		
+		<adjacent>
+			<node room-id="20" />
+			<node room-id="14" />		
+		</adjacent>
+	
+	</topology>
+
 </environment>
+

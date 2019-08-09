@@ -2,8 +2,8 @@ package it.cnr.istc.pst.koala.reasoner.owl;
 
 import org.apache.jena.rdf.model.Resource;
 
+import it.cnr.istc.pst.koala.lang.dictionary.KoalaPropertyDictionary;
 import it.cnr.istc.pst.koala.reasoner.environment.EnvironmentReasoner;
-import it.cnr.istc.pst.koala.reasoner.observation.ObservationProperty;
 import it.cnr.istc.pst.koala.reasoner.observation.ObservationReasoner;
 
 /**
@@ -42,7 +42,8 @@ public class OWLObservationReasoner extends ObservationReasoner
 	 * @param property
 	 * @throws Exception
 	 */
-	public void observation(String sensorId, String observationValue, ObservationProperty property) 
+	@Override
+	public void observation(String sensorId, String observationValue, String propertyUri) 
 			throws Exception
 	{
 		try
@@ -59,9 +60,9 @@ public class OWLObservationReasoner extends ObservationReasoner
 			this.kb.assertProperty(observation.getURI(), OWLNameSpace.SSN.getNs() + "observedBy", sensor.getURI());
 			
 			// check property in order to create observation value accordingly
-			switch (property)
+			switch (KoalaPropertyDictionary.getPropertyByURI(propertyUri))
 			{
-				case LUMINOSITY : 
+				case KOALA_LUMINOSITY : 
 				{	
 					// retrieve observed property according to type
 					Resource observedProperty = this.kb.getObservedPropertyByType(
@@ -79,6 +80,10 @@ public class OWLObservationReasoner extends ObservationReasoner
 					Resource value = this.kb.createIndividual(
 							OWLNameSpace.KOALA.getNs() + "LuminosityObservationValue");
 				
+					/*
+					 * TODO : IMPOSTARE CORRETTAMENTE IL VALORE LETTO DAL SENSOR - VALORE NUMERICO INVECE DI HIGH,LOW,REGULAR 
+					 */
+					
 					// assert data property
 					this.kb.assertDataProperty(
 							value.getURI(), 
@@ -93,15 +98,7 @@ public class OWLObservationReasoner extends ObservationReasoner
 				}
 				break;
 	
-				case PRESENCE : {
-					
-					/*
-					 * TODO: implement presence observation and missing cases
-					 */
-				} 
-				break;
-				
-				case TEMPEREATURE : 
+				case KOALA_TEMPERATURE : 
 				{
 					// retrieve observed property according to type
 					Resource observedProperty = this.kb.getObservedPropertyByType(
@@ -134,20 +131,72 @@ public class OWLObservationReasoner extends ObservationReasoner
 				break;
 				
 				
-				case ENERGY:
-					break;
+				case KOALA_ENERGY : {
 					
+				}
+				break;
 					
-				case POWER:
-					break;
+				case KOALA_PRESENCE : {
+				} 
+				break;
+				
+				case KOALA_BATTERY_LEVEL: {
 					
+				}
+				break;
+				
+				
+				case KOALA_BLOOD_PRESSURE : {
 					
-				case VOLTAGE:
-					break;
+				}
+				break;
+				
+				
+				case KOALA_BLOOD_SUGAR : {
 					
+				}
+				break;
+				
+				case KOALA_BODY_TEMPERATURE : {
 					
-				default:
-					break;
+				}
+				break;
+				
+				
+				case KOALA_BODY_WEIGHT : {
+					
+				}
+				break;
+				
+				
+				case KOALA_CONTACT : {
+					
+				}
+				break;
+				
+				
+				case KOALA_HEART_RATE : {
+					
+				}
+				break;
+				
+				
+				case KOALA_OXIMETRY : {
+					
+				}
+				break;
+				
+				case KOALA_VOICE_COMMAND : {
+					
+				}
+				break;
+				
+				
+				default : {
+					
+				}
+				break;
+				
 			}
 		}
 		catch (Exception ex) {
@@ -182,24 +231,32 @@ public class OWLObservationReasoner extends ObservationReasoner
 			
 			
 			// add observation
-			reasoner.observation("4", "11", ObservationProperty.LUMINOSITY);
+			reasoner.observation(
+					"25", 
+					"11", 
+					KoalaPropertyDictionary.KOALA_LUMINOSITY.getUri());
 			
 			Thread.sleep(1000);
 			
-			reasoner.observation("4", "55", ObservationProperty.LUMINOSITY);
+			reasoner.observation(
+					"25", 
+					"55", 
+					KoalaPropertyDictionary.KOALA_LUMINOSITY.getUri());
 			
 			
 			Thread.sleep(1000);
 			
-			reasoner.observation("4", "21", ObservationProperty.TEMPEREATURE);
+			reasoner.observation(
+					"25", 
+					"21", 
+					KoalaPropertyDictionary.KOALA_TEMPERATURE.getUri());
 			
 			Thread.sleep(1000);
 			
-			reasoner.observation("4", "10", ObservationProperty.TEMPEREATURE);
-			
-//			System.out.println("\n\n------- Knowledge-base Statements ------\n\n");
-//			reasoner.kb.listStatements();
-//			System.out.println("\n\n---------------------------------------\n\n");
+			reasoner.observation(
+					"25", 
+					"10", 
+					KoalaPropertyDictionary.KOALA_TEMPERATURE.getUri());
 		}
 		catch (Exception ex) {
 			System.err.println(ex.getMessage());

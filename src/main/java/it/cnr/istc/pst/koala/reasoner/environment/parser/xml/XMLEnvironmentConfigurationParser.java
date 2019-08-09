@@ -2,14 +2,15 @@ package it.cnr.istc.pst.koala.reasoner.environment.parser.xml;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Attr;
@@ -18,20 +19,17 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import it.cnr.istc.pst.koala.reasoner.environment.parser.EnvironmentConfigurationParser;
-import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.Room;
-import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.RoomObject;
-import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.Sensor;
-import it.cnr.istc.pst.koala.reasoner.environment.parser.lang.SensorState;
-
 
 /**
  * 
- * @author alessandro
+ * @author alessandroumbrico
  *
  */
 public class XMLEnvironmentConfigurationParser implements EnvironmentConfigurationParser
 {
 	private Document document;
+	private Map<String, Element> eCache;				// element cache
+	private Map<String, Sensor> sCache;					// sensor cache
 	
 	/**
 	 * 
@@ -39,221 +37,178 @@ public class XMLEnvironmentConfigurationParser implements EnvironmentConfigurati
 	 */
 	public XMLEnvironmentConfigurationParser(String envConfigFilePath) 
 	{
+		// setup cache
+		this.eCache = new HashMap<String, Element>();
+		this.sCache = new HashMap<String, Sensor>();
+		
 		try
 		{
 			// parse the document file
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			this.document = builder.parse(new FileInputStream(envConfigFilePath));
+			
+			
+			// load elements
+			this.loadElements();
+			
+			// set element composition
+			this.setElementComposition();
+			
+			
+			// load sensors
+			this.loadSensors();
+			
 		}
 		catch (Exception ex) {
 			throw new RuntimeException(ex.getMessage());
 		}
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Element> getElements() {
+		return new ArrayList<Element>(this.eCache.values());
+	}
 	
 	/**
+	 * 
+	 * @return
+	 */
+	public List<Sensor> getSensors() {
+		return new ArrayList<Sensor>(this.sCache.values());
+	}
+	
+	
+	/**
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Sensor> getListOfSensors() 
+	private void loadSensors() 
 			throws Exception
 	{
-		// list of parsed sensors
-		List<Sensor> list = new ArrayList<Sensor>();
-		try
-		{
-			// prepare XPath expression
-			XPathFactory xpf = XPathFactory.newInstance();
-			XPath xp = xpf.newXPath();
-			
-			// create XPATH expression
-			XPathExpression expression = xp.compile("//sensor");
-			NodeList nodes = (NodeList) expression.evaluate(this.document, XPathConstants.NODESET);
-			// iterate over results
-			for (int index = 0; index < nodes.getLength(); index++) 
-			{
-				// get node
-				Node node = nodes.item(index);
-				// get id attribute
-				Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
-				Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
-				Attr attrState = (Attr) node.getAttributes().getNamedItem("state");
-				// check sensor state
-				SensorState state = attrState.getValue().equals("0") ? SensorState.ON : SensorState.OFF;
-				// create sensor element
-				Sensor sensor = new Sensor(attrId.getValue(), attrType.getValue(), state);
-				list.add(sensor);
-			}
-		}
-		catch (XPathExpressionException ex) {
-			throw new Exception(ex.getMessage());
-		}
+		// prepare XPath expression
+		XPathFactory xpf = XPathFactory.newInstance();
+		XPath xp = xpf.newXPath();
 		
-		// get the list
-		return list;
+		// create XPATH expression
+		XPathExpression expression = xp.compile("//sensor");
+		NodeList nodes = (NodeList) expression.evaluate(this.document, XPathConstants.NODESET);
+		// iterate over results
+		for (int index = 0; index < nodes.getLength(); index++) 
+		{
+			// get node
+			Node node = nodes.item(index);
+			// get id attribute
+			Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
+			Attr attrName = (Attr) node.getAttributes().getNamedItem("name");
+			Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
+			Attr attrState = (Attr) node.getAttributes().getNamedItem("state");
+			Attr attrPlacement = (Attr) node.getAttributes().getNamedItem("placement");
+			Attr attrTarget = (Attr) node.getAttributes().getNamedItem("target");
+			
+			// check sensor state
+			SensorState state = SensorState.getStateByCode(attrState.getValue());
+			
+			// retrieve owner from cache
+			Element owner = this.eCache.get(attrPlacement.getValue());
+			// retrieve target from cache
+			Element target = this.eCache.get(attrTarget.getValue());
+			
+			// create sensor element
+			Sensor sensor = new Sensor(
+					attrId.getValue(),
+					attrName.getValue(),
+					attrType.getValue(),
+					state,
+					owner,
+					target);
+			
+			
+			// add cache entry
+			this.sCache.put(sensor.getName(), sensor);
+		}
 	}
 
+	
+	
 	/**
 	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Room> getListOfRooms() 
+	private void loadElements() 
 			throws Exception
 	{
-		// list of parsed rooms
-		List<Room> list = new ArrayList<Room>();
-		try
+		XPathFactory xpf = XPathFactory.newInstance();
+		XPath xp = xpf.newXPath();
+		
+		// create XPATH expression
+		XPathExpression expression = xp.compile("//element");
+		
+		NodeList nodes = (NodeList) expression.evaluate(this.document, XPathConstants.NODESET);
+		// iterate over results
+		for (int index = 0; index < nodes.getLength(); index++)
 		{
-			XPathFactory xpf = XPathFactory.newInstance();
-			XPath xp = xpf.newXPath();
+			// get node
+			Node node = nodes.item(index);
+			// get id attribute
+			Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
+			Attr attrName = (Attr) node.getAttributes().getNamedItem("name");
+			Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
 			
-			// create XPATH expression
-			XPathExpression expression = xp.compile("//room");
-			NodeList nodes = (NodeList) expression.evaluate(this.document, XPathConstants.NODESET);
-			// iterate over results
-			for (int index = 0; index < nodes.getLength(); index++)
-			{
-				// get node
-				Node node = nodes.item(index);
-				// get id attribute
-				Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
-				Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
-				// create sensor element
-				Room room = new Room(attrId.getValue(), attrType.getValue());
-				list.add(room);
-			}
+			// create element
+			Element element = new Element(
+					attrId.getValue(), 
+					attrName.getValue(), 
+					attrType.getValue());
+			
+			// add cache entry
+			this.eCache.put(element.getName(), element);
 		}
-		catch (XPathExpressionException ex) {
-			throw new Exception(ex.getMessage());
-		}
-		// get the list
-		return list;
 	}
 	
 	/**
 	 * 
-	 * @param room
-	 * @return
 	 * @throws Exception
 	 */
-	public List<RoomObject> getListOfObjectsByRoom(Room room) 
+	private void setElementComposition() 
 			throws Exception
 	{
-		// list of parsed objects
-		List<RoomObject> list = new ArrayList<RoomObject>();
-		try
+		XPathFactory xpf = XPathFactory.newInstance();
+		XPath xp = xpf.newXPath();
+		
+		// create XPATH expression
+		XPathExpression expression = xp.compile("//element");
+		
+		NodeList nodes = (NodeList) expression.evaluate(this.document, XPathConstants.NODESET);
+		// iterate over results
+		for (int index = 0; index < nodes.getLength(); index++)
 		{
-			XPathFactory xpf = XPathFactory.newInstance();
-			XPath xp = xpf.newXPath();
-			
-			// create XPATH expression
-			XPathExpression expression = xp.compile("//room[@id= " + room.getId() + "]/object");
-			NodeList nodes = (NodeList) expression.evaluate(this.document, XPathConstants.NODESET);
-			// iterate over results
-			for (int index = 0; index < nodes.getLength(); index++)
-			{
-				// get node
-				Node node = nodes.item(index);
-				// get id attribute
-				Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
-				Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
-				// create sensor element
-				RoomObject object = new RoomObject(attrId.getValue(), attrType.getValue());
-				list.add(object);
+			// get node
+			Node node = nodes.item(index);
+			// get id attribute
+			Attr attrName = (Attr) node.getAttributes().getNamedItem("name");
+			Attr partOf = (Attr) node.getAttributes().getNamedItem("partOf");
+
+			// check if part of is set
+			if (partOf != null) {
+				
+				// get element
+				Element element = this.eCache.get(attrName.getValue());
+				// get "parent" element
+				Element parent = this.eCache.get(partOf.getValue());
+				
+				// set element as part of parent
+				element.setPartOf(parent);
+				
 			}
 		}
-		catch (XPathExpressionException ex) {
-			throw new Exception(ex.getMessage());
-		}
-		// get the list
-		return list;
 	}
 	
-	/**
-	 * 
-	 * @param room
-	 * @return
-	 * @throws Exception
-	 */
-	public List<Sensor> getListOfSensorsByRoom(Room room) 
-			throws Exception
-	{
-		// list of parsed objects
-		List<Sensor> list = new ArrayList<Sensor>();
-		try
-		{
-			XPathFactory xpf = XPathFactory.newInstance();
-			XPath xp = xpf.newXPath();
-			
-			// create XPATH expression
-			XPathExpression expression = xp.compile("//room[@id= " + room.getId() + "]/sensor");
-			NodeList nodes = (NodeList) expression.evaluate(this.document, XPathConstants.NODESET);
-			// iterate over results
-			for (int index = 0; index < nodes.getLength(); index++)
-			{
-				// get node
-				Node node = nodes.item(index);
-				// get id attribute
-				Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
-				Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
-				Attr attrState = (Attr) node.getAttributes().getNamedItem("state");
-				// check sensor state
-				SensorState state = attrState == null || attrState.getValue().equals("1") ? SensorState.ON : SensorState.OFF;
-				// create sensor element
-				Sensor sensor = new Sensor(attrId.getValue(), attrType.getValue(), state);
-				list.add(sensor);
-			}
-		}
-		catch (XPathExpressionException ex) {
-			throw new Exception(ex.getMessage());
-		}
-		// get the list
-		return list;
-	}
-	
-	/**
-	 * 
-	 * @param room
-	 * @return
-	 * @throws Exception
-	 */
-	public List<Sensor> getListOfSensorsByObject(RoomObject object) 
-			throws Exception
-	{
-		// list of parsed objects
-		List<Sensor> list = new ArrayList<Sensor>();
-		try
-		{
-			XPathFactory xpf = XPathFactory.newInstance();
-			XPath xp = xpf.newXPath();
-			
-			// create XPATH expression
-			XPathExpression expression = xp.compile("//object[@id= " + object.getId() + "]/sensor");
-			NodeList nodes = (NodeList) expression.evaluate(this.document, XPathConstants.NODESET);
-			// iterate over results
-			for (int index = 0; index < nodes.getLength(); index++)
-			{
-				// get node
-				Node node = nodes.item(index);
-				// get id attribute
-				Attr attrId = (Attr) node.getAttributes().getNamedItem("id");
-				Attr attrType = (Attr) node.getAttributes().getNamedItem("type");
-				Attr attrState = (Attr) node.getAttributes().getNamedItem("state");
-				// check sensor state
-				SensorState state = attrState == null || attrState.getValue().equals("1") ? SensorState.ON : SensorState.OFF;
-				// create sensor element
-				Sensor sensor = new Sensor(attrId.getValue(), attrType.getValue(), state);
-				list.add(sensor);
-			}
-		}
-		catch (XPathExpressionException ex) {
-			throw new Exception(ex.getMessage());
-		}
-		// get the list
-		return list;
-	}
 	
 	/**
 	 * 
@@ -264,36 +219,18 @@ public class XMLEnvironmentConfigurationParser implements EnvironmentConfigurati
 		try
 		{
 			XMLEnvironmentConfigurationParser parser = new XMLEnvironmentConfigurationParser("etc/environment/house_config.xml");
-			List<Sensor> sensors = parser.getListOfSensors();
+			List<Sensor> sensors = parser.getSensors();
 			for (Sensor sensor : sensors) {
 				System.out.println(sensor);
 			}
 			
-			List<Room> rooms = parser.getListOfRooms();
-			for (Room room : rooms) {
-				System.out.println(room);
-				// get room objects
-				List<RoomObject> objects = parser.getListOfObjectsByRoom(room);
-				for (RoomObject obj : objects) {
-					System.out.println("\t" + obj);
-					// get list of sensors
-					List<Sensor> objSensors = parser.getListOfSensorsByObject(obj);
-					for (Sensor sensor : objSensors) {
-						System.out.println("\t\t" + sensor);
-					}
-				}
-				
-				// get list of room sensors
-				List<Sensor> roomSensors = parser.getListOfSensorsByRoom(room);
-				for(Sensor sensor : roomSensors) {
-					System.out.println("\t" + sensor);
-				}
+			List<Element> elements = parser.getElements();
+			for (Element element : elements) {
+				System.out.println(element);
 			}			
 		}
 		catch (Exception ex) {
 			System.err.println(ex.getMessage());
 		}
-		
-		
 	}
 }

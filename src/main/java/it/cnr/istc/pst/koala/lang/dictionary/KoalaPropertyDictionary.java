@@ -31,7 +31,7 @@ public enum KoalaPropertyDictionary
 	
 	KOALA_VOICE_COMMAND("http://pst.istc.cnr.it/ontologies/2017/1/koala#VoiceCommand"),
 	
-	KOALA_BATTERY("http://pst.istc.cnr.it/ontologies/2017/1/koala#Battery");
+	KOALA_BATTERY_LEVEL("http://pst.istc.cnr.it/ontologies/2017/1/koala#BatteryLevel");
 	
 	private String uri;
 	
@@ -49,5 +49,57 @@ public enum KoalaPropertyDictionary
 	 */
 	public String getUri() {
 		return uri;
+	}
+	
+	/**
+	 * 
+	 * @param propertyUri
+	 * @return
+	 */
+	public static KoalaPropertyDictionary getPropertyByURI(String propertyUri)
+	{
+		if (propertyUri.equals(KOALA_TEMPERATURE.uri)) {
+			return KOALA_TEMPERATURE;
+		}
+		else if (propertyUri.equals(KOALA_PRESENCE.uri)) {
+			return KOALA_PRESENCE;
+		}
+		else if (propertyUri.equals(KOALA_LUMINOSITY.uri)) {
+			return KOALA_LUMINOSITY;
+		}
+		else if (propertyUri.equals(KOALA_CONTACT.uri)) {
+			return KOALA_CONTACT;
+		}
+		else if (propertyUri.equals(KOALA_ENERGY.uri)) {
+			return KOALA_ENERGY;
+		}
+		else if (propertyUri.equals(KOALA_BODY_TEMPERATURE.uri)) {
+			return KOALA_BODY_TEMPERATURE;
+		}
+		else if (propertyUri.equals(KOALA_BODY_WEIGHT.uri)) {
+			return KOALA_BODY_WEIGHT;
+		}
+		else if (propertyUri.equals(KOALA_BLOOD_SUGAR.uri)) {
+			return KOALA_BLOOD_SUGAR;
+		}
+		else if (propertyUri.equals(KOALA_BLOOD_PRESSURE.uri)) {
+			return KOALA_BLOOD_PRESSURE;
+		}
+		else if (propertyUri.equals(KOALA_HEART_RATE.uri)) {
+			return KOALA_HEART_RATE;
+		}
+		else if (propertyUri.equals(KOALA_OXIMETRY.uri)) {
+			return KOALA_OXIMETRY;
+		}
+		else if (propertyUri.equals(KOALA_VOICE_COMMAND.uri)) {
+			return KOALA_VOICE_COMMAND;
+		}
+		else if (propertyUri.equals(KOALA_BATTERY_LEVEL.uri)) {
+			return KOALA_BATTERY_LEVEL;
+		}
+		else {
+			// unknown 
+			throw new RuntimeException("Unknown property URI " + propertyUri + "\n");
+		}
 	}
 }

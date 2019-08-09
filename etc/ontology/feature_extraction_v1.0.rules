@@ -23,12 +23,48 @@
 [fridge-contact:
 	(?d rdf:type koala:Fridge), makeTemp(?p)
 	->
-	(?p rdf:type koala:Contact), (?d ssn:hasProperty ?p1)]
+	(?p rdf:type koala:Contact), (?d ssn:hasProperty ?p)]
 	
-[fridge-energy:
-	(?d rdf:type koala:Fridge), makeTemp(?p)
+[patient-bloodsugar:
+	(?e rdf:type koala:Patient), makeTemp(?p)
 	->
-	(?p rdf:type koala:Energy), (?d ssn:hasProperty ?p)]
+	(?p rdf:type koala:BloodSugar), (?e ssn:hasProperty ?p)]
+	
+[patient-bloodpressure:
+	(?e rdf:type koala:Patient), makeTemp(?p)
+	->
+	(?p rdf:type koala:BloodPressure), (?e ssn:hasProperty ?p)]
+	
+[patient-bodyweight:
+	(?e rdf:type koala:Patient), makeTemp(?p)
+	->
+	(?p rdf:type koala:BodyWeight), (?e ssn:hasProperty ?p)]
+	
+[patient-bodytemp:
+	(?e rdf:type koala:Patient), makeTemp(?p)
+	->
+	(?p rdf:type koala:BodyTemperature), (?e ssn:hasProperty ?p)]
+	
+[patient-heartrate:
+	(?e rdf:type koala:Patient), makeTemp(?p)
+	->
+	(?p rdf:type koala:HeartRate), (?e ssn:hasProperty ?p)]
+	
+[patient-oximetry:
+	(?e rdf:type koala:Patient), makeTemp(?p)
+	->
+	(?p rdf:type koala:Oximetry), (?e ssn:hasProperty ?p)]
+	
+[robot-batterylevel:
+	(?e rdf:type koala:AssistiveRobot), makeTemp(?p)
+	->
+	(?p rdf:type koala:BatteryLevel), (?e ssn:hasProperty ?p)]
+	
+[robot-voicecommand:
+	(?e rdf:type koala:AssistiveRobot), makeTemp(?p)
+	->
+	(?p rdf:type koala:VoiceCommand), (?e ssn:hasProperty ?p)]
+		
 	
 [environment-luminosity:
 	(?e rdf:type ?t), (?t rdfs:subClassOf koala:HomeEnvironment),
@@ -47,6 +83,7 @@
 	makeTemp(?p)
 	->
 	(?p rdf:type koala:Presence), (?e ssn:hasProperty ?p)]
+	
 
 // modeling sensors
 
@@ -67,6 +104,26 @@
 	(?s ssn:observes koala:Contact), (?s ssn:observes koala:Luminosity),
 	(?s ssn:observes koala:Presence), (?s ssn:observes koala:Temperature)]
 	
+[physio:
+	(?s rdf:type koala:Physiological)
+	->
+	(?s ssn:observes koala:BloodPressure), (?s ssn:observes koala:BloodSugar),
+	(?s ssn:observes koala:Oximetry), (?s ssn:observes koala:HeartRate),
+	(?s ssn:observes koala:BodyWeight), (?s ssn:observes koala:BodyTemperature)]
+
+[battery-sensor:
+	(?s rdf:type koala:BatterySensor)
+	->
+	(?s ssn:observes koala:BatteryLevel)]
+	
+[command-listener:
+	(?s rdf:type koala:VoiceCommandListener)
+	->
+	(?s ssn:observes koala:VoiceCommand)]
+	
+
+	
+	
 // analyzing sensor deployment to infer observable features of the environment
 
 [features:
@@ -83,8 +140,12 @@
 	(?f koala:isObservableThrough ?s), (?s ssn:observes ?t), 
 	makeSkolem(?x, ?f, ?p, ?t)
 	->
-	(?x rdf:type koala:ObservableProperty), (?f koala:hasObservableProperty ?x), (?x ssn:observes ?p),
-	print('Observable property ', ?o, ?t, ?s)]
+	(?x rdf:type koala:ObservableProperty), (?f koala:hasObservableProperty ?x), (?x ssn:observes ?p)]
+	
+//	print('Observable property ', ?o, ?t, ?s)
+	
+	
+
 
 	
 	
