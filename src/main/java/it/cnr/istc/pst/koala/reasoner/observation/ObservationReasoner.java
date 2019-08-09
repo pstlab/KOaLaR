@@ -43,6 +43,6 @@ public abstract class ObservationReasoner implements EnvironmentListener
 	 * @param property
 	 * @throws Exception
 	 */
-	public abstract void observation(String sensorId, String observationValue, String property) 
+	public abstract void observation(String sensorId, Object observationValue, String property) 
 			throws Exception;
 }

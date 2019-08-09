@@ -221,6 +221,110 @@ public class OWLModel
 	
 	/**
 	 * 
+	 * @param referenceURI
+	 * @param propertyURI
+	 * @param value
+	 * @throws Exception
+	 */
+	public void assertDataProperty(String referenceURI, String propertyURI, String value) 
+			throws Exception
+	{
+		// check whether a resource with "referenceURI" actually exists
+		Resource reference = this.infModel.getResource(referenceURI);
+		if (reference == null) {
+			throw new Exception("Resource with URI=\"" + referenceURI + "\" not found in the knowledge-base");
+		}
+	
+		// check whether a resource with "propertyURI" actually exists
+		Property property = this.infModel.getProperty(propertyURI);
+		if (property == null) {
+			throw new Exception("Property with URI=\"" + propertyURI + "\" not found in the knowledge-base");
+		}
+		
+		// add literal and related property
+		this.infModel.add(reference, property, value);
+	}
+	
+	/**
+	 * 
+	 * @param referenceURI
+	 * @param propertyURI
+	 * @param value
+	 * @throws Exception
+	 */
+	public void assertDataProperty(String referenceURI, String propertyURI, double value) 
+			throws Exception
+	{
+		// check whether a resource with "referenceURI" actually exists
+		Resource reference = this.infModel.getResource(referenceURI);
+		if (reference == null) {
+			throw new Exception("Resource with URI=\"" + referenceURI + "\" not found in the knowledge-base");
+		}
+	
+		// check whether a resource with "propertyURI" actually exists
+		Property property = this.infModel.getProperty(propertyURI);
+		if (property == null) {
+			throw new Exception("Property with URI=\"" + propertyURI + "\" not found in the knowledge-base");
+		}
+		
+		// add literal and related property
+		this.infModel.addLiteral(reference, property, value);
+	}
+	
+	/**
+	 * 
+	 * @param referenceURI
+	 * @param propertyURI
+	 * @param value
+	 * @throws Exception
+	 */
+	public void assertDataProperty(String referenceURI, String propertyURI, boolean value) 
+			throws Exception
+	{
+		// check whether a resource with "referenceURI" actually exists
+		Resource reference = this.infModel.getResource(referenceURI);
+		if (reference == null) {
+			throw new Exception("Resource with URI=\"" + referenceURI + "\" not found in the knowledge-base");
+		}
+	
+		// check whether a resource with "propertyURI" actually exists
+		Property property = this.infModel.getProperty(propertyURI);
+		if (property == null) {
+			throw new Exception("Property with URI=\"" + propertyURI + "\" not found in the knowledge-base");
+		}
+		
+		// add literal and related property
+		this.infModel.addLiteral(reference, property, value);
+	}
+	
+	/**
+	 * 
+	 * @param referenceURI
+	 * @param propertyURI
+	 * @param value
+	 * @throws Exception
+	 */
+	public void assertDataProperty(String referenceURI, String propertyURI, int value) 
+			throws Exception
+	{
+		// check whether a resource with "referenceURI" actually exists
+		Resource reference = this.infModel.getResource(referenceURI);
+		if (reference == null) {
+			throw new Exception("Resource with URI=\"" + referenceURI + "\" not found in the knowledge-base");
+		}
+	
+		// check whether a resource with "propertyURI" actually exists
+		Property property = this.infModel.getProperty(propertyURI);
+		if (property == null) {
+			throw new Exception("Property with URI=\"" + propertyURI + "\" not found in the knowledge-base");
+		}
+		
+		// add literal and related property
+		this.infModel.addLiteral(reference, property, value);
+	}
+	
+	/**
+	 * 
 	 * @param id
 	 * @return
 	 * @throws Exception

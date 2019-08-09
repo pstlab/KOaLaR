@@ -3,6 +3,6 @@
     <uri id="Imports Wizard Entry" name="http://purl.oclc.org/NET/ssnx/ssn" uri="http://www.w3.org/2005/Incubator/ssn/ssnx/ssn"/>
     <uri id="Imports Wizard Entry" name="http://www.loa-cnr.it/ontologies/DUL.owl" uri="http://www.loa.istc.cnr.it/ontologies/DUL.owl"/>
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1565307653455" name="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl" uri="koala_v1.0.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1565355035137" name="http://pst.istc.cnr.it/ontologies/2017/1/koala.owl" uri="koala_v1.0.owl"/>
     </group>
 </catalog>

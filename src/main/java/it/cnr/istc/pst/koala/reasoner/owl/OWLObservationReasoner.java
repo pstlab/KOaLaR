@@ -39,11 +39,11 @@ public class OWLObservationReasoner extends ObservationReasoner
 	 * 
 	 * @param sensorId
 	 * @param observationValue
-	 * @param property
+	 * @param propertyUri
 	 * @throws Exception
 	 */
 	@Override
-	public void observation(String sensorId, String observationValue, String propertyUri) 
+	public void observation(String sensorId, Object observationValue, String propertyUri) 
 			throws Exception
 	{
 		try
@@ -80,15 +80,11 @@ public class OWLObservationReasoner extends ObservationReasoner
 					Resource value = this.kb.createIndividual(
 							OWLNameSpace.KOALA.getNs() + "LuminosityObservationValue");
 				
-					/*
-					 * TODO : IMPOSTARE CORRETTAMENTE IL VALORE LETTO DAL SENSOR - VALORE NUMERICO INVECE DI HIGH,LOW,REGULAR 
-					 */
-					
 					// assert data property
 					this.kb.assertDataProperty(
 							value.getURI(), 
-							OWLNameSpace.KOALA.getNs() + "hasLuminosityValue", 
-							new Long(observationValue).longValue());
+							OWLNameSpace.KOALA.getNs() + "hasLuminosityValue",
+							(Double) observationValue);
 					
 					// assert property
 					this.kb.assertProperty(
@@ -120,7 +116,7 @@ public class OWLObservationReasoner extends ObservationReasoner
 					this.kb.assertDataProperty(
 							value.getURI(), 
 							OWLNameSpace.KOALA.getNs() + "hasTemperatureValue", 
-							new Long(observationValue).longValue());
+							(Double) observationValue);
 					
 					// assert property
 					this.kb.assertProperty(
@@ -131,72 +127,378 @@ public class OWLObservationReasoner extends ObservationReasoner
 				break;
 				
 				
-				case KOALA_ENERGY : {
+				case KOALA_ENERGY : 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "Energy");
 					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "EnergyObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasEnergyValue",
+							(Double) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 					
-				case KOALA_PRESENCE : {
+				case KOALA_PRESENCE : 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "Presence");
+					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "PresenceObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasPresenceValue",
+							(Boolean) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
+					
 				} 
 				break;
 				
-				case KOALA_BATTERY_LEVEL: {
+				case KOALA_BATTERY_LEVEL: 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "BatteryLevel");
 					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "BatteryLevelObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasBatteryLevelValue",
+							(Double) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 				
 				
-				case KOALA_BLOOD_PRESSURE : {
+				case KOALA_BLOOD_PRESSURE : 
+				{
+					// get observed ranges
+					Integer[] ranges = (Integer[]) observationValue;
+					int min = ranges[0];
+					int max = ranges[1];
 					
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "BloodPressure");
+					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "BloodPressureObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasMinBloodPressureValue",
+							min);
+					
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasMaxBloodPressureValue",
+							max);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 				
 				
-				case KOALA_BLOOD_SUGAR : {
+				case KOALA_BLOOD_SUGAR : 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "BloodSugar");
 					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "BloodSugarObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasBloodSugarValue",
+							(Double) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 				
-				case KOALA_BODY_TEMPERATURE : {
+				case KOALA_BODY_TEMPERATURE : 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "BodyTemperature");
 					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "BodyTemperatureObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasBodyTemperatureValue",
+							(Double) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 				
 				
-				case KOALA_BODY_WEIGHT : {
+				case KOALA_BODY_WEIGHT : 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "BodyWeight");
 					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "BodyWeightObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasBodyWeightValue",
+							(Double) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 				
 				
-				case KOALA_CONTACT : {
+				case KOALA_CONTACT : 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "Contact");
 					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "ContactObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasContactValue",
+							(Boolean) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 				
 				
-				case KOALA_HEART_RATE : {
+				case KOALA_HEART_RATE : 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "HeartRate");
 					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "HeartRateObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasHeartRateValue",
+							(Boolean) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 				
 				
-				case KOALA_OXIMETRY : {
+				case KOALA_OXIMETRY : 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "Oximetry");
 					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "OximetryObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasOximetryValue",
+							(Boolean) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 				
-				case KOALA_VOICE_COMMAND : {
+				case KOALA_VOICE_COMMAND : 
+				{
+					// retrieve observed property according to type
+					Resource observedProperty = this.kb.getObservedPropertyByType(
+							sensor.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "VoiceCommand");
 					
+					// assert observation property
+					this.kb.assertProperty(
+							observation.getURI(), 
+							OWLNameSpace.SSN.getNs() + "observedProperty", 
+							observedProperty.getURI());
+					
+					
+					// create observation value 
+					Resource value = this.kb.createIndividual(
+							OWLNameSpace.KOALA.getNs() + "VoiceCommandObservationValue");
+				
+					// assert data property
+					this.kb.assertDataProperty(
+							value.getURI(), 
+							OWLNameSpace.KOALA.getNs() + "hasVoiceCommandValue",
+							(String) observationValue);
+					
+					// assert property
+					this.kb.assertProperty(
+							output.getURI(), 
+							OWLNameSpace.SSN.getNs() + "hasValue", 
+							value.getURI());
 				}
 				break;
 				
 				
-				default : {
-					
-				}
-				break;
-				
+				default : 
+					throw new RuntimeException("[ObservationReasoner] Unknown KOaLa property \"" + propertyUri + "\"");
 			}
 		}
 		catch (Exception ex) {

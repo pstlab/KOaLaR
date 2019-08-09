@@ -151,7 +151,7 @@
 		<element name="Mary" id="22" partOf="SoroLivingroom" type="http://pst.istc.cnr.it/ontologies/2017/1/koala#Patient">
 			<properties>
 				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodPressure" value="78_123" />
-				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodSugar" value="medium" />
+				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BloodSugar" value="44.5" />
 				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyTemperature" value="18" />
 				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#BodyWeight" value="75" />
 				<property type="http://pst.istc.cnr.it/ontologies/2017/1/koala#HeartRate" value="65" />
