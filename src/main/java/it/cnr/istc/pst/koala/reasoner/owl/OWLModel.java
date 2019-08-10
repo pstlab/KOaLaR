@@ -14,7 +14,7 @@ import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.Statement;
-import org.apache.jena.rdf.model.StmtIterator;
+import org.apache.jena.reasoner.ValidityReport;
 import org.apache.jena.reasoner.rulesys.GenericRuleReasoner;
 import org.apache.jena.reasoner.rulesys.Rule;
 import org.apache.jena.vocabulary.ReasonerVocabulary;
@@ -100,7 +100,28 @@ public class OWLModel
 		reasoner.setParameter(ReasonerVocabulary.PROPruleMode, "forwardRETE");
 		// create an inference model on the raw data model
 		this.infModel = ModelFactory.createInfModel(reasoner, this.model);
-		
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public void rebind() {
+		// re-bind the inference model to the underlying dat model
+		this.infModel.rebind();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean validate() {
+		// re-bind the inference model to the underlying dat model
+		this.infModel.rebind();
+		// validate the inference model of the knowledge base
+		ValidityReport report = this.infModel.validate();
+		// check if the model is valid
+		return report.isValid();
 	}
 	
 	/**
@@ -338,101 +359,8 @@ public class OWLModel
 	 * @param resURI
 	 * @return
 	 */
-	public Resource getResourceByURI(String resURI) {
+	public Resource getResource(String resURI) {
 		return this.infModel.getResource(resURI);
-	}
-	
-	/**
-	 * 
-	 */
-	public void listStatements() {
-		// get iterator over statements
-		StmtIterator it = this.infModel.listStatements();
-		while (it.hasNext()) {
-			System.out.println("[Statement: " + it.next() + "]");
-		}
-	}
-	
-	/**
-	 * 
-	 * @param propertyURI
-	 * @throws Exception
-	 */
-	public void listStatements(String propertyURI) 
-			throws Exception
-	{
-		// get property 
-		Property property = this.infModel.getProperty(propertyURI);
-		if (property == null) {
-			throw new Exception("Property with URI=\"" + propertyURI + "\" not found in the knowledge-base"); 
-		}
-		
-		// get iterator over statements
-		StmtIterator it = this.infModel.listStatements((Resource) null, property, (RDFNode) null);
-		while (it.hasNext()) {
-			System.out.println("[Statement: " + it.next() + "]");
-		}
-	}
-	
-	/**
-	 * 
-	 * @param classURI
-	 * @return
-	 * @throws Exception
-	 */
-	public void listIndividualsOfClass(String classURI) 
-			throws Exception
-	{
-		// check whether a resource with "classURI" actually exists
-		Resource resource = this.infModel.getResource(classURI);
-		if (resource == null) {
-			throw new Exception("Resource with URI=\"" + classURI + "\" not found in the knowledge-base");
-		}
-		
-		// get property type
-		Property property = this.infModel.getProperty(OWLNameSpace.RDF + "type");
-		// check statements
-		StmtIterator it = this.infModel.listStatements((Resource) null, property, resource.as(RDFNode.class));
-		while (it.hasNext()) {
-			System.out.println("[Statement: " + it.next() + "]");
-		}
-	}
-	
-//	
-	
-	/**
-	 * 
-	 * @param subjectURI
-	 * @param propertyId
-	 * @return
-	 * @throws Exception
-	 */
-	public List<Statement> getStatements(String subjectURI, String propertyId) 
-			throws Exception 
-	{
-		// list of statements
-		List<Statement> list = new ArrayList<Statement>();
-		// get resource 
-		Resource subject = this.infModel.getResource(subjectURI);
-		if (subject == null) {
-			throw new Exception("Resource with URI=\"" + subject + "\" not found in the knowledge-base");
-		}
-		
-		// get property
-		Property prop = this.infModel.getProperty(propertyId);
-		if (prop == null) {
-			throw new Exception("Property with URI=\"" + prop + "\" not found in the knowledge-base");
-		}
-		
-		// iterate over statements
-		Iterator<Statement> it = this.infModel.listStatements(subject, prop, (RDFNode) null);
-		while (it.hasNext()) {
-			// add statement to list
-			list.add(it.next());
-		}
-		
-		// get list
-		return list;
 	}
 	
 	/**
@@ -442,22 +370,76 @@ public class OWLModel
 	 * @throws Exception
 	 */
 	public List<Statement> getStatements(String propertyId) 
+			throws Exception  {
+		// list of statements
+		return this.getStatements(null, propertyId, null);
+	}
+	
+	/**
+	 * 
+	 * @param propertyId
+	 * @param targetId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Statement> getStatements(String propertyId, String targetId) 
+			throws Exception {
+		// get statements
+		return this.getStatements(null, propertyId, targetId);
+	}
+	
+	/**
+	 * 
+	 * @param subjectId
+	 * @param propertyId
+	 * @param targetId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Statement> getStatements(String subjectId, String propertyId, String targetId) 
 			throws Exception 
 	{
 		// list of statements
 		List<Statement> list = new ArrayList<Statement>();
 		
-		// get property
-		Property prop = this.infModel.getProperty(propertyId);
-		if (prop == null) {
-			throw new Exception("Property with URI=\"" + prop + "\" not found in the knowledge-base");
+		// check resource parameter
+		Resource subject = null;
+		if (subjectId != null) {
+			// get resource 
+			subject = this.infModel.getResource(subjectId);
+			if (subject == null) {
+				throw new Exception("Resource with URI=\"" + subjectId + "\" not found in the knowledge-base");
+			}
 		}
 		
-		Iterator<Statement> it = this.infModel.listStatements((Resource) null, prop, (RDFNode) null);
+		// check property parameter
+		Property prop = null;
+		if (propertyId != null) {
+			// get property
+			prop = this.infModel.getProperty(propertyId);
+			if (prop == null) {
+				throw new Exception("Property with URI=\"" + propertyId + "\" not found in the knowledge-base");
+			}
+		}
+		
+		// check target parameter
+		RDFNode target = null;
+		if (targetId != null) {
+			// get target
+			target = (RDFNode) this.infModel.getResource(targetId);
+			if (target == null) {
+				throw new Exception("Target with URI=\"" + targetId + "\" not found in the knowledge-base");
+			}
+		}
+		
+		
+		// iterate over statements
+		Iterator<Statement> it = this.infModel.listStatements(subject, prop, target);
 		while (it.hasNext()) {
 			// add statement to list
 			list.add(it.next());
 		}
+			
 		
 		// get list
 		return list;
@@ -465,57 +447,20 @@ public class OWLModel
 	
 	/**
 	 * 
-	 * @param observableFeatureURI
-	 * @param propertyTypeURI
+	 * @param propertyId
 	 * @return
 	 * @throws Exception
 	 */
-	public Resource getObservedPropertyByType(String sensorURI, String propertyTypeURI) 
+	public Property getProperty(String propertyId) 
 			throws Exception
 	{
-		// property instance
-		Resource pInstance = null;
-		// get sensor 
-		Resource sensor = this.infModel.getResource(sensorURI);
 		// get property
-		Property prop = this.infModel.getProperty(OWLNameSpace.KOALA.getNs() + "isObservableThrough");
-		// get observable features
-		Iterator<Resource> it = this.infModel.listResourcesWithProperty(prop, sensor.asNode());
-		while (it.hasNext() && pInstance == null)
-		{
-			// get observable feature
-			Resource feature = it.next();
-			// get property 
-			prop = this.infModel.getProperty(OWLNameSpace.KOALA.getNs() + "hasObservableProperty");
-			// get statements 
-			Iterator<Statement> itt = feature.listProperties(prop);
-			while (itt.hasNext() && pInstance == null)
-			{
-				// get statement 
-				Statement s = itt.next();
-				// get observable property
-				Resource obsProp = s.getObject().asResource();
-				
-				// get property 
-				prop = this.infModel.getProperty(OWLNameSpace.SSN.getNs() + "observes");
-				// get property instance
-				Statement result = obsProp.getProperty(prop);
-				// get property instance
-				Resource i = result.getObject().asResource();
-				// check type
-				prop = this.infModel.getProperty(OWLNameSpace.RDF.getNs() + "type");
-				Resource type = i.getProperty(prop).getObject().asResource();
-				// set property instance
-				pInstance = type.getURI().equals(propertyTypeURI) ? i : null;
-			}
+		Property prop = this.infModel.getProperty(propertyId);
+		if (prop == null) {
+			throw new Exception("Property with URI=\"" + propertyId + "\" not found in the knowledge-base");
 		}
 		
-		// check if property instance has been found
-		if (pInstance == null) {
-			throw new Exception("No observed property with URI= \"" + propertyTypeURI + "\" associated to resource with URI=\"" + sensorURI +"\" has been found");
-		}
-		
-		// get found property instance
-		return pInstance;
+		// get property 
+		return prop;
 	}
 }

@@ -208,46 +208,46 @@ public class OWLEnvironmentReasoner extends EnvironmentReasoner
 		this.kb.assertProperty(deployment.getURI(), OWLNameSpace.SSN + "deployedOnPlatform", platform.getURI());
 	}
 	
-	/**
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) 
-	{
-		try
-		{
-			// create knowledge manager
-			OWLEnvironmentReasoner km = new OWLEnvironmentReasoner(
-					"etc/ontology/koala_v1.0.owl",
-					"etc/ontology/feature_extraction_v1.0.rules");
-			
-			// initialize reasoner
-			km.init("etc/environment/house_config.xml");
-			
-			
-			
-			System.out.println("-----------------------------------------------------------------------------------------");
-			km.kb.listStatements(OWLNameSpace.SSN + "deployedOnPlatform");
-			System.out.println("-----------------------------------------------------------------------------------------");
-			km.kb.listStatements(OWLNameSpace.DUL + "hasComponent");
-			System.out.println("-----------------------------------------------------------------------------------------");
-			km.kb.listStatements(OWLNameSpace.KOALA + "hasDiagnosis");
-			// check detected features of interest
-			System.out.println("\n-------------------------------------------------------------------------------------------------\n"
-					+ "\tList of detected observable features of the environment\n"
-					+ "-------------------------------------------------------------------------------------------------\n");
-			
-			// list detected observable features
-			km.kb.listIndividualsOfClass(OWLNameSpace.KOALA + "ObservableFeature");
-			System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-			km.kb.listStatements(OWLNameSpace.KOALA + "hasObservableFeature");
-			
-			System.out.println("#######################################################################################################");
-			// list properties that can be observed through features
-			km.kb.listStatements(OWLNameSpace.KOALA + "hasObservableProperty");
-		}
-		catch (Exception ex) {
-			System.err.println(ex.getMessage());
-		}
-	}
+//	/**
+//	 * 
+//	 * @param args
+//	 */
+//	public static void main(String[] args) 
+//	{
+//		try
+//		{
+//			// create knowledge manager
+//			OWLEnvironmentReasoner km = new OWLEnvironmentReasoner(
+//					"etc/ontology/koala_v1.0.owl",
+//					"etc/ontology/feature_extraction_v1.0.rules");
+//			
+//			// initialize reasoner
+//			km.init("etc/environment/house_config.xml");
+//			
+//			
+//			
+//			System.out.println("-----------------------------------------------------------------------------------------");
+//			km.kb.listStatements(OWLNameSpace.SSN + "deployedOnPlatform");
+//			System.out.println("-----------------------------------------------------------------------------------------");
+//			km.kb.listStatements(OWLNameSpace.DUL + "hasComponent");
+//			System.out.println("-----------------------------------------------------------------------------------------");
+//			km.kb.listStatements(OWLNameSpace.KOALA + "hasDiagnosis");
+//			// check detected features of interest
+//			System.out.println("\n-------------------------------------------------------------------------------------------------\n"
+//					+ "\tList of detected observable features of the environment\n"
+//					+ "-------------------------------------------------------------------------------------------------\n");
+//			
+//			// list detected observable features
+//			km.kb.listIndividualsOfClass(OWLNameSpace.KOALA + "ObservableFeature");
+//			System.out.println("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+//			km.kb.listStatements(OWLNameSpace.KOALA + "hasObservableFeature");
+//			
+//			System.out.println("#######################################################################################################");
+//			// list properties that can be observed through features
+//			km.kb.listStatements(OWLNameSpace.KOALA + "hasObservableProperty");
+//		}
+//		catch (Exception ex) {
+//			System.err.println(ex.getMessage());
+//		}
+//	}
 }
