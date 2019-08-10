@@ -4,21 +4,33 @@
 @prefix dul:	<http://www.loa-cnr.it/ontologies/DUL.owl#>.
 @prefix	koala:	<http://pst.istc.cnr.it/ontologies/2017/1/koala#>.
 
+// assistive task inference
 
-[test0:
-	(?o rdf:type ssn:Observation)
+[dietary-reminding-task:
+	(?a rdf:type koala:Cooking),
+	makeSkolem(?condition, ?a), makeSkolem(?task, ?a)
 	->
-	print('[Goal] Can see observation ', ?o)]
+	print('[Goal] Inferring assistive task ', ?task, ' supporting assistive service ' koala:DietaryRemindingService)
+	(?task rdf:type koala:DietaryRemindingTask), (?condition rdf:type koala:ObservedSituation), 
+	(?task koala:hasPrecondition ?condition), (?task koala:supports koala:DietaryRemindingService)]
 
-[test1: 
-	(?a rdf:type koala:Cooking)
+[bloodpressure-monitoring:
+	(?e rdf:type koala:HighBloodPressure),
+	makeSkolem(?condition, ?a), makeSkolem(?task, ?a)
 	->
-	print('[Goal] Triggering goal about activity ', ?a)]
-	
-[test2: 
-	(?a rdf:type koala:HighBloodPressure)
+	print('[Goal] Inferring assistive task ', ?task, ' supporting assistive service ' koala:HearMonitoringService)
+	(?task rdf:type koala:PhysiologicalParameterMonitoringTask), (?condition rdf:type koala:ObservedSituation), 
+	(?task koala:hasPrecondition ?condition), (?task koala:supports koala:HearMonitoringService)]
+
+
+[heartrate-monitoring:
+	(?e rdf:type koala:HighHeartFrequency),
+	makeSkolem(?condition, ?a), makeSkolem(?task, ?a)
 	->
-	print('[Goal] Triggering goal about activity ', ?a)]
+	print('[Goal] Inferring assistive task ', ?task, ' supporting assistive service ' koala:HearMonitoringService)
+	(?task rdf:type koala:PhysiologicalParameterMonitoringTask), (?condition rdf:type koala:ObservedSituation), 
+	(?task koala:hasPrecondition ?condition), (?task koala:supports koala:HearMonitoringService)]
+
 
 
 

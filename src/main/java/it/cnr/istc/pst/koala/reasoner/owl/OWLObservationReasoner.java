@@ -474,7 +474,6 @@ public class OWLObservationReasoner extends ObservationReasoner
 	{
 		// list of observation to notify 
 		List<ObservationReasonerUpdate> updates = new ArrayList<ObservationReasonerUpdate>();
-		
 		try
 		{
 			// get the list of inferred events
