@@ -29,6 +29,16 @@
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#activityConcerns -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#activityConcerns">
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedActivity"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#adjacent -->
 
     <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#adjacent">
@@ -41,6 +51,16 @@
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns -->
 
     <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns">
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#eventConcerns -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#eventConcerns">
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent"/>
         <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
     </owl:ObjectProperty>
     
@@ -61,15 +81,6 @@
         <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#hasDescription"/>
         <rdfs:domain rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalObject"/>
         <rdfs:range rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Diagnosis"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#hasEventCategory -->
-
-    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#hasEventCategory">
-        <rdfs:domain rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Event"/>
-        <rdfs:range rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Event"/>
     </owl:ObjectProperty>
     
 

@@ -1,0 +1,24 @@
+@prefix	rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#>.
+@prefix ssn:	<http://purl.oclc.org/NET/ssnx/ssn#>.
+@prefix dul:	<http://www.loa-cnr.it/ontologies/DUL.owl#>.
+@prefix	koala:	<http://pst.istc.cnr.it/ontologies/2017/1/koala#>.
+
+
+[test0:
+	(?o rdf:type ssn:Observation)
+	->
+	print('[Goal] Can see observation ', ?o)]
+
+[test1: 
+	(?a rdf:type koala:Cooking)
+	->
+	print('[Goal] Triggering goal about activity ', ?a)]
+	
+[test2: 
+	(?a rdf:type koala:HighBloodPressure)
+	->
+	print('[Goal] Triggering goal about activity ', ?a)]
+
+
+

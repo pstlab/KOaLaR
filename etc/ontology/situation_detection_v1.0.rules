@@ -24,9 +24,10 @@
 	greaterThan(?l, ?max), makeSkolem(?event, ?o, ?sit), 
 	makeTemp(?i), now(?t)
 	->
-	print('[Event] High luminosity detected on feature ', ?l, ?e),
+	print('[Event] High luminosity detected on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:HighLuminosity), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o),
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 	
 [luminosity-low:
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), (?e koala:hasObservableFeature ?f),
@@ -37,7 +38,8 @@
 	->
 	print('[Event] Low luminosity detected on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:LowLuminosity), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o),
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]	
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]	
 	
 
 [temperature-high:
@@ -49,7 +51,8 @@
 	->
 	print('[Event] High temperature detected on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:HighTemperature), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o),
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 	
 [luminosity-low:
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), 
@@ -61,7 +64,8 @@
 	->
 	print('[Event] Low temperature detected on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:LowTemperature), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o),
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 	
 [motion:
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f),
@@ -72,7 +76,8 @@
 	->
 	print('[Event] Motion detected on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:MotionEvent), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 
 
 // analyze observations concerning physiological parameters
@@ -86,7 +91,8 @@
 	->
 	print('[Event] High blood pressure on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:HighBloodPressure), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 	
 
 [low-bloodpressure:
@@ -98,7 +104,8 @@
 	->
 	print('[Event] Low blood pressure on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:LowBloodPressure), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 
 
 [high-glucose:
@@ -110,7 +117,8 @@
 	->
 	print('[Event] High blood sugar on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:HighBloodGlucoseLevel), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 	
 
 [low-glucose:
@@ -122,7 +130,8 @@
 	->
 	print('[Event] Low blood sugar on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:LowBloodGlucoseLevel), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTIme ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTIme ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 	
 	
 [high-heartrate:
@@ -134,7 +143,8 @@
 	->
 	print('[Event] High heart rate on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:HighHeartFrequency), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 
 
 [low-heartrate:
@@ -146,7 +156,8 @@
 	->
 	print('[Event] Low heart rate on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:LowHeartFrequency), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 	
 	
 [pain-attack:
@@ -157,8 +168,8 @@
 	->
 	print('[Event] Pain attack from events ', ?e1, ?e2),
 	(?event rdf:type koala:PainAttack), (?event koala:concerns ?f1), (?event koala:concerns ?f2),  
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
-
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 
 	
 // analyze observations concerning interactions with the robot 
@@ -171,7 +182,8 @@
 	->
 	print('[Event] Voice command on feature ', ?l, ?e, ?event),
 	(?event rdf:type koala:IssuingVoiceCommand), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
-	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t),
+	(?event koala:hasEventCategory koala:ObservedEvent)]
 
 
 
@@ -186,7 +198,8 @@
 	->
 	print('[Activity] Cooking from events ', ?e1, ?e2),
 	(?activity rdf:type koala:Cooking), (?activity koala:concerns ?f1), (?activity koala:concerns ?f2),  
-	(?i rdf:type koala:TimeInstant), (?activity ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	(?i rdf:type koala:TimeInstant), (?activity ssn:observationRuleTime ?i), (?i koala:hasDate ?t),
+	(?activity koala:hasEventCategory koala:ObservedActivity)]
 	
 
 
