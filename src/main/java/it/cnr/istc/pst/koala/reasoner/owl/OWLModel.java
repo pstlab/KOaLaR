@@ -27,20 +27,10 @@ import org.apache.jena.vocabulary.ReasonerVocabulary;
 public class OWLModel 
 {
 	private final AtomicLong idCounter;
-//	private static final String ONTOLOGY_VERSION = "1.0";
-//	private static final String ONTOLOGY_FILE = "etc/ontology/koala_v" + ONTOLOGY_VERSION + ".owl";
 	private String ontologyFile;
 	private String inferenceRuleFile;
 	private OntModel model;
 	private InfModel infModel;
-	
-//	/**
-//	 * 
-//	 * @param inferenceRuleFile
-//	 */
-//	protected OWLModel(String inferenceRuleFile) {
-//		this(ONTOLOGY_FILE, inferenceRuleFile);
-//	}
 	
 	/**
 	 * 
@@ -57,10 +47,7 @@ public class OWLModel
 		// set inference rule file
 		this.inferenceRuleFile = inferenceRuleFile;
 		// create the model schema from the ontology 
-//		this.model = ModelFactory.createOntologyModel();									// create in-memory ontology model with OWL-Full language and sub-class, sub-property inference
-//		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RULE_INF);	// create in-memory ontology model with OWL-DL language and rule-based reasoner with OWL rules (computationally expansive)
 		this.model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM_TRANS_INF);		// create in-memory ontology model with RDFS language and transitive rule-based reasoner with RDFS rules
-//		this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM_RDFS_INF);
 		// use DocumentManager API to specify that KOALA ontology is replicated locally on disk
 		this.model.getDocumentManager().addAltEntry(OWLNameSpace.KOALA.getNs(), "file:" + this.ontologyFile);
 		// read ontology file

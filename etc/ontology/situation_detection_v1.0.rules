@@ -10,13 +10,12 @@
 [register-observation:
 	(?o rdf:type ssn:Observation), (?o ssn:observedProperty ?p),
 	(?o ssn:observedBy ?s), (?f koala:isObservableThrough ?s),
-	noValue(?o, ssn:observationResultTime), makeTemp(?i), now(?t)
+	makeTemp(?i), now(?t)
 	->
-	print('Processing observation ', ?o, ?t), 
 	(?o ssn:featureOfInterest ?f),
 	(?i rdf:type koala:TimeInstant), (?o ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
 	
-// analyze observations concerning environment luminosity
+// analyze observations concerning environment 
 	
 [luminosity-high:
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), (?e koala:hasObservableFeature ?f),
@@ -26,7 +25,7 @@
 	makeTemp(?i), now(?t)
 	->
 	print('[Event] High luminosity detected on feature ', ?l, ?e),
-	(?event rdf:type koala:HighLuminosity), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o),
+	(?event rdf:type koala:HighLuminosity), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o),
 	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
 	
 [luminosity-low:
@@ -37,11 +36,9 @@
 	makeTemp(?i), now(?t)
 	->
 	print('[Event] Low luminosity detected on feature ', ?l, ?e, ?event),
-	(?event rdf:type koala:LowLuminosity), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o),
+	(?event rdf:type koala:LowLuminosity), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o),
 	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]	
 	
-
-// analyze observations concerning environment temperature
 
 [temperature-high:
 	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f), (?e koala:hasObservableFeature ?f),
@@ -51,7 +48,7 @@
 	makeTemp(?i), now(?t)
 	->
 	print('[Event] High temperature detected on feature ', ?l, ?e, ?event),
-	(?event rdf:type koala:HighTemperature), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o),
+	(?event rdf:type koala:HighTemperature), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o),
 	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
 	
 [luminosity-low:
@@ -63,7 +60,7 @@
 	makeTemp(?i), now(?t)
 	->
 	print('[Event] Low temperature detected on feature ', ?l, ?e, ?event),
-	(?event rdf:type koala:LowTemperature), (?event koala:concerns ?e), (?event ssn:isProducedBy ?o),
+	(?event rdf:type koala:LowTemperature), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o),
 	(?i rdf:type koala:TimeInstant), (?event ssn:observationResultTime ?i), (?i koala:hasDate ?t)]
 	
 [motion:
@@ -74,16 +71,130 @@
 	makeTemp(?i), now(?t)
 	->
 	print('[Event] Motion detected on feature ', ?l, ?e, ?event),
-	(?event rdf:type koala:MotionEvent), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
-
-
+	(?event rdf:type koala:MotionEvent), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
 
 
 // analyze observations concerning physiological parameters
 
+[high-bloodpressure:
+	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f),
+	(?e koala:hasObservableFeature ?f), (?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
+	(?v koala:hasMaxBloodPressureValue ?l), (koala:health_high_bloodpressure koala:hasMaxBloodPressureValue ?max),
+	greaterThan(?l, ?max), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
+	->
+	print('[Event] High blood pressure on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:HighBloodPressure), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	
+
+[low-bloodpressure:
+	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f),
+	(?e koala:hasObservableFeature ?f), (?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
+	(?v koala:hasMaxBloodPressureValue ?l), (koala:health_min_bloodpressure koala:hasMaxBloodPressureValue ?min),
+	lessThan(?l, ?min), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
+	->
+	print('[Event] Low blood pressure on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:LowBloodPressure), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+
+
+[high-glucose:
+	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f),
+	(?e koala:hasObservableFeature ?f), (?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
+	(?v koala:hasBloodSugarValue ?l), (koala:health_high_bloodsugar koala:hasMaxBloodPressureValue ?max),
+	greaterThan(?l, ?max), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
+	->
+	print('[Event] High blood sugar on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:HighBloodGlucoseLevel), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	
+
+[low-glucose:
+	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f),
+	(?e koala:hasObservableFeature ?f), (?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
+	(?v koala:hasBloodSugarValue ?l), (koala:health_min_bloodsugar koala:hasMaxBloodPressureValue ?min),
+	lessThan(?l, ?min), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
+	->
+	print('[Event] Low blood sugar on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:LowBloodGlucoseLevel), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTIme ?i), (?i koala:hasDate ?t)]
+	
+	
+[high-heartrate:
+	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f),
+	(?e koala:hasObservableFeature ?f), (?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
+	(?v koala:hasHeartRateValue ?l), (koala:health_high_heart_frequency koala:hasHeartRateValue ?max),
+	greaterThan(?l, ?max), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
+	->
+	print('[Event] High heart rate on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:HighHeartFrequency), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+
+
+[low-heartrate:
+	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f),
+	(?e koala:hasObservableFeature ?f), (?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
+	(?v koala:hasHeartRateValue ?l), (koala:health_low_heart_frequency koala:hasHeartRateValue ?min),
+	lessThan(?l, ?max), makeSkolem(?event, ?o),
+	makeTemp(?i), now(?t)
+	->
+	print('[Event] Low heart rate on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:LowHeartFrequency), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	
+	
+[pain-attack:
+	(?e1 rdf:type koala:HighBloodPressure), (?e1 koala:concerns ?f1), (?p koala:hasObservableFeature ?f1), 
+	(?e2 rdf:type koala:HighHeartRate), (?e2 koala:concerns ?f2), (?p koala:hasObservableFeature ?f2),
+	(?p rdf:type koala:Patient),
+	makeSkolem(?event, ?e1, ?e2), makeTemp(?i), now(?t)
+	->
+	print('[Event] Pain attack from events ', ?e1, ?e2),
+	(?event rdf:type koala:PainAttack), (?event koala:concerns ?f1), (?event koala:concerns ?f2),  
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+
+
+	
+// analyze observations concerning interactions with the robot 
+
+[voice-command:
+	(?o rdf:type ssn:Observation), (?o ssn:featureOfInterest ?f),
+	(?e koala:hasObservableFeature ?f), (?o ssn:hasOutput ?d), (?d ssn:hasValue ?v),
+	(?v koala:hasVoiceCommandValue ?l), 
+	makeSkolem(?event, ?o), makeTemp(?i), now(?t)
+	->
+	print('[Event] Voice command on feature ', ?l, ?e, ?event),
+	(?event rdf:type koala:IssuingVoiceCommand), (?event koala:concerns ?f), (?event ssn:isProducedBy ?o), 
+	(?i rdf:type koala:TimeInstant), (?event ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
 
 
 
+
+// combine events to detect activities
+
+[cooking:
+	(?e1 rdf:type koala:MotionEvent), (?e1 koala:concerns ?f1), (?k koala:hasObservableFeature ?f1), 
+	(?e2 rdf:type koala:HighLuminosity), (?e2 koala:concerns ?f2), (?k koala:hasObservableFeature ?f2),
+	(?k rdf:type koala:Kitchen),
+	makeSkolem(?activity, ?e1, ?e2), makeTemp(?i), now(?t)
+	->
+	print('[Activity] Cooking from events ', ?e1, ?e2),
+	(?activity rdf:type koala:Cooking), (?activity koala:concerns ?f1), (?activity koala:concerns ?f2),  
+	(?i rdf:type koala:TimeInstant), (?activity ssn:observationRuleTime ?i), (?i koala:hasDate ?t)]
+	
+
+
+
+
+
+
+ 
 
 
 	

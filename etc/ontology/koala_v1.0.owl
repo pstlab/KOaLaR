@@ -29,6 +29,16 @@
     
 
 
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#activityConcerns -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#activityConcerns">
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedActivity"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#adjacent -->
 
     <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#adjacent">
@@ -41,8 +51,17 @@
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns -->
 
     <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns">
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#eventConcerns -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#eventConcerns">
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
         <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent"/>
-        <rdfs:range rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Object"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
     </owl:ObjectProperty>
     
 
@@ -1121,6 +1140,12 @@ Weight</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Action"/>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#observationResultTime"/>
                 <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#TimeInstant"/>
             </owl:Restriction>
@@ -1136,7 +1161,13 @@ Weight</rdfs:label>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
-                <owl:someValuesFrom rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Object"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#isProducedBy"/>
+                <owl:someValuesFrom rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Observation"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
