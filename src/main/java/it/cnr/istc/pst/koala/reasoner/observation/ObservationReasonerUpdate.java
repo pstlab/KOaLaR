@@ -10,17 +10,20 @@ public class ObservationReasonerUpdate
 	private String eventId;
 	private String eventType;
 	private ObservationUpdateCategory category;
+	private String concernedFeatureId;
 	
 	/**
 	 * 
 	 * @param eventId
 	 * @param eventType
+	 * @param concernedFeatureId
 	 * @param category
 	 */
-	protected ObservationReasonerUpdate(String eventId, String eventType, ObservationUpdateCategory category) {
+	protected ObservationReasonerUpdate(String eventId, String eventType, String concernedFeatureId, ObservationUpdateCategory category) {
 		this.eventId = eventId;
 		this.eventType = eventType;
 		this.category = category;
+		this.concernedFeatureId = concernedFeatureId;
 	}
 	
 	/**
@@ -45,6 +48,14 @@ public class ObservationReasonerUpdate
 	 */
 	public String getEventType() {
 		return eventType;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getConcernedFeatureId() {
+		return concernedFeatureId;
 	}
 
 	/**

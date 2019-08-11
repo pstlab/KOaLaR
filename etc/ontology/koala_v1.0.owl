@@ -50,9 +50,7 @@
 
     <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns -->
 
-    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns">
-        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
-    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
     
 
 
@@ -682,6 +680,12 @@ Weight</rdfs:label>
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#Capability">
         <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Action"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#AutonomousRobot"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -840,6 +844,12 @@ Weight</rdfs:label>
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#EnvironmentEvent">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
+                <owl:someValuesFrom rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#PhysicalPlace"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Environment-related Event</rdfs:label>
     </owl:Class>
@@ -922,6 +932,12 @@ Weight</rdfs:label>
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthEvent">
         <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
+                <owl:someValuesFrom rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#NaturalPerson"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment></rdfs:comment>
         <rdfs:label>Health-related Event</rdfs:label>
     </owl:Class>
@@ -1257,7 +1273,7 @@ Weight</rdfs:label>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
-                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
+                <owl:someValuesFrom rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#NaturalPerson"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -1274,12 +1290,6 @@ Weight</rdfs:label>
 
     <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservedEvent">
         <rdfs:subClassOf rdf:resource="http://www.loa-cnr.it/ontologies/DUL.owl#Event"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#concerns"/>
-                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#ObservableFeature"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#isProducedBy"/>
@@ -1380,10 +1390,18 @@ Weight</rdfs:label>
     
 
 
-    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#PainAttack -->
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#PainAttackMitigationService -->
 
-    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#PainAttack">
-        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#HealthEvent"/>
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#PainAttackMitigationService">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#MonitoringService"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2017/1/koala#PainAttackMitigationTask -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2017/1/koala#PainAttackMitigationTask">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2017/1/koala#AssistiveTask"/>
     </owl:Class>
     
 

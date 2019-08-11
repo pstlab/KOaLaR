@@ -140,11 +140,16 @@ public abstract class ObservationReasoner implements EnvironmentListener
 	 * 
 	 * @param eventId
 	 * @param eventType
+	 * @param concernedFeatureId
 	 * @return
 	 */
-	protected ObservationReasonerUpdate createEventUpdate(String eventId, String eventType) {
+	protected ObservationReasonerUpdate createEventUpdate(String eventId, String eventType, String concernedFeatureId) {
 		// create update object
-		return new ObservationReasonerUpdate(eventId, eventType, ObservationUpdateCategory.OBSERVED_EVENT);
+		return new ObservationReasonerUpdate(
+				eventId, 
+				eventType,
+				concernedFeatureId,
+				ObservationUpdateCategory.OBSERVED_EVENT);
 		
 	}
 	
@@ -152,11 +157,16 @@ public abstract class ObservationReasoner implements EnvironmentListener
 	 * 
 	 * @param eventId
 	 * @param eventType
+	 * @param concernedFeatureId
 	 * @return
 	 */
-	protected ObservationReasonerUpdate createActivityUpdate(String eventId, String eventType) {
+	protected ObservationReasonerUpdate createActivityUpdate(String eventId, String eventType, String concernedFeatureId) {
 		// create update object
-		return new ObservationReasonerUpdate(eventId, eventType, ObservationUpdateCategory.OBSERVED_ACTIVITY);
+		return new ObservationReasonerUpdate(
+				eventId, 
+				eventType, 
+				concernedFeatureId,
+				ObservationUpdateCategory.OBSERVED_ACTIVITY);
 		
 	}
 	

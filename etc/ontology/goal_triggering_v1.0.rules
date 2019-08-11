@@ -6,30 +6,45 @@
 
 // assistive task inference
 
+[pain-attack:
+	(?p rdf:type koala:Patient),
+	(?e1 rdf:type koala:HighBloodPressure), (?e1 koala:concerns ?p),
+	(?e2 rdf:type koala:HighHeartRate), (?e2 koala:concerns ?p),
+	makeSkolem(?condition, ?e1, ?e2), makeSkolem(?task, ?e1, ?e2)
+	->
+	print('[Goal] Inferring assistive task ', ?task, ' supporting assistive service ' koala:PainAttackMitigationService)
+	(?condition rdf:type koala:ObservedSituation), (?condition dul:includesEvent ?e1), (?condition dul:includesEvent ?e2),  
+	(?task rdf:type koala:PainAttackMitigationTask), (?task koala:hasPrecondition ?condition),
+	(?task koala:supports koala:PainAttackMitigationService)]
+
 [dietary-reminding-task:
-	(?a rdf:type koala:Cooking),
+	(?a rdf:type koala:Cooking), (?a koala:concerns ?k), (?k rdf:type koala:Kitchen),
 	makeSkolem(?condition, ?a), makeSkolem(?task, ?a)
 	->
 	print('[Goal] Inferring assistive task ', ?task, ' supporting assistive service ' koala:DietaryRemindingService)
-	(?task rdf:type koala:DietaryRemindingTask), (?condition rdf:type koala:ObservedSituation), 
-	(?task koala:hasPrecondition ?condition), (?task koala:supports koala:DietaryRemindingService)]
+	(?condition rdf:type koala:ObservedSituation), (?condition dul:includesEvent ?a),
+	(?task rdf:type koala:DietaryRemindingTask), (?task koala:hasPrecondition ?condition),
+	(?task koala:supports koala:DietaryRemindingService)]
 
 [bloodpressure-monitoring:
-	(?e rdf:type koala:HighBloodPressure),
-	makeSkolem(?condition, ?a), makeSkolem(?task, ?a)
+	(?p rdf:type koala:Patient),
+	(?e rdf:type koala:HighBloodPressure), (?e koala:concerns ?p),
+	makeSkolem(?condition, ?e), makeSkolem(?task, ?e)
 	->
 	print('[Goal] Inferring assistive task ', ?task, ' supporting assistive service ' koala:HearMonitoringService)
-	(?task rdf:type koala:PhysiologicalParameterMonitoringTask), (?condition rdf:type koala:ObservedSituation), 
-	(?task koala:hasPrecondition ?condition), (?task koala:supports koala:HearMonitoringService)]
-
+	(?condition rdf:type koala:ObservedSituation), (?condition dul:includesEvent ?e), 
+	(?task rdf:type koala:PhysiologicalParameterMonitoringTask), (?task koala:hasPrecondition ?condition), 
+	(?task koala:supports koala:HearMonitoringService)]
 
 [heartrate-monitoring:
-	(?e rdf:type koala:HighHeartFrequency),
-	makeSkolem(?condition, ?a), makeSkolem(?task, ?a)
+	(?p rdf:type koala:Patient),
+	(?e rdf:type koala:HighHeartFrequency), (?e koala:concerns ?p),
+	makeSkolem(?condition, ?e), makeSkolem(?task, ?e)
 	->
 	print('[Goal] Inferring assistive task ', ?task, ' supporting assistive service ' koala:HearMonitoringService)
-	(?task rdf:type koala:PhysiologicalParameterMonitoringTask), (?condition rdf:type koala:ObservedSituation), 
-	(?task koala:hasPrecondition ?condition), (?task koala:supports koala:HearMonitoringService)]
+	(?condition rdf:type koala:ObservedSituation), (?condition dul:includesEvent ?e),
+	(?task rdf:type koala:PhysiologicalParameterMonitoringTask), (?task koala:hasPrecondition ?condition), 
+	(?task koala:supports koala:HearMonitoringService)]
 
 
 

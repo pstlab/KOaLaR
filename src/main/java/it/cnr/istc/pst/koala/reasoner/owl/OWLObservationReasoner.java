@@ -496,8 +496,14 @@ public class OWLObservationReasoner extends ObservationReasoner
 					Property pType = this.kb.getProperty(OWLNameSpace.RDF.getNs() + "type");
 					// get event property statement
 					Statement pStatement = subject.getProperty(pType);
-					// get last inferred type
+					// get inferred event type
 					Resource eventType = pStatement.getResource();
+					// get the observable feature associated
+					Property concerns = this.kb.getProperty(OWLNameSpace.KOALA.getNs()+ "concerns");
+					// get concerns property statement
+					Statement cStatement = subject.getProperty(concerns);
+					// get observable feature
+					Resource observableFeature = cStatement.getResource();
 					
 					// check category
 					if (object.getURI().equals(OWLNameSpace.KOALA.getNs() + "ObservedActivity")) 
@@ -505,7 +511,8 @@ public class OWLObservationReasoner extends ObservationReasoner
 						// create activity update
 						ObservationReasonerUpdate update = this.createActivityUpdate(
 								subject.getId().getBlankNodeId().getLabelString(), 
-								eventType.getURI());
+								eventType.getURI(),
+								observableFeature.getURI());
 						
 						// add update to the list 
 						updates.add(update);
@@ -517,7 +524,8 @@ public class OWLObservationReasoner extends ObservationReasoner
 						// create event update
 						ObservationReasonerUpdate update = this.createEventUpdate(
 								subject.getId().getBlankNodeId().getLabelString(), 
-								eventType.getURI());
+								eventType.getURI(),
+								observableFeature.getURI());
 						
 						// add update to the list
 						updates.add(update);
