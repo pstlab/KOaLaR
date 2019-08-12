@@ -58,6 +58,11 @@ public abstract class ObservationReasoner implements EnvironmentListener
 	/**
 	 * 
 	 */
+	public abstract void close();
+	
+	/**
+	 * 
+	 */
 	public void update() 
 	{
 		// TODO Auto-generated method stub

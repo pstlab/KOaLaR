@@ -1,5 +1,10 @@
 package it.cnr.istc.pst.koala.reasoner.owl;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +28,11 @@ import it.cnr.istc.pst.koala.reasoner.observation.ObservationReasonerUpdate;
 public class OWLObservationReasoner extends ObservationReasoner
 {
 	private OWLModel kb;											// the knowledge-base
-	private Map<Statement, ObservationReasonerUpdate> cache;			// cache of notified obaervations
+	private Map<Statement, ObservationReasonerUpdate> cache;		// cache of notified observations
+	
+	private long inferenceTime;										// count time spent doing inference
+	private int inferenceCounter;									// count number of inferred events
+	private PrintWriter writer;
 	
 	/**
 	 * 
@@ -36,17 +45,47 @@ public class OWLObservationReasoner extends ObservationReasoner
 		this.kb = new OWLModel(ontologyFilePath, ruleFilePath);
 		// setup cache
 		this.cache = new HashMap<Statement, ObservationReasonerUpdate>();
+		this.writer = null;
+		this.inferenceTime = 0;
 	}
-
+	
 	/**
 	 * 
 	 */
 	@Override
-	protected void doInitialize(EnvironmentReasoner env) {
+	protected void doInitialize(EnvironmentReasoner env) 
+	{
+		// set parameters
+		this.inferenceTime = 0;
+		this.inferenceCounter = 0;
+		// current time
+		long now = System.currentTimeMillis();
 		// setup model
 		this.kb.setup(env.getModel());
+		// time
+		long time = System.currentTimeMillis() - now;
+		// update inference time
+		this.inferenceTime += time;
+		
 		// setup cache
 		this.cache.clear();
+		
+		try
+		{
+			// create data file
+			File dataFile = new File("data/observation_reasoner_" + System.currentTimeMillis() + ".csv");
+			// create file and write the header of the CSV
+			this.writer = new PrintWriter(new BufferedWriter(new FileWriter(dataFile)));
+			// print header
+			this.writer.print("timestamp;number of inferred events;total inference time\n");
+			this.writer.flush();
+		}
+		catch (IOException ex) {
+			// set to null writer
+			this.writer = null;
+			// print error message 
+			System.err.println("[ObservationReasoner] Error opening writer buffer for data\n- message: " + ex.getMessage());
+		}
 	}
 	
 	/**
@@ -70,6 +109,8 @@ public class OWLObservationReasoner extends ObservationReasoner
 	public void doHandleObservation(String sensorId, Object observationValue, String propertyUri) 
 			throws Exception
 	{
+		// get current time
+		long now = System.currentTimeMillis();
 		try
 		{
 			// retrieve sensor individual according to the ID
@@ -390,7 +431,7 @@ public class OWLObservationReasoner extends ObservationReasoner
 					this.kb.assertDataProperty(
 							value.getURI(), 
 							OWLNameSpace.KOALA.getNs() + "hasHeartRateValue",
-							(Boolean) observationValue);
+							(Double) observationValue);
 					
 					// assert property
 					this.kb.assertProperty(
@@ -418,7 +459,7 @@ public class OWLObservationReasoner extends ObservationReasoner
 					this.kb.assertDataProperty(
 							value.getURI(), 
 							OWLNameSpace.KOALA.getNs() + "hasOximetryValue",
-							(Boolean) observationValue);
+							(Double) observationValue);
 					
 					// assert property
 					this.kb.assertProperty(
@@ -464,6 +505,12 @@ public class OWLObservationReasoner extends ObservationReasoner
 			// forward exception
 			throw new Exception(ex.getMessage());
 		}
+		finally {
+			// compute inference time 
+			long time = System.currentTimeMillis() - now;
+			// update total inference time
+			this.inferenceTime += time;
+		}
 	}
 
 	/**
@@ -472,13 +519,15 @@ public class OWLObservationReasoner extends ObservationReasoner
 	@Override
 	protected List<ObservationReasonerUpdate> doPrepareObservationNotifications() 
 	{
+		// get current time
+		long timestamp = System.currentTimeMillis();
 		// list of observation to notify 
 		List<ObservationReasonerUpdate> updates = new ArrayList<ObservationReasonerUpdate>();
 		try
 		{
 			// get the list of inferred events
 			List<Statement> list = this.kb.getStatements(
-					OWLNameSpace.KOALA.getNs() + "hasEventCategory");
+					OWLNameSpace.SSN.getNs() + "isProxyFor");
 			
 			// check inferred events
 			for (Statement s : list) 
@@ -486,6 +535,9 @@ public class OWLObservationReasoner extends ObservationReasoner
 				// check if already notified
 				if (!this.cache.containsKey(s))
 				{
+					// increase inference counter
+					this.inferenceCounter++;
+					
 					// get statement elements
 					Resource subject = s.getSubject();
 					// get statement's object
@@ -503,7 +555,7 @@ public class OWLObservationReasoner extends ObservationReasoner
 					// get concerns property statement
 					Statement cStatement = subject.getProperty(concerns);
 					// get observable feature
-					Resource observableFeature = cStatement.getResource();
+					Resource concernedElement = cStatement.getResource();
 					
 					// check category
 					if (object.getURI().equals(OWLNameSpace.KOALA.getNs() + "ObservedActivity")) 
@@ -512,7 +564,7 @@ public class OWLObservationReasoner extends ObservationReasoner
 						ObservationReasonerUpdate update = this.createActivityUpdate(
 								subject.getId().getBlankNodeId().getLabelString(), 
 								eventType.getURI(),
-								observableFeature.getURI());
+								concernedElement.getURI());
 						
 						// add update to the list 
 						updates.add(update);
@@ -525,14 +577,13 @@ public class OWLObservationReasoner extends ObservationReasoner
 						ObservationReasonerUpdate update = this.createEventUpdate(
 								subject.getId().getBlankNodeId().getLabelString(), 
 								eventType.getURI(),
-								observableFeature.getURI());
+								concernedElement.getURI());
 						
 						// add update to the list
 						updates.add(update);
 						// add event to the cache
 						this.cache.put(s, update);
 					}
-					
 				}
 			}
 		}
@@ -540,8 +591,31 @@ public class OWLObservationReasoner extends ObservationReasoner
 			System.err.println("[ObservationReasoner] Error while checking inferred events/activities:\n"
 					+ "\t- message= " + ex.getMessage() + "\n");
 		}
+		finally 
+		{
+			// write data
+			if (this.writer != null) 
+			{
+				// print inferred event type and service type
+				this.writer.print(timestamp + ";" + this.inferenceCounter + ";" + this.inferenceTime + "\n");
+				// write record
+				this.writer.flush();
+			}
+		}
 		
 		// get the list of updates
 		return updates;
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public void close() 
+	{
+		// close writer
+		if (this.writer != null) {
+			this.writer.close();
+		}
 	}
 }

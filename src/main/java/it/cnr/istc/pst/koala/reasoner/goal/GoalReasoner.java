@@ -96,12 +96,8 @@ public abstract class GoalReasoner implements ObservationListener
 		
 		// complete initialization
 		this.doInitialize(this.environment);
-	}
-	
-	/*
-	 * 
-	 */
-	public void start() {
+		
+		
 		// check if initialize
 		if (this.process != null && !this.process.isAlive()) {
 			// start background process
@@ -113,7 +109,7 @@ public abstract class GoalReasoner implements ObservationListener
 	 * 
 	 * @throws Exception
 	 */
-	public void stop() 
+	public void close() 
 			throws Exception 
 	{
 		// check if process is running
@@ -122,6 +118,9 @@ public abstract class GoalReasoner implements ObservationListener
 			this.process.interrupt();
 			this.process.join();
 		}
+		
+		// complete process interruption
+		this.doClose();
 	}
 	
 	/**
@@ -147,4 +146,9 @@ public abstract class GoalReasoner implements ObservationListener
 	 * 
 	 */
 	protected abstract void doGoalTriggering(List<ObservationReasonerUpdate> notifications);
+	
+	/**
+	 * 
+	 */
+	protected abstract void doClose();
 }
