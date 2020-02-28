@@ -48,7 +48,8 @@ public abstract class OWLModel
 		// set inference rule file
 		this.inferenceRuleFile = inferenceRuleFile;
 		// create the model schema from the ontology 
-		this.model = ModelFactory.createOntologyModel(OntModelSpec.RDFS_MEM_TRANS_INF);		// create in-memory ontology model with RDFS language and transitive rule-based reasoner with RDFS rules
+		this.model = ModelFactory.createOntologyModel(
+				OntModelSpec.RDFS_MEM_TRANS_INF);		// create in-memory ontology model with RDFS language and transitive rule-based reasoner with RDFS rules
 		// use DocumentManager API to specify that ontology is replicated locally on disk
 		this.model.getDocumentManager().addAltEntry(domainNameSpace, "file:" + this.ontologyFile);
 		// read ontology file
