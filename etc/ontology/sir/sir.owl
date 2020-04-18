@@ -1,0 +1,1246 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://pst.istc.cnr.it/ontologies/2020/01/sir#"
+     xml:base="http://pst.istc.cnr.it/ontologies/2020/01/sir"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir">
+        <owl:versionIRI rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/soho/1.0.0"/>
+        <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+        <rdfs:comment>Domain Ontology module of SI-Robotics defined to  support personalized stimulation plan synthesis and cognitive status monitoring</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#canAfford -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#canAfford">
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveExercise"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveImpairment"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#concerns -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#concerns">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveImpairment"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#concernsPatient -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#concernsPatient">
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#concerns"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveImpairment"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Patient"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#concernsQuality -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#concernsQuality">
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#concerns"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveImpairment"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#exerciseOutcome -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#exerciseOutcome">
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasOutcome"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn">
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Function"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#hasOutcome -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasOutcome">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#hasPart -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasPart"/>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#hasProfile -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasProfile">
+        <owl:inverseOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#isProfileOf"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Patient"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveProfile"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#isProfileOf -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#isProfileOf"/>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#measurementOutcome -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#measurementOutcome">
+        <rdfs:subPropertyOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasOutcome"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Measurement"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQualityRegion"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#measures -->
+
+    <owl:ObjectProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#measures">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Measurement"/>
+        <rdfs:range rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#hasICFScore -->
+
+    <owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasICFScore">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQualityRegion"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#hasId -->
+
+    <owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasId">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#hasName -->
+
+    <owl:DatatypeProperty rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#AcquiringKnowledgeStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#AcquiringKnowledgeStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#KnowledgeStimulationFunction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Affordances -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Affordances">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ArticulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ArticulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#VoiceAndSpeechFUnction"/>
+        <rdfs:comment>Functions of the production of speech sounds</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#AttentionFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#AttentionFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+        <rdfs:comment>Specific mental function of focusing on external stimulus or internal experience for the required period of time</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#AttentionStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#AttentionStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#AttentionFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Calculating -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Calculating">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge"/>
+        <rdfs:comment>Performing computations by applying mathematical principles to solve problems that are described in word and producing or displaying the results, such as computing the sum of three numbers or finding the result of dividing one number by another</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#CalculationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#CalculationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+        <rdfs:comment>Specific mental functions of determination, approximation and manipulation of mathematical symbols and processes</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#CalculationStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#CalculationStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CalculationFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ChangingBasicBodyPosition -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ChangingBasicBodyPosition">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility"/>
+        <rdfs:comment>Getting into and out of a body position and moving from one location to another</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ChangingBasicBodyPositionStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ChangingBasicBodyPositionStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MobilityStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#ChangingBasicBodyPosition"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveExercise -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveExercise">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Stimulus"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#canAfford"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveImpairment"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveImpairment -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveImpairment">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveSituation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Measurement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#concernsPatient"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Patient"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#concernsQuality"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveProfile -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveProfile">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HealthStatus"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasPart"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Measurement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#isProfileOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Patient"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveSituation -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveSituation">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HealthSituation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveStimulation -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveStimulation">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationFunction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Communication -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Communication">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBehaviorQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#DecisionMaking -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#DecisionMaking">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge"/>
+        <rdfs:comment>Making a choice among options, implementing the choice, and evaluating the effects of the choice, such as selecting and purchasing a specific item, or deciding to undertake and undertaking one task from among several tasks that need to be done</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#DecisionMakingStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#DecisionMakingStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#AcquiringKnowledgeStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#DecisionMaking"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Driving -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Driving">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility"/>
+        <rdfs:comment>Being in control of and moving a vehicle</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#EmotionalFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#EmotionalFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+        <rdfs:comment>Specific mental functions related to the feeling and affective components of the processes of the mind</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#EmotionalStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#EmotionalStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#EmotionalFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ExchangingNonverbalMessage -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ExchangingNonverbalMessage">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Communication"/>
+        <rdfs:comment>Comprehending literal and implied meanings of messages conveyed by gestures, symbols and drawings</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ExchangingSignMessage -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ExchangingSignMessage">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Communication"/>
+        <rdfs:comment>Comprehending literal and implied meanings of messages in formal sign language with literal and implied meaning</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ExchangingWrittenMessage -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ExchangingWrittenMessage">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Communication"/>
+        <rdfs:comment>Comprehending literal and implied meanings of messages that are conveyed through written language (including Braille)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ExchaningSpokenMessage -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ExchaningSpokenMessage">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Communication"/>
+        <rdfs:comment>Comprehending literal and implied meanings of messages in spoken language</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ExerciseExecution -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ExerciseExecution">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#exerciseOutcome"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Stimulus"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ExperienceOfSelfAndTime -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ExperienceOfSelfAndTime">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+        <rdfs:comment>Specific mental functions related to awareness of one&apos;s identity, one&apos;s body, one&apos;s position in the reality of one&apos;s environment and of time</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ExperienceOfSelfAndTimeStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ExperienceOfSelfAndTimeStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#ExperienceOfSelfAndTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#FluencyAndRhythmOfSpeech -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#FluencyAndRhythmOfSpeech">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#VoiceAndSpeechFUnction"/>
+        <rdfs:comment>Functions of the production of flow and tempo of speech</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Function -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Function">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Method"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQualityRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>ICF-based modeling of physical and cognitive state of a person</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQualityRegion -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQualityRegion">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasICFScore"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>ICF-based measurement of functioning and disabilities of physical and cognitive dimensions of a person</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#HandUse -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#HandUse">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility"/>
+        <rdfs:comment>Performing the coordinated actions of handling objects</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#HandUseStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#HandUseStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MobilityStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HandUse"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#HealthSituation -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#HealthSituation">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#HealthStatus -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#HealthStatus">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#HearingFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#HearingFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#SensoryFunction"/>
+        <rdfs:comment>Sensory functions related to sensing the presence of sounds and discriminating the location, pitch, loudness, and quality of sounds</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#HigherLevelCognitiveFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#HigherLevelCognitiveFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+        <rdfs:comment>Specific mental functions especially dependent on the frontal lobes od the brain, including complex goal-directedf behaviors such as decision making, abstract thinking, planning and carrying out plans, mental flexibility, and deciding which behaviors are appropriate under what circumstances</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#HigherLevelCognitiveStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#HigherLevelCognitiveStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HigherLevelCognitiveFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBehaviorQuality -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBehaviorQuality">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBodyQuality -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBodyQuality">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#KnowledgeStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#KnowledgeStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#LanguageStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#LanguageStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunctionOfLanguage"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBehaviorQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#KnowledgeStimulationFunction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#LiftingAndCarryingObjects -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#LiftingAndCarryingObjects">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility"/>
+        <rdfs:comment>Raising up an object or taking something from one place to another, such as when lifitng a cup or toy or carrying a box</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#LiftingAndCarryingObjectsStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#LiftingAndCarryingObjectsStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MobilityStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LiftingAndCarryingObjects"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Listening -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Listening">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge"/>
+        <rdfs:comment>Using the sense of hearing intentionally t oexperience auditory stimuli, such as listening to a radio, to human voice, to music, to a lecture or to a story told</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ListeningStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ListeningStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Listening"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#MaintainingBodyPosition -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#MaintainingBodyPosition">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility"/>
+        <rdfs:comment>Staying in the same body position as required</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#MaintainingBodyPositionStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#MaintainingBodyPositionStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MobilityStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MaintainingBodyPosition"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Measurement -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Measurement">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Diagnosis"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#measurementOutcome"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQualityRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#measures"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Patient"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRelatedToDescription"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveProfile"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#MemoryFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#MemoryFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+        <rdfs:comment>Specific mental functions of registering and sorting information and retrieving it as needed</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#MemoryStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#MemoryStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MemoryFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBodyQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunctionOfLanguage -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunctionOfLanguage">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+        <rdfs:comment>Specific mental functions of recognizing and using signs, symbols and other components of a language</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBehaviorQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#MobilityStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#MobilityStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#PhysicalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#OrientationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#OrientationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+        <rdfs:comment>General mental functions of knowing and ascertaining one&apos;s relation to time, to place, to self, to others, to objects and space</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#OrientationStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#OrientationStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#OrientationFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Patient -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Patient">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Person"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasProfile"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveProfile"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBodyQuality"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#PerceptualFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#PerceptualFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalFunction"/>
+        <rdfs:comment>Specific mental functions of recognizing and interpreting sensory stimuli</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#PerceptualStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#PerceptualStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#MentalStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#PerceptualFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#PhysicalStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#PhysicalStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationFunction"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ProblemSolving -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ProblemSolving">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge"/>
+        <rdfs:comment>Finding solutions to questions or situations by identifying and analyzing issues, developing options and solutions, evaluating potential effects of solutions, and executing a chosen solution, such as in resolving a dispute between two people</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ProblemSolvingStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ProblemSolvingStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#AcquiringKnowledgeStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#ProblemSolving"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Reading -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Reading">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge"/>
+        <rdfs:comment>Performing activities involved in the comprehension and interpretation of written language for the purpose of obtaining general knowledge or specific information</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#ReadingStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#ReadingStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Reading"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#SeeingFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#SeeingFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#SensoryFunction"/>
+        <rdfs:comment>Specific functions related to seeing the presence of light and sensing the form, size, shape and colour of the visual stimuli</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#SensoryFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#SensoryFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBodyQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Speaking -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Speaking">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Communication"/>
+        <rdfs:comment>Producing words, phrases and longer passages in spoken messages with literal and implied meaning, such as expressing a fact or telling a story in oral language</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationAction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationAction">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#ExerciseExecution"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Function"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConstituentOf"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Stimulus"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationOpportunity -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationOpportunity">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Affordances"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveImpairment"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationFunction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Stimulus"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationPlan -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationPlan">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#CognitiveStimulation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Stimulus"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationProcess -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationProcess">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationPlan"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#StimulationAction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Stimulus -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Stimulus">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Method"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#canAfford"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HealthSituation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Function"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#FunctioningQuality"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#UsingCommunicationDevices -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#UsingCommunicationDevices">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Communication"/>
+        <rdfs:comment>Using devices, techniques and other means for the purpose of communicating</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#UsingTransportation -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#UsingTransportation">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility"/>
+        <rdfs:comment>Using transportation to move around as a passenger</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#VoiceAndSpeechFUnction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#VoiceAndSpeechFUnction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#HumanBodyQuality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#VoiceFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#VoiceFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#VoiceAndSpeechFUnction"/>
+        <rdfs:comment>Functions of the production of various sounds by the passage of air through the larynx</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Walking -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Walking">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Mobility"/>
+        <rdfs:comment>Moving along a surface on foot, step by step, so that one foot is always on the ground</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Watching -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Watching">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge"/>
+        <rdfs:comment>Using the sense of seeing intentionally to experience visual stimuli, such as visually tracking and object, watching a sporting event, people or children playing</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#WatchingStimulationFunction -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#WatchingStimulationFunction">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningStimulationFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#hasEffectOn"/>
+                <owl:allValuesFrom rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#Watching"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://pst.istc.cnr.it/ontologies/2020/01/sir#Writing -->
+
+    <owl:Class rdf:about="http://pst.istc.cnr.it/ontologies/2020/01/sir#Writing">
+        <rdfs:subClassOf rdf:resource="http://pst.istc.cnr.it/ontologies/2020/01/sir#LearningAndApplyingKnowledge"/>
+        <rdfs:comment>Using or producing symbols or language to convey information, such as producing a written record of events or ideas or drafting a letter</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

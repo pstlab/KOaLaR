@@ -36,25 +36,34 @@ public abstract class OWLModel
 	/**
 	 * 
 	 * @param ontologyFile
+	 * @param domainNameSpace
+	 */
+	protected OWLModel(String ontologyFile, String domainNameSpace) 
+	{
+		// set ID counter
+		this.idCounter = new AtomicLong(0);
+		// set onto file 
+		this.ontologyFile = ontologyFile;
+		// create the model schema from the onto 
+		this.model = ModelFactory.createOntologyModel(
+				OntModelSpec.RDFS_MEM_TRANS_INF);		// create in-memory onto model with RDFS language and transitive rule-based reasoner with RDFS rules
+		// use DocumentManager API to specify that onto is replicated locally on disk
+		this.model.getDocumentManager().addAltEntry(domainNameSpace, "file:" + this.ontologyFile);
+		// read onto file
+		this.model.read(domainNameSpace);
+	}
+	
+	/**
+	 * 
+	 * @param ontologyFile
 	 * @param inferenceRuleFile
 	 * @param domainNameSpace
 	 */
 	protected OWLModel(String ontologyFile, String inferenceRuleFile, String domainNameSpace) 
 	{
-		// set ID counter
-		this.idCounter = new AtomicLong(0);
-		// set ontology file 
-		this.ontologyFile = ontologyFile;
+		this(ontologyFile, domainNameSpace);
 		// set inference rule file
 		this.inferenceRuleFile = inferenceRuleFile;
-		// create the model schema from the ontology 
-		this.model = ModelFactory.createOntologyModel(
-				OntModelSpec.RDFS_MEM_TRANS_INF);		// create in-memory ontology model with RDFS language and transitive rule-based reasoner with RDFS rules
-		// use DocumentManager API to specify that ontology is replicated locally on disk
-		this.model.getDocumentManager().addAltEntry(domainNameSpace, "file:" + this.ontologyFile);
-		// read ontology file
-		this.model.read(domainNameSpace);
-		
 		// parse the list of inference rules for feature extraction 
 		List<Rule> rules = Rule.rulesFromURL("file:" + inferenceRuleFile);
 		// create a generic rule-based reasoner
