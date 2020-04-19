@@ -22,7 +22,7 @@ public class StiimaKnowledgeReasonerTest
 		{
 			// create onto model
 			SohoOWLModel model = new SohoOWLModel(
-					"etc/ontology/sharework/soho_stiima.owl", 
+					"etc/ontology/sharework/soho_demo_v1.1.owl", 
 					"etc/ontology/sharework/soho_rules_v1.0.rules");
 			
 			// get taxonomy of function
