@@ -1,0 +1,256 @@
+@prefix	rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#>.
+@prefix dul:	<http://www.loa-cnr.it/ontologies/DUL.owl#>.
+@prefix	sir:	<http://pst.istc.cnr.it/ontologies/2020/01/sir#>.
+
+[k1: 
+	(?x rdf:type sir:Stimulus), 
+	(?x dul:hasConstituent sir:DecisionMakingStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:DecisionMaking)]
+	
+[k2: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:ProblemSolvingStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:ProblemSolving)]
+	
+[k3: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:ListeningStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:Listening)]
+
+[k4: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:ReadingStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:Reading)]
+	
+[k5: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:WatchingStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:Watching)]
+	
+[k6: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:AttentionStimulationFunction),
+	->
+	(?x sir:hasEffectOn sir:AttentionFunction)]
+
+[k7: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:CalculationStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:CalculationFunction)]
+	
+[k8: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:EmotionalStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:EmotionalFunction)]
+	
+[k9: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:ExperienceOfSelfAndTimeStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:ExperienceOfSelfAndTime)]
+
+[k10: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:HigherLevelCognitiveStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:HigherLevelCognitiveFunction)]
+
+[k11:
+	(?x rdf:type sir:Stimulus), 
+	(?x dul:hasConstituent sir:MemoryStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:MemoryFunction)]
+	
+[k12: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:OrientationStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:OrientationFunction)]
+	
+[k13: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:PerceptualStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:PerceptualFunction)]
+	
+[k14: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:ChangingBasicBodyPositionStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:ChangingBasicBodyPosition)]
+	
+[k15: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:HandUseStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:HandUse)]
+
+[k16: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:LiftingAndCarryingObjectsStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:LiftingAndCarryingObjects)]
+	
+[k17: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:MaintainingBodyPositionStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:MaintainingBodyPosition)]
+
+[k18: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:LanguageStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:MentalFunctionOfLanguage)]
+	
+[stimulus-effects:
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent ?f),
+	(?f sir:hasEffectOn ?q)
+	->
+	(?x sir:hasEffectOn ?q)]
+
+[impairments:
+	(?x rdf:type sir:Measurement),
+	(?x dul:isRelatedToDescription ?p),
+	(?x sir:measures ?y), 
+	(?x sir:measurementOutcome ?z), 
+	(?z sir:hasICFScore ?v), 
+	greaterThan(?v, 0), lessThan(?v, 5), 
+	makeTemp(?i)
+	->
+	(?i rdf:type sir:CognitiveImpairment),
+	(?i sir:concernsProfile ?p), 
+	(?i sir:concernsQuality ?y), 
+	(?i dul:satisfies ?x)]
+
+
+[opportunities:
+	(?i rdf:type sir:CognitiveImpairment), 
+	(?i sir:concernsQuality ?q), 
+	(?s rdf:type sir:Stimulus),
+	(?s sir:hasEffectOn ?q),
+	makeTemp(?x)
+	->
+	(?x rdf:type sir:StimulationOpportunity)
+	(?x dul:classifies ?i), 
+	(?x dul:classifies ?s),
+	(?s sir:canAfford ?i)]
+
+
+
+	
+	
+[interaction_parameter_perceptual_critical:
+	(?p rdf:type sir:CognitiveProfile), (?p sir:hasPart ?m),
+	(?m sir:measures sir:PerceptualFunction), (?m sir:measurementOutcome ?z), (?z sir:hasICFScore ?v),
+	greaterThan(?v, 3), lessThan(?v, 5),
+	(?i sir:concernsProfile ?p), (?s sir:canAfford ?i),
+	noValue(?s sir:hasInteractionQuality sir:UserInterfaceInteractionQuality)
+	noValue(?s sir:hasInteractionQuality sir:VoiceInteractionQuality),
+	makeTemp(?r1), makeTemp(?r2), makeTemp(?r3)
+	->   
+	(?s sir:hasInteractionQuality sir:UserInterfaceInteractionQuality),
+	(?s sir:hasInteractionQuality sir:VoiceInteractionQuality),
+	(?r1 rdf:type sir:FontSize), 
+	(?r1 dul:isRegionFor sir:UserInterfaceInteractionQuality),
+	(?r2 rdf:type sir:SoundLevel),
+	(?r2 dul:isRegionFor sir:VoiceInteractionQuality),
+	(?r3 rdf:type sir:Subtitles),
+	(?r3 dul:isRegionFor sir:UserInterfaceInteractionQuality),
+	(?r1 dul:hasRegionDataValue 'large'),
+	(?r2 dul:hasRegionDataValue 'high'),
+	(?r3 dul:hasRegionDataValue 'yes'),
+	(?s sir:hasInteractionParameter ?r1), (?s sir:hasInteractionParameter ?r2), (?s sir:hasInteractionParameter ?r3)]
+
+	
+[interaction_parameter_perceptual_medium:
+	(?p rdf:type sir:CognitiveProfile), (?p sir:hasPart ?m),
+	(?m sir:measures sir:PerceptualFunction), (?m sir:measurementOutcome ?z), (?z sir:hasICFScore ?v),
+	ge(?v, 2), le(?v, 3),
+	(?i sir:concernsProfile ?p), (?s sir:canAfford ?i),
+	noValue(?s sir:hasInteractionQuality sir:UserInterfaceInteractionQuality)
+	noValue(?s sir:hasInteractionQuality sir:VoiceInteractionQuality),
+	makeTemp(?r1), makeTemp(?r2), makeTemp(?r3)
+	->   
+	(?s sir:hasInteractionQuality sir:UserInterfaceInteractionQuality),
+	(?s sir:hasInteractionQuality sir:VoiceInteractionQuality),
+	(?r1 rdf:type sir:FontSize), 
+	(?r1 dul:isRegionFor sir:UserInterfaceInteractionQuality),
+	(?r2 rdf:type sir:SoundLevel),
+	(?r2 dul:isRegionFor sir:VoiceInteractionQuality),
+	(?r3 rdf:type sir:Subtitles),
+	(?r3 dul:isRegionFor sir:UserInterfaceInteractionQuality),
+	(?r1 dul:hasRegionDataValue 'regular'),
+	(?r2 dul:hasRegionDataValue 'high'),
+	(?r3 dul:hasRegionDataValue 'yes'),
+	(?s sir:hasInteractionParameter ?r1), (?s sir:hasInteractionParameter ?r2), (?s sir:hasInteractionParameter ?r3)]
+	
+	
+[interaction_parameter_perceptual_soft:
+	(?p rdf:type sir:CognitiveProfile), (?p sir:hasPart ?m),
+	(?m sir:measures sir:PerceptualFunction), (?m sir:measurementOutcome ?z), (?z sir:hasICFScore ?v),
+	lessThan(?v, 2),
+	(?i sir:concernsProfile ?p), (?s sir:canAfford ?i),
+	noValue(?s sir:hasInteractionQuality sir:UserInterfaceInteractionQuality)
+	noValue(?s sir:hasInteractionQuality sir:VoiceInteractionQuality),
+	makeTemp(?r1), makeTemp(?r2), makeTemp(?r3)
+	->   
+	(?s sir:hasInteractionQuality sir:UserInterfaceInteractionQuality),
+	(?s sir:hasInteractionQuality sir:VoiceInteractionQuality),
+	(?r1 rdf:type sir:FontSize), 
+	(?r1 dul:isRegionFor sir:UserInterfaceInteractionQuality),
+	(?r2 rdf:type sir:SoundLevel),
+	(?r2 dul:isRegionFor sir:VoiceInteractionQuality),
+	(?r3 rdf:type sir:Subtitles),
+	(?r3 dul:isRegionFor sir:UserInterfaceInteractionQuality),
+	(?r1 dul:hasRegionDataValue 'regular'),
+	(?r2 dul:hasRegionDataValue 'regular'),
+	(?r3 dul:hasRegionDataValue 'none'),
+	(?s sir:hasInteractionParameter ?r1), (?s sir:hasInteractionParameter ?r2), (?s sir:hasInteractionParameter ?r3)]
+	
+	
+
+
+[interaction_parameter_explanation_medium: 
+	(?p rdf:type sir:CognitiveProfile), (?p sir:hasPart ?m),
+	(?m sir:measures sir:MemoryFunction), (?m sir:measurementOutcome ?z), (?z sir:hasICFScore ?v),
+	greaterThan(?v, 2), lessThan(?v, 5),
+	(?i sir:concernsProfile ?p), (?s sir:canAfford ?i),
+	noValue(?s sir:hasInteractionQuality sir:BehaviorInteractionQuality),
+	makeTemp(?r1),
+	->
+	(?s sir:hasInteractionQuality sir:BehaviorInteractionQuality),
+	(?r1 rdf:type sir:Explanation),
+	(?r1 dul:isRegionFor sir:BehaviorInteractionQuality),
+	(?r1 dul:hasRegionDataValue 'yes'),
+	(?s sir:hasInteractionParameter ?r1)]
+	
+[interaction_parameter_explanation_soft: 
+	(?p rdf:type sir:CognitiveProfile), (?p sir:hasPart ?m),
+	(?m sir:measures sir:MemoryFunction), (?m sir:measurementOutcome ?z), (?z sir:hasICFScore ?v),
+	le(?v, 2),
+	(?i sir:concernsProfile ?p), (?s sir:canAfford ?i),
+	noValue(?s sir:hasInteractionQuality sir:BehaviorInteractionQuality),
+	makeTemp(?r1),
+	->
+	(?s sir:hasInteractionQuality sir:BehaviorInteractionQuality),
+	(?r1 rdf:type sir:Explanation),
+	(?r1 dul:isRegionFor sir:BehaviorInteractionQuality),
+	(?r1 dul:hasRegionDataValue 'no'),
+	(?s sir:hasInteractionParameter ?r1)]
+
+	
+
+	
+	
+	
+	
