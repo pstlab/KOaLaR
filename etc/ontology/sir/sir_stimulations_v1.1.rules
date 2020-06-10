@@ -111,6 +111,64 @@
 	->
 	(?x sir:hasEffectOn sir:MentalFunctionOfLanguage)]
 	
+	
+[k19: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:SustainingAttentionStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:SustainingAttention)]
+
+[k20: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:ShiftingAttentionStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:ShiftingAttention)]	
+
+
+[k21: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:AbstractionStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:Abstraction)]	
+
+[k22: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:PlanningStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:Planning)]	
+	
+[k23: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:FlexibilityStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:Flexibility)]	
+	
+
+[k24: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:ShortTermMemoryStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:ShortTermMemory)]
+	
+[k25: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:LongTermMemoryStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:LongTermMemory)]	
+	
+[k26: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:RetrievalProcessingStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:RetrievalProcessing)]
+	
+[k27: 
+	(?x rdf:type sir:Stimulus),
+	(?x dul:hasConstituent sir:WorkingMemoryStimulationFunction)
+	->
+	(?x sir:hasEffectOn sir:WorkingMemory)]
+
+	
 [stimulus-effects:
 	(?x rdf:type sir:Stimulus),
 	(?x dul:hasConstituent ?f),
