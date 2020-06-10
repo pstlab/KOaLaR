@@ -1,10 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>it.cnr.istc.pst.koala</groupId>
-  <artifactId>koala-reasoner</artifactId>
+
+  <groupId>it.cnr.istc.pst</groupId>
+  <artifactId>koalar</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>koalar</name>
+  <packaging>jar</packaging>
+  
+  <name>KOaLa-R</name>
   <description>Knowledge-based cOntinuous Loop Reasoner</description>
+  
   <dependencies>
   	<dependency>
   		<groupId>org.apache.jena</groupId>
@@ -32,4 +36,13 @@
   		<version>3.0.0-M1</version>
   	</dependency>
   </dependencies>
+  
+  <distributionManagement>
+  	<repository>
+  		<id>github</id>
+  		<name>GitHub PSTLab Apache Maven Package</name>
+  		<url>https://maven.pkg.github.com/pstlab/koalar</url>
+  	</repository>
+  
+  </distributionManagement>
 </project>
