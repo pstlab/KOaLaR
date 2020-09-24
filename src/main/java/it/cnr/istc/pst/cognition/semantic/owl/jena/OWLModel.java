@@ -144,7 +144,7 @@ public abstract class OWLModel
 	 * @return
 	 */
 	public void rebind() {
-		// re-bind the inference model to the underlying dat model
+		// re-bind the inference model to the underlying data model
 		this.infModel.rebind();
 	}
 	
